@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Engine and the Pitch — Jack Tran</title>
+<meta name="author" content="Jack Tran">
+<meta name="description" content="A long-form essay on soccer match physiology and why swimming and deep-water running can condition the aerobic engine without making a soccer player. Written for Jack Tran from fetched sources only.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #071422;
+  --navy-2: #0d2740;
+  --navy-3: #163a5a;
+  --ink: #1a2230;
+  --muted: #5a6573;
+  --paper: #f4efe4;
+  --paper-2: #ebe3d2;
+  --card: #faf6ee;
+  --aqua: #1fb8ae;
+  --aqua-deep: #0e7f79;
+  --aqua-pale: #d4f1ee;
+  --turf: #2c7a4b;
+  --turf-bright: #3a9a5c;
+  --turf-pale: #dcefe3;
+  --rule: #cbbfa6;
+  --warn: #8a5a12;
+  --warn-pale: #f3e6c8;
+  --unv: #6b3a3a;
+  --unv-pale: #f3e4e2;
+  --white: #fffdf8;
+  --shadow: 0 1px 0 rgba(7,20,34,.06);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Source Serif 4", Georgia, "Iowan Old Style", "Palatino Linotype", ui-serif, serif;
+  font-size: 19px;
+  line-height: 1.62;
+  font-optical-sizing: auto;
+}
+.skip {
+  position: absolute; left: -999px; top: 0;
+}
+.skip:focus { left: 1rem; top: 1rem; background: #fff; padding: .5rem 1rem; z-index: 9; }
+/* layout */
+.frame {
+  display: grid;
+  grid-template-columns: 248px minmax(0, 1fr);
+  min-height: 100vh;
+}
+nav.toc {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: auto;
+  background: var(--navy);
+  color: #d7e4ef;
+  padding: 1.4rem 1rem 2rem 1.15rem;
+  font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  font-size: 12.5px;
+  line-height: 1.35;
+}
+nav.toc .kicker {
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--aqua);
+  font-weight: 600;
+  font-size: 10px;
+  margin: 0 0 .4rem;
+}
+nav.toc h1 {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 1.1rem;
+  line-height: 1.35;
+  font-family: inherit;
+}
+nav.toc ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: t;
+}
+nav.toc ol li { margin: 0 0 .15rem; }
+nav.toc a {
+  display: block;
+  color: #b9c9d6;
+  text-decoration: none;
+  padding: .32rem .4rem .32rem .55rem;
+  border-left: 2px solid transparent;
+  border-radius: 0 3px 3px 0;
+}
+nav.toc a:hover { color: #fff; background: rgba(31,184,174,.12); }
+nav.toc a.active {
+  color: #fff;
+  border-left-color: var(--aqua);
+  background: rgba(31,184,174,.16);
+}
+nav.toc .toc-note {
+  margin-top: 1.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,.12);
+  color: #8aa0b3;
+  font-size: 11px;
+  line-height: 1.45;
+}
+main {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 2.2rem 6rem;
+}
+/* masthead */
+.mast {
+  padding: 3.2rem 0 2.2rem;
+  border-bottom: 3px solid var(--navy);
+  margin-bottom: 2.4rem;
+}
+.mast .series {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 11.5px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--aqua-deep);
+  font-weight: 600;
+  margin: 0 0 .85rem;
+}
+.mast h1 {
+  font-size: clamp(2.05rem, 4.2vw, 2.85rem);
+  line-height: 1.12;
+  letter-spacing: -.02em;
+  color: var(--navy);
+  margin: 0 0 1rem;
+  font-weight: 700;
+}
+.mast .deck {
+  font-size: 1.18rem;
+  line-height: 1.45;
+  color: var(--navy-2);
+  max-width: 40rem;
+  margin: 0 0 1.4rem;
+  font-style: italic;
+}
+.meta {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem 1.2rem;
+}
+.meta b { color: var(--navy); font-weight: 600; }
+/* type */
+h2 {
+  font-size: 1.62rem;
+  line-height: 1.2;
+  color: var(--navy);
+  margin: 2.8rem 0 .9rem;
+  letter-spacing: -.015em;
+  padding-top: .6rem;
+  border-top: 1px solid var(--rule);
+}
+h2 .num {
+  display: block;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--aqua-deep);
+  font-weight: 600;
+  margin-bottom: .35rem;
+}
+h3 {
+  font-size: 1.22rem;
+  color: var(--navy-2);
+  margin: 2rem 0 .6rem;
+  font-weight: 650;
+}
+h4 {
+  font-size: 1.02rem;
+  color: var(--navy-3);
+  margin: 1.5rem 0 .4rem;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: .01em;
+}
+p { margin: 0 0 1.05rem; }
+.lede p:first-of-type::first-letter {
+  float: left;
+  font-size: 4.1rem;
+  line-height: .78;
+  padding: .12rem .45rem 0 0;
+  color: var(--navy);
+  font-weight: 700;
+}
+blockquote.pull {
+  margin: 1.6rem 0 1.7rem;
+  padding: 0 0 0 1.15rem;
+  border-left: 3px solid var(--aqua);
+  color: var(--navy);
+  font-size: 1.12rem;
+  line-height: 1.45;
+  font-style: italic;
+}
+blockquote.pull cite {
+  display: block;
+  margin-top: .5rem;
+  font-style: normal;
+  font-size: .78rem;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  letter-spacing: .04em;
+  color: var(--muted);
+}
+a { color: var(--aqua-deep); }
+a:hover { color: var(--navy); }
+sup a, .fn {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: .72em;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--navy-3);
+  padding: 0 .12em;
+}
+/* chips / callouts */
+.how {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.4rem 0 2rem;
+}
+.how article {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  padding: 1.1rem 1.15rem 1.2rem;
+  box-shadow: var(--shadow);
+}
+.how h3 { margin-top: 0; font-size: 1rem; font-family: "IBM Plex Sans", system-ui, sans-serif; letter-spacing: .02em; }
+.how .who { font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; margin: 0 0 .4rem; }
+.how .youth { color: var(--aqua-deep); }
+.how .elite { color: var(--turf); }
+.how p { font-size: .92rem; margin-bottom: .65rem; }
+.how p:last-child { margin-bottom: 0; }
+.arg {
+  background: var(--navy);
+  color: #e8eef4;
+  padding: 1.35rem 1.4rem 1.2rem;
+  margin: 1.6rem 0 2rem;
+}
+.arg h3 {
+  color: var(--aqua);
+  margin: 0 0 .85rem;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.arg ol { margin: 0; padding-left: 1.2rem; }
+.arg li { margin: 0 0 .7rem; font-size: .98rem; line-height: 1.5; }
+.arg li:last-child { margin-bottom: 0; }
+.arg .turf { color: #7dcc96; }
+.arg .aq { color: var(--aqua); }
+.callout {
+  border: 1px solid var(--rule);
+  background: var(--paper-2);
+  padding: 1rem 1.15rem;
+  margin: 1.3rem 0 1.5rem;
+  font-size: .95rem;
+}
+.callout.turf { border-left: 4px solid var(--turf); }
+.callout.aqua { border-left: 4px solid var(--aqua); }
+.callout.warn { border-left: 4px solid var(--warn); background: var(--warn-pale); }
+.callout.unv { border-left: 4px solid var(--unv); background: var(--unv-pale); }
+.callout strong.k {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: .35rem;
+  color: var(--navy-3);
+}
+.statrow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .7rem;
+  margin: 1.2rem 0 1.6rem;
+}
+.stat {
+  background: var(--navy);
+  color: #fff;
+  padding: .9rem .95rem 1rem;
+  min-height: 6.2rem;
+}
+.stat.aqua { background: var(--aqua-deep); }
+.stat.turf { background: var(--turf); }
+.stat .v {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 1.55rem;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  display: block;
+  margin-bottom: .35rem;
+}
+.stat .l {
+  font-size: .78rem;
+  line-height: 1.35;
+  color: rgba(255,255,255,.82);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .84rem;
+  margin: 1rem 0 1.5rem;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  background: var(--white);
+}
+th, td {
+  text-align: left;
+  padding: .45rem .55rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+th {
+  background: var(--navy);
+  color: #fff;
+  font-weight: 500;
+  font-size: 11.5px;
+  letter-spacing: .04em;
+}
+tr:nth-child(even) td { background: var(--paper-2); }
+caption {
+  text-align: left;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: .4rem;
+  caption-side: top;
+}
+.fig {
+  margin: 1.6rem 0 1.8rem;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 1rem 1rem 1.1rem;
+}
+.fig .cap {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-top: .75rem;
+  line-height: 1.4;
+}
+.fig .cap b { color: var(--navy); }
+/* diagrams */
+.buoy {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1rem;
+  align-items: stretch;
+  min-height: 340px;
+}
+.pool {
+  position: relative;
+  background: linear-gradient(#9ad9d4 0%, #148f8a 100%);
+  border-radius: 4px;
+  overflow: hidden;
+  height: 340px;
+}
+.bodyfig {
+  position: absolute;
+  left: 50%;
+  bottom: 8%;
+  width: 36px;
+  height: 78%;
+  transform: translateX(-50%);
+  background:
+    radial-gradient(circle at 50% 8%, #f4efe4 9px, transparent 10px),
+    linear-gradient(#f4efe4, #f4efe4);
+  background-repeat: no-repeat;
+  background-size: 100% 100%, 18px 70%;
+  background-position: 0 0, 9px 18%;
+  opacity: .95;
+}
+.pool .wl {
+  position: absolute; left: 0; right: 0; height: 1px; background: rgba(255,255,255,.7);
+}
+.levels { display: flex; flex-direction: column; justify-content: space-between; font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 12.5px; }
+.levels div { padding: .35rem 0; border-bottom: 1px dotted var(--rule); }
+.levels strong { color: var(--aqua-deep); }
+.energy {
+  position: relative;
+  height: 168px;
+  background: #0d2740;
+  overflow: hidden;
+}
+.energy .band {
+  position: absolute; left: 0; right: 0;
+  background: rgba(31,184,174,.28);
+  border-top: 1px dashed rgba(31,184,174,.7);
+  border-bottom: 1px dashed rgba(31,184,174,.7);
+}
+.energy .low {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 10px, transparent 10px 18px);
+}
+.energy .spk {
+  position: absolute; bottom: 18%; width: 3px; background: var(--turf-bright);
+  opacity: .85;
+}
+.energy .axis {
+  position: absolute; left: 8px; top: 8px; color: #cfe3ee;
+  font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 11px;
+}
+.energy .t {
+  position: absolute; bottom: 6px; left: 8px; right: 8px;
+  display: flex; justify-content: space-between;
+  color: #9bb3c4; font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 10.5px;
+}
+.hrgrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .45rem;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 13px;
+}
+.hrbar { display: grid; grid-template-columns: 210px 1fr 70px; gap: .5rem; align-items: center; }
+.hrbar .lab { color: var(--navy); }
+.track { height: 10px; background: var(--paper-2); position: relative; }
+.track > i {
+  display: block; height: 100%; background: var(--aqua);
+}
+.week {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .7rem;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 13px;
+}
+.week section {
+  padding: .85rem .9rem 1rem;
+  min-height: 11rem;
+}
+.week .yes { background: var(--aqua-pale); border-top: 4px solid var(--aqua-deep); }
+.week .no { background: var(--unv-pale); border-top: 4px solid var(--unv); }
+.week .must { background: var(--turf-pale); border-top: 4px solid var(--turf); }
+.week h4 { margin: 0 0 .5rem; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
+.week ul { margin: 0; padding-left: 1.05rem; }
+.week li { margin: 0 0 .3rem; }
+.legend {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 12px; color: var(--muted);
+  margin: .4rem 0 0;
+}
+.swatch { display: inline-block; width: 12px; height: 12px; margin-right: .3rem; vertical-align: -1px; }
+ol.sources, ol.notes {
+  font-size: .88rem;
+  padding-left: 1.3rem;
+}
+ol.sources li, ol.notes li { margin: 0 0 .45rem; }
+ol.sources a { word-break: break-all; }
+.rule-end {
+  margin: 3rem 0 1rem;
+  border: 0;
+  border-top: 3px double var(--navy);
+}
+footer.colophon {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+  padding-bottom: 2rem;
+}
+.small { font-size: .92rem; color: var(--navy-2); }
+ul.plain { margin: 0 0 1.1rem; padding-left: 1.2rem; }
+ul.plain li { margin: 0 0 .4rem; }
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0 1.5rem;
+}
+.two .box {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: .9rem 1rem;
+  font-size: .92rem;
+}
+.two h4 { margin-top: 0; }
+@media (max-width: 980px) {
+  .frame { grid-template-columns: 1fr; }
+  nav.toc { position: relative; height: auto; max-height: 42vh; }
+  main { padding: 0 1.1rem 4rem; }
+  .how, .statrow, .two, .week, .buoy { grid-template-columns: 1fr; }
+  .hrbar { grid-template-columns: 1fr; }
+}
+@media print {
+  @page { size: letter; margin: .7in; }
+  :root { --paper: #fff; }
+  body { background: #fff; font-size: 10pt; line-height: 1.4; color: #111; }
+  .frame { display: block; }
+  nav.toc { display: none; }
+  main { max-width: none; padding: 0; }
+  a { color: inherit; text-decoration: none; }
+  .stat, .arg { break-inside: avoid; }
+  .fig, table, .how, .week { break-inside: avoid; }
+  h2 { break-after: avoid; }
+  .mast h1 { font-size: 22pt; }
+  footer.colophon { font-size: 8.5pt; }
+  ol.sources { font-size: 8.5pt; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#essay">Skip to essay</a>
+<div class="frame">
+<nav class="toc" aria-label="Contents">
+  <p class="kicker">Essay · 2026</p>
+  <h1>The Engine and the Pitch</h1>
+  <ol>
+    <li><a href="#how">How to use this</a></li>
+    <li><a href="#argument">The argument</a></li>
+    <li><a href="#engine">Not a 10 km time trial</a></li>
+    <li><a href="#energy">Ninety minutes of PCr cycling</a></li>
+    <li><a href="#vo2">What VO<sub>2</sub>max actually buys</a></li>
+    <li><a href="#said">Specificity on grass</a></li>
+    <li><a href="#planet">A different mechanical planet</a></li>
+    <li><a href="#heart">Heart rate is a range</a></li>
+    <li><a href="#drag">Drag, not ground reaction</a></li>
+    <li><a href="#dwr">Wilber, Bushman, and underdose</a></li>
+    <li><a href="#magel">Magel and Tanaka</a></li>
+    <li><a href="#soccer-aqua">Soccer’s aquatic literature</a></li>
+    <li><a href="#doses">Sourced doses only</a></li>
+    <li><a href="#youth">A nine-year-old is not an elite midfielder</a></li>
+    <li><a href="#rehab">Rehab, heat, congestion</a></li>
+    <li><a href="#risks">Risks that are real</a></li>
+    <li><a href="#counters">Two counters</a></li>
+    <li><a href="#run-hiit">Run HIIT vs swim</a></li>
+    <li><a href="#unverified">Unverified</a></li>
+    <li><a href="#synthesis">Synthesis</a></li>
+    <li><a href="#sources">Sources</a></li>
+  </ol>
+  <p class="toc-note">Single-file essay. Numbers only from fetched pages in the companion research briefs. Print stylesheet: 10 pt body. Offline: system-ui / Georgia if webfonts fail.</p>
+</nav>
+<main id="essay">
+<header class="mast">
+  <p class="series">Physiology · aquatic training · soccer · a parent’s brief</p>
+  <h1>The Engine and the Pitch: Why Water Can Condition Soccer Endurance Without Making a Soccer Player</h1>
+  <p class="deck">Soccer endurance is not a distance-run. Water is not land with extra resistance. Between those two facts sits a useful tool — and a tempting mistake.</p>
+  <div class="meta">
+    <span>For <b>Jack Tran</b></span>
+    <span>Concerning <b>Elon Tran</b>, age 9, 5th grade, FSA soccer — and, separately, the sport’s elite demand</span>
+    <span>Compiled 30 Aug 2026 (CT)</span>
+    <span>Fetched sources only · no invented session menus</span>
+  </div>
+</header>
+
+<section id="how">
+  <h2><span class="num">Reader’s frame</span> How to use this</h2>
+  <div class="lede">
+    <p>This is a long essay, not a session plan. It was written so that a parent, a coach, and a skeptical physiologist can share the same page: every kilometre, every beat per minute, every week-count that appears below was taken from pages that were actually fetched for two research briefs (soccer match physiology; water training). If a number is not in those files, it is not here. If a drill was not sourced — Wilber’s alternating hard/moderate deep-water runs, Bushman’s exclusive four-week block, Eyestone’s underdosed 20–30 minutes, Fonseca’s 944 aquatic jumps, Stolt’s NSCA cap of ≤60 minutes, Brody’s 25–40 minute lower-extremity circuit — it is not invented to fill a hole. There is no 8×45-second set on this page, because that set was never found on a fetched page.</p>
+  </div>
+  <p>Two readers are assumed. They must not be collapsed into one.</p>
+  <div class="how">
+    <article>
+      <p class="who youth">If you are the parent of a 9-year-old club player</p>
+      <h3>Elon Tran · 5th grade · FSA</h3>
+      <p>The World Cup and Premier League figures describe <em>the sport</em>, not a training target for a nine-year-old. The American Academy of Pediatrics places age 9 in the FUNdamental stage (6–10 years): agility, balance, coordination, speed; “positive and fun.” The next LTAD stage, Training to Train (10–14), is not a licence to import adult 90-minute aerobic volume.</p>
+      <p>The closest fetched youth match data are Sanchez et al. 2021: Spanish professional-academy Under-12 males, age <b>10.9 ± 0.8 years</b> — roughly one to two years older than Elon, not Elon’s age. Their official matches ran two 30-minute halves. Soccer-11 total distance was 4598 ± 1163 m, not 10–13 km. Treat those numbers as adjacent, not interchangeable.</p>
+      <p>AAP hour rules, stated as needing further long-term validation: organized hours per week greater than the athlete’s age in years, and an organized-to-free-play ratio greater than 2:1, have been associated with overuse injury. Recommendations on the fetched page: at least 3 months off the primary sport per year (in 1-month increments); 1–2 days off per week from the primary sport; multiple sports at least until puberty. Adding a dissimilar endurance mode on top of a 3 × 90-minute + weekend-match week is an extra-volume question those rules are designed to flag — not a physiology green light.</p>
+    </article>
+    <article>
+      <p class="who elite">If you are thinking about adult / elite soccer</p>
+      <h3>The demand profile of the sport</h3>
+      <p>Mean internal load around 70% of VO<sub>2</sub>max and 85% of HRmax over a match, 150–250 brief intense actions, phosphocreatine cycling in the more-than-70% of time that is low-intensity, repeated-sprint ability, and a decade in which high-intensity and sprint distance have grown far faster than total distance: that is what the aerobic engine has to support. It is not a 10 km time trial.</p>
+      <p>Water can keep that engine turning when impact, heat, or a rehab constraint takes running off the table. Deep-water running at high, frequent intensity maintained land VO<sub>2</sub>max and 5 km performance in trained runners across 4–6 weeks (Bushman; Wilber). Swimming raised swimming VO<sub>2</sub>max and did not raise treadmill VO<sub>2</sub>max (Magel 1975). Tanaka 1994: minimum transfer from swim training to VO<sub>2</sub>max, and cross-training never exceeds the sport-specific mode.</p>
+      <p>Use water as extra aerobic work, rehab volume, or congestion-volume without impact. Do not use it as a substitute for pitch running, change of direction, or soccer high-intensity distance. No fetched front-crawl soccer RCT existed to copy.</p>
+    </article>
+  </div>
+  <p class="small">Direct quotations appear only where the source briefs marked them as quotes. Helgerud et al. 2001 is now full-text verified (7-page MSSE PDF): run-based 4×4 moved match distance and sprints. Magel 1975 and Tanaka 1994 were fetched as abstracts and remain the swim-to-run counters.</p>
+</section>
+
+<section id="argument">
+  <h2><span class="num">First principles</span> The argument</h2>
+  <div class="arg">
+    <h3>Five claims the rest of the essay has to earn</h3>
+    <ol>
+      <li><span class="turf">Soccer endurance is intermittent running.</span> Elite match play sits near 70% VO<sub>2</sub>max and 85% HRmax, with 150–250 intense actions, PCr resynthesis in the &gt;70% of time that is low-intensity, and a modern demand curve in which high-intensity distance and sprinting have grown faster than total distance.</li>
+      <li><span class="aq">Water is a different mechanical planet.</span> Density is about 800 times that of air. Buoyancy offloads by depth. Hydrostatic pressure raises stroke volume. Deep-water running has no vertical ground-reaction force. Overload is drag, not grass. The heart-rate offset is a range, not a −10 bpm law.</li>
+      <li>Therefore swimming and DWR can keep the aerobic engine (Wilber / Bushman: high-intensity, frequent DWR, 4–6 weeks) but do not train running stiffness, change of direction, or soccer high-intensity running. Magel: swim VO<sub>2</sub>max up, treadmill VO<sub>2</sub>max not. Tanaka: minimum transfer swim → run.</li>
+      <li>Use water as extra aerobic work, rehab, or congestion-volume without impact — not as a substitute for pitch running.</li>
+      <li>How much: sourced doses only. Front-crawl soccer RCT: none fetched.</li>
+    </ol>
+  </div>
+</section>
+<section id="engine">
+  <h2><span class="num">I · The sport</span> Soccer endurance is not a 10 km time trial</h2>
+  <p>A 10 km time trial is a nearly continuous aerobic problem. A soccer match is a 90-minute problem in which most of the metres are cheap and a minority of the metres decide the game. The aerobic system is not optional — it is the background and the recovery machinery — but the quality that has grown in the tracking era is repeated high-speed running, not total distance.</p>
+
+  <h3>What a World Cup team actually covers</h3>
+  <p>Across all 64 matches of the FIFA World Cup Qatar 2022, outfield players including substitutes (no goalkeepers, no extra time), teams covered <b>108.1 ± 3.6 km</b> in total per match. High-intensity distance at ≥20.0 km·h<sup>−1</sup> was <b>9.0 ± 0.9 km</b> in the <cite>Biology of Sport</cite> paper, reported as <b>9,001 m</b> on the FIFA Training Centre page and as <b>9,001 ± 850 m</b> in the PMC results. Sprint distance at ≥25.0 km·h<sup>−1</sup> was <b>2.3 ± 0.3 km</b> in the abstract, <b>2,345 m</b> on FIFA TC, and <b>2,345 ± 314 m</b> in the PMC results.<sup><a href="#fn1" id="ref1">1</a>, <a href="#fn2">2</a></sup></p>
+  <blockquote class="pull">
+    “on average, teams during the FIFA World Cup Qatar 2022™ covered 108.1km in total, with 9,001m and 2,345m covered at the higher intensities (&gt;20km/h and &gt;25km/h), respectively.”
+    <cite>FIFA Training Centre, Qatar 2022 physical analysis, Part 1 — distances teams covered<sup><a href="#fn2">2</a></sup></cite>
+  </blockquote>
+  <div class="statrow">
+    <div class="stat turf">
+      <span class="v">108.1 km</span>
+      <span class="l">Team total, Qatar 2022, 64 matches, outfield including substitutes, no extra time</span>
+    </div>
+    <div class="stat turf">
+      <span class="v">9,001 m</span>
+      <span class="l">Team high-intensity distance ≥20 km·h<sup>−1</sup> — the band that actually grew</span>
+    </div>
+    <div class="stat turf">
+      <span class="v">2,345 m</span>
+      <span class="l">Team sprint distance ≥25 km·h<sup>−1</sup> — small fraction, large match meaning</span>
+    </div>
+  </div>
+  <p>Against Russia 2018 the same comparison is the essay’s first warning against “more easy kilometres.” Total distance was only <b>+3%</b>. Distance at the higher intensities was <b>+16–19%</b> in absolute terms. On a per-minute basis the high-intensity difference was still <b>9–12%</b>, and total distance was <b>3% lower</b> in Qatar 2022 than in 2018. The game did not get longer in metres. It got sharper.<sup><a href="#fn1">1</a></sup></p>
+  <p>That sharpness is not evenly distributed. Top versus bottom teams on high-intensity distance (≥20 km·h<sup>−1</sup>): United States, Canada, Saudi Arabia, Germany, and IR Iran covered <b>19–34%</b> more HID than Argentina, Ecuador, Qatar, Poland, and Costa Rica. Match-to-match coefficient of variation at team level: total distance <b>3.2%</b>, HID <b>9.1%</b>, sprint <b>13.9%</b>. Japan’s HID/sprint CV ran <b>23.2–29.4%</b>. Ecuador’s HID CV was <b>2.1%</b>; Uruguay’s sprint CV <b>3.3%</b>. High-intensity runs correlated with defensive transitions and recoveries (<b>r = 0.63</b>) and with progressions and final-third entries (<b>r = 0.73–0.75</b>).<sup><a href="#fn1">1</a></sup> HID is not decoration. It is how teams win the moments that look like tactics on television.</p>
+
+  <h3>Position is a different sport wearing the same shirt</h3>
+  <p>Bradley’s Part 1 paper on Qatar 2022 used 722 full-match observations across eight roles. Defensive and central midfielders covered <b>8–19%</b> more total distance than other roles. Some midfielders (Brozović, Skhiri) exceeded <b>13 km</b>. A centre-back example: Mepham <b>&gt;11 km</b>; Silva <b>8 km</b>. Wide midfielders and wide forwards produced HID <b>16–92%</b> higher and sprint distance <b>36–138%</b> higher than centre-backs, defensive midfielders, central midfielders, and centre-forwards. Average HID for those wide roles sat around <b>1.0–1.1 km</b>; upper examples Castagne and Taremi around <b>1.6–1.8 km</b>. Central roles: <b>0.5–0.8 km</b> HID.<sup><a href="#fn3">3</a></sup></p>
+  <p>Possession context splits the same high-intensity metres. Defensive and central midfielders did <b>71–83%</b> of their HID out of possession. Attacking midfielders, wide forwards, and centre-forwards did <b>55–68%</b> of theirs in possession. Nine of the top ten sprint speeds came from wide roles, in the band <b>35.3–35.7 km·h<sup>−1</sup></b>. Mean top speeds: wide defenders / attacking midfielders / wide midfielders / wide forwards / centre-forwards <b>32.1–32.3 km·h<sup>−1</sup></b> against centre-backs / defensive midfielders / central midfielders at <b>30.2–30.8 km·h<sup>−1</sup></b>.<sup><a href="#fn3">3</a></sup></p>
+  <p>Second-half running, per minute, among full-match players: total distance down about <b>7%</b> versus the first half, more pronounced in defensive midfielders (<b>−9.8%</b>), least in wide defenders (<b>−6.0%</b>). HID/sprint decline <b>6–10%</b> on FIFA Training Centre, <b>8–10%</b> in Bradley’s discussion. Attacking midfielders’ HID/sprint fell <b>−17.5% to −20.0%</b>. At team level, including substitutes, there was no half-by-half difference at the higher intensities; total distance per minute was still higher in the first half.<sup><a href="#fn3">3</a>, <a href="#fn4">4</a>, <a href="#fn1">1</a></sup> Substitutes are part of how modern teams keep HID alive. They are not a swimming problem.</p>
+  <p>The speed zones themselves, TRACAB Gen5 at 25 Hz: Zone 1, 0.0–6.9 km·h<sup>−1</sup>; Zone 2, ≥7.0–14.9; Zone 3, ≥15.0–19.9; Zone 4, ≥20–24.9; Zone 5, ≥25.0. HID is Zones 4+5; sprint is Zone 5.<sup><a href="#fn3">3</a></sup> Those thresholds are adult elite. They are not the zones used on a U12 GPS unit, and they are not a nine-year-old’s homework.</p>
+
+  <h3>A decade of the Premier League: total distance barely moved; sprinting did</h3>
+  <p>Allen, Taberner, Zhilkin and Green tracked English Premier League running loads across 2015/16–2024/25: 3,750 games, 3,408 after exclusions, team totals including goalkeepers. Their high-intensity definition is &gt;5.5 m/s; high-speed running 5.5–7 m/s; sprint &gt;7 m/s. Over ten seasons, team totals: total distance <b>+2%</b>, HID <b>+27%</b>, HSR <b>+23%</b>, sprint distance <b>+40%</b>. Intensity per minute (HID/min, HSR/min, sprint/min) increased; <b>TD/min decreased</b> (effect size −0.27).<sup><a href="#fn5">5</a></sup></p>
+  <p>The largest jump sat in 2023/24, linked to the added-time rule (<b>+5.0 minutes</b> mean game duration versus 2015/16). A 2024/25 added-time modification reduced minutes (<b>−1.8 min</b> versus the prior season in the paper’s Table 2 discussion). Rolling three-season total match minutes were <b>+1,600</b>; congested minutes <b>+1,415</b>. Top-six clubs: total minutes <b>+5,659</b> (<b>+9%</b>), congested <b>+2,003</b>. Congested minutes as a share of total: all players <b>13% → 26%</b> versus the first three-season average; top-six stayed <b>17–29%</b> against all-player <b>12–20%</b>. The paper cites other work that some elite players have as few as <b>22 rest days</b> between seasons and average <b>4.3 days</b> between games.<sup><a href="#fn5">5</a></sup> That is a player-health problem. It is not a call to add a fifth aerobic mode.</p>
+
+  <h3>EURO 2024, classic match analysis, and the women’s game</h3>
+  <p>UEFA’s 18 March 2025 article on EURO 2024 recorded Kylian Mbappé’s top speed at <b>36.7 km/h</b>; Nico Williams, Micky van de Ven, and Benjamin Šeško at <b>35.9 km/h</b>. Substitutes performed more high-speed running per minute than starters. Peak effort was more frequent at the start of both halves, then increasingly concentrated toward the end of matches.<sup><a href="#fn6">6</a></sup></p>
+  <blockquote class="pull">
+    “Although time spent in these higher speed zones accounts for a small proportion of the overall distance covered by a player in a game, sprinting can be vital to important match actions and is the most physically demanding action performed by players.”
+    <cite>UEFA.com, Physical demands of EURO 2024, 18 March 2025<sup><a href="#fn6">6</a></sup></cite>
+  </blockquote>
+  <p>The classic picture, from Bangsbo’s GSSI Sports Science Exchange #125 (which itself cites Mohr 2003, Bangsbo 1991/1994/2006, Krustrup 2005/2006), has not been repealed by GPS. Typical top-level outfield male distance: <b>10–13 km</b>. The majority is walking and low-intensity running. Players perform low-intensity activities for <b>more than 70%</b> of the game. International top-class versus lower professional (Mohr et al. 2003 as stated in SSE #125): <b>28%</b> more high-intensity running (<b>2.43 vs 1.90 km</b>) and <b>58%</b> more sprinting (<b>650 vs 410 m</b>). Elite players perform <b>150–250</b> brief intense actions per game. English top three standards (Bradley et al. 2013a as stated there): high-speed running &gt;19 km/h — Championship <b>803 m</b>, League 1 <b>881 m</b>, Premier League <b>681 m</b>; sprinting <b>308 / 360 / 248 m</b>. FA Premier League: about <b>700 turns</b> per game, around <b>600</b> of them 0–90° (Bloomfield et al. 2007). About <b>110</b> actions with the ball. Tackles <b>3–27</b>, jumps <b>1–36</b> (Mohr et al. 2003). Elite female high-intensity running about <b>30%</b> lower than elite male (Krustrup 2005; Mohr 2003, as stated in SSE #125).<sup><a href="#fn7">7</a></sup></p>
+  <p>That Premier League <em>less</em> high-speed running than Championship and League 1 is worth sitting with. Possession tactics, not inferior fitness, is the attribution on the page. More aerobic volume does not automatically produce better soccer. Work rate is not monotonically “more metres = better.” Bradley notes that some elite forwards in his sample (Messi, Mbappé, Lewandowski) sat in a low-volume, low-explosiveness quadrant.</p>
+  <p>FIFA Women’s World Cup 2023 methodology (absolute team kilometres were not on the fetched page): female-specific zones, high-intensity &gt;19.0 km/h, sprint &gt;23.0 km/h. High-intensity running increased by around <b>20%</b> between Canada 2015 and France 2019, as cited on that page. Absolute 2023 distances were not compared across tournaments because of a different tracking system.<sup><a href="#fn8">8</a></sup></p>
+  <p>Yang and Feng (2026) unified 225 matches and 3,454 outfield players across the 2010–2022 World Cups: LIRD &lt;15 km/h, HIRD ≥15 km/h, sprint &gt;25 km/h. All confederations showed increases in top speed, sprint, and LIRD. Total distance rose 2018→2022 in AFC, CONCACAF, and UEFA; CONMEBOL total distance changed little. HIRD was lower in 2018/2022 than in 2010/2014 in AFC, CONMEBOL, and UEFA. The paper cites Tuo et al. that in 2018 approximately two-thirds of match distance was walking or very low speed, and only about <b>7–8%</b> of match distance was &gt;15 km/h. Those 7–8% / two-thirds figures are Tuo as reported by Yang; the original Tuo paper was not fetched.<sup><a href="#fn9">9</a></sup></p>
+  <div class="callout turf">
+    <strong class="k">Soccer numbers in turf green</strong>
+    The demand that swimming would have to support is not “cover 10–13 km.” It is: tolerate ~70% VO<sub>2</sub>max for 90 minutes while producing 150–250 intense actions, ~700 turns, role-specific HID of roughly 0.5–1.8 km at ≥20 km·h<sup>−1</sup>, and top speeds in the 32–36+ km·h<sup>−1</sup> band — then do it again when the calendar says 4.3 days later. Water can tax the engine. It cannot be those actions.
+  </div>
+</section>
+
+<section id="energy">
+  <h2><span class="num">II · Energetics</span> Ninety minutes of phosphocreatine cycling</h2>
+  <p>Once the GPS file is put down, the internal load is almost embarrassingly aerobic — and the decisive spikes are not. That is not a contradiction. It is the sport.</p>
+  <blockquote class="pull">
+    “The aerobic energy system is highly taxed during a football game, with average and peak heart rates around 85% and 98% of maximal values, respectively, corresponding to average oxygen uptake of around 70% of maximum.”
+    <cite>Bangsbo, GSSI Sports Science Exchange #125, key points<sup><a href="#fn7">7</a></sup></cite>
+  </blockquote>
+  <p>Average heart rate during elite match play ~<b>85% HRmax</b>; peak ~<b>98% HRmax</b>; corresponding average VO<sub>2</sub> ~<b>70% VO<sub>2</sub>max</b> (Reilly &amp; Thomas 1979; Ekblom 1986; Ali &amp; Farally 1991; Bangsbo 1994; Krustrup et al. 2005 — all as stated in SSE #125). Core temperature <b>39–40°C</b> during a game supports that aerobic loading estimate (Ekblom 1986; Mohr et al. 2004). Heart rate is rarely below <b>65% HRmax</b>, so muscle blood flow stays elevated versus rest.<sup><a href="#fn7">7</a></sup></p>
+
+  <div class="fig" role="img" aria-label="Schematic of soccer energy systems over 90 minutes">
+    <div class="energy">
+      <div class="axis">Internal load · schematic, not a tracing</div>
+      <div class="band" style="top:28%;height:22%"></div>
+      <div class="low" style="height:38%"></div>
+      <!-- illustrative spikes; counts are decorative relative to 150-250, not a data series -->
+      <span class="spk" style="left:6%;height:52%"></span>
+      <span class="spk" style="left:9%;height:40%"></span>
+      <span class="spk" style="left:14%;height:62%"></span>
+      <span class="spk" style="left:18%;height:35%"></span>
+      <span class="spk" style="left:22%;height:48%"></span>
+      <span class="spk" style="left:27%;height:70%"></span>
+      <span class="spk" style="left:31%;height:38%"></span>
+      <span class="spk" style="left:36%;height:55%"></span>
+      <span class="spk" style="left:41%;height:33%"></span>
+      <span class="spk" style="left:44%;height:60%"></span>
+      <span class="spk" style="left:52%;height:42%"></span>
+      <span class="spk" style="left:55%;height:68%"></span>
+      <span class="spk" style="left:61%;height:36%"></span>
+      <span class="spk" style="left:67%;height:50%"></span>
+      <span class="spk" style="left:71%;height:31%"></span>
+      <span class="spk" style="left:76%;height:58%"></span>
+      <span class="spk" style="left:82%;height:40%"></span>
+      <span class="spk" style="left:88%;height:64%"></span>
+      <span class="spk" style="left:93%;height:37%"></span>
+      <div class="t"><span>kick-off</span><span>half</span><span>full time</span></div>
+    </div>
+    <p class="cap"><b>Figure 1.</b> Energy systems over 90 minutes, drawn from SSE #125. Aqua band: mean ~70% VO<sub>2</sub>max / ~85% HRmax, HR rarely below 65% HRmax. Hatched floor: &gt;70% of time at low intensity, where CP is largely resynthesized. Turf spikes: 150–250 brief intense actions; clustered bouts can drive CP below 30% of rest. This is a schematic of the sourced description, not a match file.</p>
+    <p class="legend"><span><i class="swatch" style="background:#1fb8ae"></i>aerobic background</span><span><i class="swatch" style="background:#3a9a5c"></i>intense actions (ATP–PCr / glycolysis)</span><span><i class="swatch" style="background:#0d2740"></i>low-intensity PCr recovery time</span></p>
+  </div>
+
+  <h3>ATP–PCr, glycolysis, glycogen</h3>
+  <p>The 150–250 brief intense actions imply high anaerobic turnover in periods of the game. Creatine phosphate is largely resynthesized in subsequent low-intensity periods (Bangsbo 1994, as stated in SSE #125). Muscle CP after intense in-game periods is about <b>75%</b> of rest; biopsies were taken 15–30 s after activity, so in-match CP is lower. Bangsbo estimates that with clustered intense bouts, CP may fall <b>below 30%</b> of rest.<sup><a href="#fn7">7</a></sup></p>
+  <p>Average blood lactate <b>2–10 mM</b>, individual values <b>&gt;12 mM</b> (Krustrup et al. 2006, as stated in SSE #125). Muscle lactate after intense periods about <b>15 mmol/kg dry weight</b> (fourfold rest), highest <b>35 mmol/kg d.w.</b> — less than one-third of values in short-term exhaustive intermittent exercise. Blood lactate often reflects the accumulated response to several high-intensity actions, not a single bout.<sup><a href="#fn7">7</a></sup></p>
+  <p>Muscle glycogen is the main substrate. Single-fibre analysis after a game: a significant number of fibres depleted or partly depleted (Krustrup et al. 2006). Saltin (1973) as cited: if pre-match glycogen was low (~<b>45 mmol/kg w.w.</b>), stores were almost depleted by halftime; with normal pre-match ~<b>100 mmol/kg w.w.</b>, some players were <b>&lt;10 mmol/kg w.w.</b> at full time. Other studies: <b>40–65 mmol/kg w.w.</b> remaining after the game. FFA in blood rises, more in the second half; fat oxidation increases as glycogen falls.<sup><a href="#fn7">7</a></sup></p>
+  <p>Temporary fatigue is not a VO<sub>2</sub>max ceiling in isolation. After the most intense 5-minute period, high-intensity running in the next 5 minutes was <b>12%</b> below game average (Mohr et al. 2003, as stated in SSE #125). End-game: high-intensity running in the last 15 minutes was <b>35–45%</b> lower than the first 15 minutes. Substitutes covered <b>25%</b> more high-intensity ground in the final 15 minutes than other players.<sup><a href="#fn7">7</a></sup> Adding low-skill endurance in a second sport can deplete glycogen and add tissue load without training the 150–250 intense running actions or the ~700 turns. That sentence is a synthesis of fetched facts, not a swimming trial.</p>
+
+  <h3>Repeated-sprint ability is not a VO<sub>2</sub>max test</h3>
+  <p>Gist, Northey, Cooper, Gloeckner and Peacock (2017) tested Division I soccer players, n=20 (10 male / 10 female). RSA protocol: <b>10 × 30 m</b>, start every <b>30 s</b>; work:rest about <b>1:4</b> (~6 s work, ~24 s rest). Male VO<sub>2</sub>max <b>66.3 ± 5.1 ml·kg<sup>−1</sup>·min<sup>−1</sup></b>; female <b>51.7 ± 5.9</b>. Average sprint time male <b>4.7 ± 0.2 s</b>, female <b>5.4 ± 0.3 s</b>. Fatigue index male <b>6.5 ± 1.4%</b>, female <b>5.3 ± 1.9%</b>. VO<sub>2</sub>max versus every sprint time: <b>r ≤ −0.69</b>, all <b>P &lt; 0.001</b>; versus average sprint time <b>r = −0.767</b>. No significant relationship between VO<sub>2</sub>max and fatigue index (<b>r = 0.333, P = 0.15</b>). Percent of HRmax during the RSA test: <b>73%</b> (sprint 1) → <b>87%</b> (sprint 5) → <b>93.5%</b> (sprint 10).<sup><a href="#fn10">10</a></sup></p>
+  <p>The authors’ interpretation on the fetched page: greater aerobic capacity is associated with faster repeated 30 m sprints; they cite the aerobic system’s role in PCr replenishment. They also note prior studies (Aziz; Pyne) that found <b>no</b> VO<sub>2</sub>max–RSA link at 20–30 m with 1:4 to 1:5 rest — so the literature is mixed, and this paper’s contribution is a significant association even at distances under 40 m. Gist also notes that discrepancies between studies include <em>mode</em> (running versus cycling), sprint distance, age, and level: transfer is mode-sensitive even within RSA tests.<sup><a href="#fn10">10</a></sup></p>
+  <p>Match work:rest is not a single ratio. Low-intensity activity occupies more than 70% of time, but mean VO<sub>2</sub> is still about 70% VO<sub>2</sub>max because of the 150–250 intense actions. That is intermittent play with clustered high-intensity periods and then a temporary drop-off. The laboratory ~1:4 RSA protocol is a test, not a match average.<sup><a href="#fn7">7</a>, <a href="#fn10">10</a></sup></p>
+</section>
+
+<section id="vo2">
+  <h2><span class="num">III · Aerobic capacity</span> What VO<sub>2</sub>max actually buys</h2>
+  <p>Slimani et al. 2019, a network meta-analysis of 16 studies and 2,385 male players, ages 10–39 as stated on the page, is the fetched synthesis of soccer VO<sub>2</sub>max. Overall male soccer VO<sub>2</sub>max <b>48–62 ml·kg<sup>−1</sup>·min<sup>−1</sup></b> regardless of competitive level (authors’ synthesis). Stratified ranges on the page: elite <b>59.2–63.2</b>; international <b>59.2–61.5</b>; professional <b>58.2–62.2</b>; amateur <b>57.8–61.7</b> ml·kg<sup>−1</sup>·min<sup>−1</sup>. Higher-level versus lower-level: effect size <b>0.58</b> (95% CI 0.08–1.08), <b>P = 0.022</b>. The authors call VO<sub>2</sub>max “the most powerful discriminator between higher and lower-level soccer players” in this analysis. Heterogeneity is high (I<sup>2</sup> <b>93–98%</b>). Tests are mixed lab and field. Male only.<sup><a href="#fn11">11</a></sup></p>
+  <p>By position: goalkeepers <b>48.4–57.5</b>; defenders <b>53.2–62.8</b>; midfielders <b>54.7–63</b>; forwards <b>54.5–62.9</b> ml·kg<sup>−1</sup>·min<sup>−1</sup>. Midfielders versus goalkeepers ES <b>1.37</b>; defenders versus goalkeepers ES <b>1.31</b>; forwards versus goalkeepers ES <b>1.07</b>. Midfielders versus defenders or forwards were not significant.<sup><a href="#fn11">11</a></sup> The engine is larger in the roles that cover the most grass. That does not make the engine the game.</p>
+  <p>Age pattern on the same page: VO<sub>2</sub>max increased year-to-year between Under-10 and Under-15 in pairwise/meta-regression (significant increases U10 vs U11, U11 vs U12, through U14 vs U15, and U16–18 vs U20–23). U14 &gt; U15 (ES <b>−0.98</b>) and U14 &gt; U16 (ES <b>−1.18</b>) in the pairwise set they report — the U14 node was higher than U15/U16 in those comparisons. No significant U15 vs U16 or U16 vs U17. Season: VO<sub>2</sub>max higher off-season and lower at end of season when stratified by level. Competitive-season values higher than pre-season and end-season when stratified by age.<sup><a href="#fn11">11</a></sup> This meta-analysis does not isolate 9-year-old FSA recreational or club players; samples include amateur through elite, ages 10–39.</p>
+  <p>College Division I snapshot from Gist 2017: males <b>66.3 ± 5.1</b>, females <b>51.7 ± 5.9 ml·kg<sup>−1</sup>·min<sup>−1</sup></b>. The authors note that <b>60 ml·kg<sup>−1</sup>·min<sup>−1</sup></b> has been used as a men’s professional minimum, citing Stolen 2005 on that page.<sup><a href="#fn10">10</a></sup> No fetched page gave female soccer VO<sub>2</sub>max bands by level; they are not invented here. Female <em>match</em> high-intensity running about 30% lower than elite male is verified via SSE #125.</p>
+  <p>SSE #125’s more interesting claim is kinetic, not ceiling: more important than average match VO<sub>2</sub> may be the <em>rate of rise of VO<sub>2</sub></em> in short intense actions; oxygen kinetics are limited by local muscle oxidative capacity; interval training can speed the VO<sub>2</sub> rise (Krustrup et al. 2004, as stated there).<sup><a href="#fn7">7</a></sup> Slimani: “well-developed aerobic fitness helps soccer players to maintain repetitive high-intensity actions within a soccer match, to accelerate the recovery process…” Gist: VO<sub>2</sub>max correlated with the speed of each sprint in an RSA test, not with fatigue index; mechanism discussed: the aerobic system assists PCr–ATP recovery between sprints. Bradley Part 1: “This type of training [position-specific high-intensity drills] has been found to tax both the aerobic and anaerobic systems and thus create desirable adaptation to develop players physiological capacities” (citing Ade 2014; Fransson 2018; Mohr 2016).<sup><a href="#fn3">3</a>, <a href="#fn11">11</a>, <a href="#fn10">10</a></sup></p>
+  <p>Running economy and match-output transfer from <b>run-based</b> HIIT are now full-text verified in Helgerud et al. 2001 (see the run-HIIT section). That protocol is running, not swimming.</p>
+</section>
+
+<section id="said">
+  <h2><span class="num">IV · SAID</span> Specificity on grass</h2>
+  <p>No fetched page was a swimming randomized trial in soccer players. The specificity argument has to be assembled from pages that <em>were</em> fetched, and then from Magel and Tanaka in the water brief.</p>
+  <p>Bradley Part 1 conclusion: “practitioners should ideally design high-intensity drills that replicate both position- and individual-specific characteristics that fully prepare players for the match demands.” FIFA Training Centre background: physical analysis is meant to “aid the development of specific training drills that replicate aspects of the game.” High-intensity activity is involved in goal-scoring opportunities (the page cites Faude et al. 2012; Faude’s own 360-goal / 83% / 45% figures were not on a fetched full text and stay Unverified).<sup><a href="#fn3">3</a>, <a href="#fn12">12</a></sup></p>
+  <p>Sanchez et al. 2021 is a specificity finding wearing a youth-GPS coat. Smaller area per player in Soccer-7 and Soccer-8 versus Soccer-11 changed the external-load mix: more relative accelerations and decelerations in 7/8; more total and high-speed distance in 11. Format-specific load is itself SAID.<sup><a href="#fn13">13</a></sup></p>
+  <p>Implication for swimming as soccer endurance support, as logic from fetched facts, not as a swim-soccer trial: soccer’s metabolic load is intermittent running with accelerations, decelerations, turns (~700), and 150–250 intense actions on grass, at mean ~70% VO<sub>2</sub>max / ~85% HRmax, with PCr cycling during the &gt;70% low-intensity time. A dissimilar mode does not reproduce (i) stretch-shortening and eccentric decelerations, (ii) running economy, (iii) the VO<sub>2</sub>-on kinetics of <em>running</em> transitions, (iv) the speed-zone distribution FIFA now treats as the evolving demand — HID and sprint up far more than total distance.</p>
+</section>
+<section id="planet">
+  <h2><span class="num">V · Physics</span> Water is a different mechanical planet</h2>
+  <p>The temptation is to treat the pool as a kinder treadmill: same run, less pounding. It is not. Density, buoyancy, hydrostatic pressure, and the absence of a vertical ground-reaction force in deep water change the problem being solved. A soccer player who “goes hard” in the pool is solving a drag-and-hydrostatics problem. A soccer player who goes hard on grass is solving a ground-reaction, stretch-shortening, and change-of-direction problem. The cardiovascular system can be invited to both rooms. The tendons and the ankles cannot.</p>
+
+  <h3>Density and buoyancy by depth</h3>
+  <p>Di Prampero (1986), as reported on the fetched Kravitz/Mayo aqua review, states that water density is approximately <b>800 times</b> that of air, which raises the energy cost of moving limbs through water.<sup><a href="#fn14">14</a></sup> That is the first mechanical fact. Air is not a serious fluid for a running stride. Water is.</p>
+  <p>Becker (2009), fetched in full PDF: mean human specific gravity <b>0.974</b>; lean mass near <b>1.1</b>, fat mass about <b>0.9</b>. A body with specific gravity <b>0.97</b> floats when <b>97%</b> of volume is submerged. Neck-depth immersion: only about <b>15 lb</b> of compressive force (approximate weight of the head) on spine, hips, and knees. Immersion to the symphysis pubis offloads <b>40%</b> of body weight. Immersion to the umbilicus offloads approximately <b>50%</b>. Xiphoid immersion offloads <b>60% or more</b>, depending on arm position.<sup><a href="#fn15">15</a></sup></p>
+  <p>Harrison et al. (1992), as quoted on a fetched PMC page: gravitational force reduced by <b>30%</b> at knee-level, <b>50%</b> at waist-level, and about <b>90%</b> reduced weight-bearing at the neck.<sup><a href="#fn16">16</a></sup> Harrison and Bulstrode (1987), as reported in a fetched orthopaedic aquatic-loading study: C7/neck <b>5.9–10%</b> of dry body weight; xiphisternum <b>25–37%</b>; ASIS/navel <b>40–56%</b>. The same paper’s own measurements in periarticular-fracture patients (n=61): mean percent dry weight <b>7.9%</b> (SD 3.3) at neck exhaling, <b>6.0%</b> (SD 2.7) at neck inhaling, <b>23.9%</b> (SD 5.9) at nipple, <b>51.4%</b> (SD 5.6) at navel.<sup><a href="#fn17">17</a></sup></p>
+  <p>Kwok et al. (2022) define deep-water running as running with <b>70%</b> of the body immersed, submerged at shoulder level, with or without a flotation device. Deep water <b>eliminates vertical ground-reaction forces</b>.<sup><a href="#fn18">18</a></sup> Shallow-water work is not the same planet as deep water. At xiphoid or chest depth the legs still load at roughly one-quarter to one-third of dry weight when standing, and more when walking or jogging. Nagle et al. note that walking and jogging may increase weight-bearing by about <b>25% to 75%</b> depending on depth, movement, and speed — citing Gulick/Geigle via Nagle 2017.<sup><a href="#fn19">19</a></sup></p>
+
+  <div class="fig">
+    <div class="buoy">
+      <div class="pool" aria-hidden="true">
+        <div class="bodyfig"></div>
+        <div class="wl" style="top:8%"></div>
+        <div class="wl" style="top:28%"></div>
+        <div class="wl" style="top:46%"></div>
+        <div class="wl" style="top:58%"></div>
+        <div class="wl" style="top:78%"></div>
+      </div>
+      <div class="levels">
+        <div><strong>Neck / C7</strong> — remaining load about 6–10% of dry weight (Harrison &amp; Bulstrode); Bressel: 7.9% exhaling, 6.0% inhaling; Becker: ~15 lb compressive. Harrison 1992: ~90% reduced weight-bearing. This is DWR territory; Kwok: 70% immersed, shoulder, zero vertical GRF.</div>
+        <div><strong>Xiphoid / nipple</strong> — Becker: 60% or more offloaded. Harrison &amp; Bulstrode: 25–37% remaining at xiphisternum. Bressel nipple: 23.9% of dry weight. Nagle restates xiphoid offload ~60%.</div>
+        <div><strong>Umbilicus / navel / ASIS</strong> — Becker: ~50% offload at umbilicus. Harrison &amp; Bulstrode: 40–56% remaining. Bressel navel: 51.4% of dry weight. Harrison 1992: 50% reduction at waist.</div>
+        <div><strong>Symphysis pubis</strong> — Becker: 40% of body weight offloaded.</div>
+        <div><strong>Knee</strong> — Harrison 1992: gravitational force reduced 30% at knee-level. This is not “non-impact.”</div>
+      </div>
+    </div>
+    <p class="cap"><b>Figure 2.</b> Buoyancy is a depth function, not a mood. Deep-water running and neck-depth immersion are a different loading environment from xiphoid jogging, and both are different from grass. Numbers as reported by Becker 2009, Harrison (via Carayannopoulos 2020 and Bressel 2015), Bressel’s own n=61, and Kwok 2022. Walking and jogging can raise remaining load by about 25–75% (Nagle citing Gulick/Geigle).</p>
+  </div>
+</section>
+
+<section id="heart">
+  <h2><span class="num">VI · Hydrostatics</span> Heart rate in water is a range, not a law</h2>
+  <p>Immersion is a cardiovascular intervention before it is an exercise session. Becker, fetched PDF: water pressure <b>22.4 mm Hg per foot</b> of depth, or <b>1 mm Hg per 1.36 cm</b>. Immersion to <b>48 inches</b> is about <b>88.9 mm Hg</b> — slightly above typical diastolic pressure. Neck-depth immersion: central blood volume increases by about <b>0.7 L</b> (<b>60%</b> increase in central volume); cardiac volume increases <b>27–30%</b>; mean stroke volume increases <b>35%</b> at rest (resting SV ~<b>71 mL/beat</b> plus ~<b>25 mL</b> → ~<b>100 mL</b>). Heart rate typically drops as filling rises; at average pool temperatures the rate lowers by <b>12–15%</b> from symphysis to xiphoid immersion. Cardiac output increases by about <b>1,500 mL/min</b> at clavicle-depth immersion. Neck-depth: systemic vascular resistance falls <b>30%</b> at thermoneutral temperatures; systolic blood pressure during work generally about <b>20%</b> less in water than on land. Work of breathing for a <b>1 L</b> tidal volume increases <b>60%</b> at neck submersion (about <b>6–9%</b> drop in vital capacity versus xiphoid).<sup><a href="#fn15">15</a></sup> Nagle restates the same chain, including the 12–15% heart-rate decrease at xiphoid in about <b>33.5–35.5 °C</b> water.<sup><a href="#fn19">19</a></sup></p>
+  <p>The slogan that follows this physiology is “heart rate is about 10 bpm lower in water.” It appears on fetched pages. It is not a law.</p>
+
+  <div class="fig">
+    <div class="hrgrid">
+      <div class="hrbar"><span class="lab">Becker, aquatic treadmill vs land</span><span class="track"><i style="width:42%"></i></span><span>10 bpm</span></div>
+      <div class="hrbar"><span class="lab">Nagle / Sanders, 18–25 °C cycling/running</span><span class="track"><i style="width:52%"></i></span><span>10–15 bpm</span></div>
+      <div class="hrbar"><span class="lab">Nagle, 30–35.5 °C water</span><span class="track"><i style="width:8%;background:#2c7a4b"></i></span><span>≈ land</span></div>
+      <div class="hrbar"><span class="lab">Becker, rest, symphysis → xiphoid</span><span class="track"><i style="width:48%"></i></span><span>12–15%</span></div>
+      <div class="hrbar"><span class="lab">Wilber, submax DWR vs treadmill</span><span class="track"><i style="width:50%"></i></span><span>14%</span></div>
+      <div class="hrbar"><span class="lab">Hamer &amp; Morton, shallow 1 m, submax</span><span class="track"><i style="width:44%"></i></span><span>10–12 bpm</span></div>
+      <div class="hrbar"><span class="lab">Same study, at 90% VO<sub>2</sub>max (168 vs 173)</span><span class="track"><i style="width:22%"></i></span><span>5 bpm</span></div>
+      <div class="hrbar"><span class="lab">Svedenhag &amp; Seger, HRmax 172 vs 188</span><span class="track"><i style="width:64%"></i></span><span>16 bpm</span></div>
+      <div class="hrbar"><span class="lab">Michaud, DWR HRmax vs treadmill</span><span class="track"><i style="width:58%"></i></span><span>~15 bpm</span></div>
+      <div class="hrbar"><span class="lab">Kravitz synthesis, submax DWR</span><span class="track"><i style="width:46%"></i></span><span>3–15%</span></div>
+      <div class="hrbar"><span class="lab">Mougios &amp; Deligiannis, given VO<sub>2</sub></span><span class="track"><i style="width:80%"></i></span><span>up to 20 bpm</span></div>
+    </div>
+    <p class="cap"><b>Figure 3.</b> Heart-rate offset in water is a <em>range</em>. Bars are ordinal, not a common scale: some rows are beats, some are percents. Town &amp; Bradley (abstract): DWR VO<sub>2</sub>max 73.5% of treadmill, SWR 90.3%; HRmax DWR 86% of treadmill, SWR 88.6%. Prescribe water intensity with RPE, cadence, and water-specific HR, not land zones (Killgore via Kwok; Nagle; Kravitz). Warm water can erase the gap; max tests often widen it.</p>
+  </div>
+
+  <p>Town and Bradley (1991) abstract, trained runners, max tests: treadmill VO<sub>2</sub>max and HRmax higher than both water tests. Shallow-water running VO<sub>2</sub>max <b>90.3%</b> of treadmill; deep-water running <b>73.5%</b>. HRmax SWR <b>88.6%</b>, DWR <b>86%</b> of treadmill. RER and lactate did not differ. Shallow water was metabolically greater than deep water.<sup><a href="#fn20">20</a></sup> Svedenhag and Seger (1992), as reported on the Kravitz page: HRmax <b>172 vs 188 bpm</b>; VO<sub>2</sub>max <b>4.03 vs 4.60 L/min</b> (water versus land), trained male runners in a vest.<sup><a href="#fn14">14</a></sup> Michaud et al. (1995), same page: DWR HRmax about <b>15 beats</b> lower than treadmill (pre 172 vs 187; post 175 vs 189) in untrained subjects, max tests. Wilber et al. (1996), same page: average HR <b>14%</b> lower during DWR versus treadmill in endurance runners, submax. Hamer and Morton (1990), same page: submax water-run HR <b>10–12 bpm</b> lower; at <b>90%</b> VO<sub>2</sub>max the gap shrank to <b>5 bpm</b> (168 vs 173), in shallow water of <b>1 m</b>. Kravitz summary of the literature they reviewed: submax DWR HR <b>3–15%</b> lower than treadmill; at a given VO<sub>2</sub>, HR has been shown <b>up to 20 bpm</b> lower in water (citing Mougios and Deligiannis 1993).<sup><a href="#fn14">14</a></sup></p>
+  <p>Practical implication, sourced: do not take a land heart-rate zone into the pool and call it equivalent. Kravitz notes that ACSM land HR targets may underdose chest-depth water because of hydrostatic bradycardia; studies that hit <b>70–85% HRmax</b> in water (upper end of zone) were the ones that improved fitness.<sup><a href="#fn14">14</a></sup> Killgore (2012), as quoted by Kwok: DWR max HR and VO<sub>2</sub> “consistently lower” than treadmill; “submaximal values strikingly similar”; gap smaller with DWR experience.<sup><a href="#fn18">18</a></sup></p>
+  <p>Temperature is not a footnote. Kwok et al. (citing Reilly 2003): <b>26 °C to 28 °C</b> recommended for DWR at maximal intensities.<sup><a href="#fn18">18</a></sup> Becker: public and competitive pools often <b>27–29 °C</b>; therapy pools <b>33.5–35.5 °C</b>.<sup><a href="#fn15">15</a></sup> Nagle: aquatic cycling/running in <b>18–25 °C</b> produces HRs <b>10–15 beats/min</b> lower than land; exercising in <b>30–35.5 °C</b> water → HRs similar to land.<sup><a href="#fn19">19</a></sup> Water conducts heat <b>25 times</b> faster than air (Becker). Cool pools dump heat; hot tubs (<b>37.5–41 °C</b>) do the opposite.<sup><a href="#fn15">15</a></sup></p>
+</section>
+
+<section id="drag">
+  <h2><span class="num">VII · Force</span> Drag, not ground reaction</h2>
+  <p>Deep water: no foot contact, therefore no vertical GRF, no land-style push-off (Kwok; Becker). Propulsion is against viscous drag, which rises as a log function of velocity under turbulence (Becker). Horizontal and multi-plane drag is the overload, not ground reaction.<sup><a href="#fn15">15</a>, <a href="#fn18">18</a></sup></p>
+  <p>Shallow water and aquatic plyometrics still have a floor, but it is a quieter floor. Donoghue, Shimojo and Takagi (2011), full PMC: water depth <b>1.3 m</b> (about <b>3 cm</b> below xiphoid for their sample), <b>27.5 °C</b>, drop jump from <b>30 cm</b>. Peak impact forces <b>33–54%</b> lower, impulse <b>19–54%</b> lower, rate of force development <b>33–62%</b> lower versus land for most drills. Peak GRF land <b>4.32–6.77 BW</b> versus water <b>1.99–4.05 BW</b>. They note land running typically <b>2–3 BW</b> on one leg (citing Cavanagh).<sup><a href="#fn21">21</a></sup> That is a bridge after running, before full land plyometrics — and the opposite of a stiffness stimulus. Reduced RFD is not how a soccer ankle learns to be a soccer ankle.</p>
+  <p>Becker is explicit: aquatic training is “unlikely” to substantially improve dry-land coordination skills (hurdles, high jump, complex timing).<sup><a href="#fn15">15</a></sup> Killgore et al. (2006), cited by Becker: a cross-country DWR style is closer to treadmill knee/ankle kinematics than a high-kick style. Kwok (citing Silva 2020): DWR showed higher activation of distal leg muscles than proximal thigh muscles versus land treadmill running — so muscle emphasis is not a land-run copy.<sup><a href="#fn18">18</a></sup> NSCA’s Stolt, in the 2008 aquatic cross-training roundtable: footwork (jumps, hops, shuffles, sprints, change of direction) can be introduced in water but “should not be solely relied on” because buoyancy and viscosity change the drill. Higher-impact shallow-water work: wear water shoes.<sup><a href="#fn22">22</a></sup></p>
+  <p>Frangolias, Rhodes and Taunton (1996), on the Kravitz page: experienced DWR athletes (at least <b>6</b> DWR workouts per month for <b>6</b> months) had a land–water VO<sub>2</sub>max difference of <b>3.8 mL/kg/min</b>; inexperienced <b>10.3 mL/kg/min</b>. Experienced runners: no significant HRmax land versus water difference. Frangolias and Rhodes (1995), same page: max VO<sub>2</sub> and HR about <b>8%</b> lower in water in experienced DWR runners. Butts, Tucker and Greening (1991): DWR VO<sub>2</sub>max <b>9%</b> lower in men, <b>16%</b> lower in women versus treadmill; HRmax <b>5%</b> lower both sexes. Brown et al. (1997): at matched cadences, <em>submax</em> VO<sub>2</sub> was <b>higher</b> in DWR than treadmill (harder at the same turnover); max VO<sub>2</sub> on the treadmill was <b>13%</b> (men) and <b>24%</b> (women) higher than DWR.<sup><a href="#fn14">14</a></sup> Reilly, Dowzer and Cable (2003) abstract, quoted on Becker and Kwok: at submax, lactate higher in DWR than treadmill at a given VO<sub>2</sub>; at max, VO<sub>2</sub>, VE, and HR decreased in water; still an “adequate stimulus” for cardiovascular training. Aerobic performance maintained with DWR <b>up to 6 weeks</b> in trained endurance athletes; sedentary individuals improve VO<sub>2</sub>max more than athletes.<sup><a href="#fn15">15</a>, <a href="#fn18">18</a></sup> Chu and Rhodes (2001) abstract: immersion to the neck lowers respiratory and cardiovascular parameters; VO<sub>2</sub>max and HR lower during DWR versus land; DWR training produced “equivocal” responses versus land in fit/highly trained, mixed for untrained.<sup><a href="#fn23">23</a></sup></p>
+</section>
+
+<section id="dwr">
+  <h2><span class="num">VIII · Transfer that is real</span> Wilber, Bushman, and the underdose warning</h2>
+  <p>The honest aerobic story in water is not “swimming makes you a soccer player.” It is: <em>hard, frequent deep-water running can hold a runner’s land engine for a handful of weeks</em>; easy, short, land-heart-rate-zone water work can fail; untrained people can gain VO<sub>2</sub>max in the pool at three sessions a week. Those sentences are all sourced. They are runner sentences. They are still the best fetched evidence for using water as an aerobic stand-in.</p>
+
+  <h3>Wilber et al. 1996 — maintenance at matched intensity</h3>
+  <p>Trained male runners, VO<sub>2</sub>max <b>58.6 ± 3.6</b> mL·kg<sup>−1</sup>·min<sup>−1</sup>; n=16; <b>6 weeks</b>; <b>5 d·wk<sup>−1</sup></b>; alternating <b>30 min at 90–100% VO<sub>2</sub>max</b> and <b>60 min at 70–75% VO<sub>2</sub>max</b>. Pool <b>27 °C</b>; flotation used; <b>96–98%</b> compliance; <b>30</b> sessions.<sup><a href="#fn18">18</a>, <a href="#fn14">14</a>, <a href="#fn24">24</a></sup></p>
+  <table>
+    <caption>Wilber 1996 — treadmill versus water-run groups (Kwok Tables 2–3 / Kravitz / MSSE). No significant intra- or inter-group differences. Conclusion: DWR may maintain aerobic performance up to 6 weeks.</caption>
+    <thead><tr><th></th><th>Pre</th><th>Post</th><th>Units</th></tr></thead>
+    <tbody>
+      <tr><td>Treadmill group VO<sub>2</sub>max</td><td>58.4 ± 2.3</td><td>60.1 ± 3.6</td><td>mL·kg<sup>−1</sup>·min<sup>−1</sup></td></tr>
+      <tr><td>Water-run group VO<sub>2</sub>max</td><td>58.7 ± 4.7</td><td>59.6 ± 5.4</td><td>mL·kg<sup>−1</sup>·min<sup>−1</sup></td></tr>
+      <tr><td>Treadmill VT</td><td>47.5 ± 1.8</td><td>48.2 ± 3.3</td><td>mL·kg<sup>−1</sup>·min<sup>−1</sup></td></tr>
+      <tr><td>Water VT</td><td>46.5 ± 6.4</td><td>47.4 ± 6.7</td><td>mL·kg<sup>−1</sup>·min<sup>−1</sup></td></tr>
+      <tr><td>Economy at 255 m·min<sup>−1</sup>, treadmill group</td><td>48.4 ± 2.3</td><td>48.9 ± 2.0</td><td>mL·kg<sup>−1</sup>·min<sup>−1</sup></td></tr>
+      <tr><td>Economy, water group</td><td>51.8 ± 2.0</td><td>48.9 ± 2.2</td><td>mL·kg<sup>−1</sup>·min<sup>−1</sup></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Bushman et al. 1997 — exclusive DWR, 4 weeks, 5 km held</h3>
+  <p>Eleven competitive runners; exclusive DWR <b>4 weeks</b>; <b>5–6 d·wk<sup>−1</sup></b>; <b>20–24</b> sessions, mean <b>22 ± 1.5</b>. Five-kilometre treadmill time: <b>1142.7 ± 39.5 s</b> pre versus <b>1149.8 ± 36.9 s</b> post (P=0.28). Submax VO<sub>2</sub>: <b>44.8 ± 1.2</b> versus <b>45.3 ± 1.5</b> mL·kg<sup>−1</sup>·min<sup>−1</sup> (P=0.47). Lactate-threshold velocity: <b>249.1 ± 0.9</b> versus <b>253.6 ± 6.3</b> m·min<sup>−1</sup> (P=0.44). VO<sub>2</sub>max: <b>63.4 ± 1.3</b> versus <b>62.2 ± 1.3</b> mL·kg<sup>−1</sup>·min<sup>−1</sup> (P=0.11). Land running performance maintained.<sup><a href="#fn25">25</a>, <a href="#fn14">14</a></sup></p>
+
+  <h3>Eyestone 1993 and Quinn 1994 — underdose is not a vibe, it is a result</h3>
+  <p>Eyestone et al.: 32 recreational runners; <b>6 weeks</b> DWR versus cycling versus run; ACSM-minimum-style dose: week 1 <b>3 d</b>, weeks 3–6 <b>5 d</b> (Kwok lists week 2 as 4 sessions; <b>27</b> total); <b>20 min</b> progressing to <b>30 min</b>; <b>70%</b> HRmax progressing to <b>80%</b>. Pre VO<sub>2</sub>max <b>56.29 ± 1.49</b> → post <b>53.52 ± 1.61</b> mL·kg<sup>−1</sup>·min<sup>−1</sup> (<b>−4.9%</b>, significant). Two-mile time: small non-significant <b>+1.21%</b> improvement. Kravitz notes hydrostatic bradycardia may have caused under-dosing if land HR targets were used.<sup><a href="#fn14">14</a>, <a href="#fn18">18</a></sup></p>
+  <p>Quinn et al. 1994: 7 untrained women; <b>4 weeks</b> DWR at steady <b>80% HRR ±10 bpm</b> after land training. VO<sub>2</sub>max fell from <b>42.9 ± 3.2</b> (post-land) to <b>40.0 ± 1.8</b> (<b>−6.75%</b>). Authors later recommended adding intervals.<sup><a href="#fn14">14</a></sup></p>
+
+  <h3>Michaud 1995 — untrained people can gain</h3>
+  <p>Ten inactive adults; <b>8 weeks</b>; <b>3×/week</b>; session length disagrees across secondary sources: Kwok table <b>40–70 min</b>; Kravitz also reports <b>25–45 min</b> interval sessions; Brody excerpt <b>16–36 min</b>. Intensity <b>63–83%</b> of treadmill HRmax (Brody prints 63–82%). Treadmill VO<sub>2</sub>max <b>+10.6 to 10.7%</b> (29.3±8.2 → 32.8±8.0); DWR-tested VO<sub>2</sub>max <b>+20.1%</b>. Crossover to land present in untrained. Kravitz: intervals <b>30 s to 7 min</b>.<sup><a href="#fn18">18</a>, <a href="#fn14">14</a>, <a href="#fn26">26</a></sup> The disagreement on minutes is left standing. The primary PDF was not fetched.</p>
+
+  <h3>Kwok 2022 and Becker’s synthesis</h3>
+  <p>Kwok systematic review: 11 trials, 287 people. DWR versus land training showed similar effects on VO<sub>2</sub>max (athletic SMDs <b>0.06–0.10</b>). Session range across included trials: <b>30–70 min</b>, <b>2–5</b> sessions/week, <b>3–18 weeks</b>. They did not meta-analyse a single dose. Sedentary and elderly gained more than trained athletes. Kwok: DWR “viable… for athletes susceptible to repetitive stress injuries”; buoyancy eliminates vertical GRF.<sup><a href="#fn18">18</a></sup></p>
+  <p>Becker synthesis: for highly fit individuals, water running equals land running for maintenance of max VO<sub>2</sub> when intensities and frequencies are matched, for published training periods <b>up to 6 weeks</b> (citing Bushman, Wilber, Gatti).<sup><a href="#fn15">15</a></sup> Coyle et al., as reported in the Thein/Brody book excerpt: <b>14–16%</b> decline in VO<sub>2</sub>max after <b>6 weeks</b> of rest; significant cardiovascular decline from as little as <b>3 weeks</b> inactivity. That is the rehab rationale for replacing rest with water work.<sup><a href="#fn26">26</a></sup></p>
+  <div class="callout aqua">
+    <strong class="k">Water numbers in chlorinated aqua</strong>
+    Exclusive, hard, runner-style DWR can hold land VO<sub>2</sub>max / 5 km / economy for 4–6 weeks (Bushman, Wilber). Easy, short, land-HR-zone DWR can fail (Eyestone −4.9% VO<sub>2</sub>max; Quinn −6.75% after land training). Untrained people gain at about 3×/week (Michaud). Soccer in-season cannot copy the 5–6 d/wk exclusive DWR runner studies without dropping soccer-specific load — and no fetched paper tested that trade-off.
+  </div>
+</section>
+
+<section id="magel">
+  <h2><span class="num">IX · The counters</span> Magel 1975 and Tanaka 1994</h2>
+  <p>Deep-water running is still a running action, even when the ground has been taken away. Front crawl is not. The two classic transfer papers sit in the water brief as fetched abstracts. They are the essay’s load-bearing counters. They are not Unverified.</p>
+  <p><b>Magel et al., 1975.</b> Fifteen male recreational swimmers; interval swim <b>1 h/day, 3 days/wk, 10 weeks</b>. Swim VO<sub>2</sub>max <b>+380 mL/min</b>; max VE <b>+14.9 L/min</b>; max swim time <b>+4.0 min</b>; max HR <b>−3.5 bpm</b>. <b>No significant improvement in treadmill-running VO<sub>2</sub>max.</b> “The results … clearly demonstrate the <b>specificity</b> of the cardiorespiratory adaptation to swim training.”<sup><a href="#fn27">27</a></sup></p>
+  <p><b>Tanaka, 1994.</b> Review of transfer among cycling, running, and swimming. Some VO<sub>2</sub>max transfer exists, “more noticeable when <b>running</b> is performed as a cross-training mode.” Quote, as marked in the water brief: “Swim training, however, may result in minimum transfer of training effects on VO<sub>2</sub>max.” Cross-training effects <b>never exceed</b> those induced by the sport-specific training mode. Specificity has “greater significance, especially for highly trained athletes.” Rehab and overreaching are the justified use-cases.<sup><a href="#fn28">28</a></sup></p>
+  <p>What <em>does</em> transfer from swimming, on fetched pages: central cardiovascular adaptations can occur with swim training (stroke volume, resting HR, VO<sub>2</sub> in the <em>swim</em> mode). Martin et al. (1987), as reported by Nagle: <b>12 weeks</b>, <b>3×/week</b>, swim continuous + interval plus land circuit; peak supine VO<sub>2</sub> <b>+10%</b>; peak supine LV end-diastolic volume <b>+18%</b>; lower resting HR.<sup><a href="#fn19">19</a></sup> Becker: neck-depth work raises inspiratory muscle work; competitive swimmers show larger VC/TLC. Useful for respiratory endurance, not soccer-specific locomotion. Hydrostatic edema control and non-impact aerobic volume: Becker; Kwok.</p>
+  <p>Bone is not a swimming gift to a soccer player. Becker reviews impact versus swim: youthful swimmers generally less BMD than gymnasts and impact athletes, higher than sedentary; Bravo aquatic “impact” in waist-depth water did not increase spine or femoral-neck BMD over a year. Soccer needs impact-sensitive bone and tendon. Ankle stiffness, stretch-shortening, change of direction: no fetched RCT showed swimming improved soccer COD or ankle stiffness. Donoghue: aquatic landings cut RFD 33–62% — the opposite of a stiffness stimulus. Skill limiter, Brody/Thein excerpt: many athletes “are not accomplished swimmers and may <b>not</b> be able to achieve an adequate cardiovascular workout” with front crawl; they recommend kickboard flutter/dolphin as a workaround.<sup><a href="#fn26">26</a></sup></p>
+  <p><b>Soccer-specific swimming RCTs for endurance:</b> none fetched that used front-crawl volume as the independent variable in soccer players. Football aquatic literature that was fetched is mostly plyometrics, aqua aerobics, and hydrotherapy, not endurance swimming (Doctor and Rathod 2024).</p>
+</section>
+<section id="soccer-aqua">
+  <h2><span class="num">X · Football in the pool</span> Soccer’s aquatic literature is plyometrics, not endurance swimming</h2>
+  <p>Doctor and Rathod (2024) screened 1,512 records and kept 10 football studies (2012–2022), ages 12–30. They conclude aquatic therapy improved speed, agility, and leg power. They explicitly found no studies on core strength or kick velocity. Endurance was not the primary outcome set.<sup><a href="#fn29">29</a></sup> Johnson et al. (2021), aquatic versus land plyometrics: 8 studies in athletes; APT typically 6–12 weeks, 2–3 days/week; similar jump gains; APT may cut impact and soreness. The soccer sample is Fonseca.<sup><a href="#fn30">30</a></sup></p>
+  <p><b>Fonseca et al. 2017</b> (in Johnson and in Doctor): 24 male soccer players, 16–18 years; 6 weeks, 2 days/week, 944 jumps; vertical jump up in both aquatic and land plyometric training; APT less DOMS; APT foot contact time 482.46 → 376.19 ms.<sup><a href="#fn30">30</a>, <a href="#fn29">29</a></sup> That is a power study. It is not an aerobic-engine study.</p>
+  <p>Chomani et al. 2021 (Doctor Table 3): 2 months, n=40, youth football, agility / 30 m / vertical jump / broad jump improved versus control. Percent-change numbers that circulated in a separate 2021 abstract (+21.05% VJ, +8.84% long jump, +9.35% agility, +12.50% speed) were not on a page fully fetched; those four percentages are Unverified here. Murugavel 2022 (Doctor): 12 weeks, n=40, age 20–23; aqua aerobics versus control; strength-endurance and standing broad jump improved in the aqua group. Hailu et al. 2015 (Doctor): 3 months, n=24 beginner soccer; 600-yard run, barbell squat, 12-min run; water-based group “better improvement.” Nualon 2013 (Doctor): 6 weeks, n=47, hydrotherapy plus land for chronic ankle instability in athletes (not soccer-only); hydrotherapy greater improvement on single-leg hop. Hoskin 2013 (Doctor): AFL recovery, aquatic exercise versus contrast plus shallow-water treadmill; one-time, n=29; AE improved listed parameters versus contrast/SWT — not a training study.<sup><a href="#fn29">29</a></sup></p>
+  <p>Water polo–style treading as a soccer aerobic method: not found. In-water soccer or water-polo drills for field-sport VO<sub>2</sub>: not found. Flutter kick only as aerobic cross-training: thin, practical only — Brody excerpt: flutter or dolphin with flippers or kickboard can condition unskilled swimmers; no soccer RCT. Paddles, drag suits, extra surface area: mechanics yes (Becker: at a given speed, larger surface area → more overload; Nagle: gloves/paddles as HIIT overload), soccer RCTs no. Deep-water treading: not found as a dosed protocol. Bungee-tethered aqua sprints: mentioned on non-fetched blogs; Unverified.</p>
+  <p>Bottom line, as the water brief stated it: aquatic plyometrics have a small soccer evidence base for power and agility. Aquatic endurance for soccer is inferred from runner DWR studies, not from water-polo or in-water soccer trials. Evidence for polo-style treading, in-water soccer, and drag-suit programming as soccer endurance tools is thin.</p>
+</section>
+
+<section id="doses">
+  <h2><span class="num">XI · Prescription without invention</span> Sourced doses only</h2>
+  <p>No fetched FIFA or UEFA page published a swimming or aqua-jog session length, weekly frequency, or percent of VO<sub>2</sub> for soccer players. FIFA Medical Centre of Excellence Tehran includes a hydrotherapy facility — infrastructure, not a dose.<sup><a href="#fn31">31</a></sup> UEFA.com reported Swedish FA physiologist Helena Andersson: active recovery between two 90-min games 72 h apart had “neither a positive nor a negative impact” versus rest in elite female players. That study is not aqua-specific in the UEFA news-page text.<sup><a href="#fn32">32</a></sup> Do not treat club MD+1 “pool days” as FIFA doctrine. They are common practice; they are not a fetched FIFA prescription. No fetched UKSCA aquatic-dose document existed.</p>
+  <p>What follows are verbatim structures from reputable sports-medicine and strength-and-conditioning sources. They are not a Jack Tran program. They are not Elon’s week.</p>
+
+  <h3>NSCA Stolt — the cap</h3>
+  <p>Haff et al., Aquatic Cross Training for Athletes, <cite>Strength &amp; Conditioning Journal</cite> 2008, Parts I and II. Stolt (Part II): would not work longer than <b>60 minutes</b> in a pool session; can structure an intense session in that window. Use for rehab and pre/post-season. Athlete need not be a swimmer but must be comfortable; do not put non-swimmers in over-their-head water without confirmed ability. Stolt (Part I): DWR can maintain aerobic performance; Wilber and Bushman concluded long-term DWR can maintain running economy; uninjured athletes can include DWR. Footwork should not be solely relied on.<sup><a href="#fn22">22</a>, <a href="#fn33">33</a></sup></p>
+
+  <h3>Brody / Thein — lower-extremity circuit, 25–40 min</h3>
+  <p>Source: <cite>Aquatic Exercise for Rehabilitation and Training</cite> excerpt, Human Kinetics, citing Thein and Brody 1998 and Bates and Hanson 1996. Interval rule (Bates and Hanson 1996, as printed there): work <b>2–8 min</b>, HR <b>80–90%</b> high / <b>60–70%</b> low; total <b>20–50 min</b>. Target overall <b>60–90%</b> HRR or RPE <b>13–14</b>.<sup><a href="#fn26">26</a></sup></p>
+  <table>
+    <caption>Table 11.10 from the fetched Brody/Thein excerpt — lower-extremity aquatic exercises for athletes. Copied structure, not an invented menu.</caption>
+    <thead><tr><th>Exercise</th><th>Duration</th><th>Intensity</th></tr></thead>
+    <tbody>
+      <tr><td>Water running</td><td>3–5 min</td><td>High</td></tr>
+      <tr><td>Scissor kicks</td><td>2–3 min</td><td>Low</td></tr>
+      <tr><td>Cross-country skiing</td><td>3–5 min</td><td>High</td></tr>
+      <tr><td>Trunk rotations</td><td>2–3 min</td><td>Low</td></tr>
+      <tr><td>High knee running</td><td>3–5 min</td><td>High</td></tr>
+      <tr><td>Leg figure-eights</td><td>2–3 min</td><td>Low</td></tr>
+      <tr><td>Water running</td><td>3–5 min</td><td>High</td></tr>
+      <tr><td>Double knee to chest</td><td>2–3 min</td><td>Low</td></tr>
+      <tr><td>Cross-country skiing</td><td>3–5 min</td><td>High</td></tr>
+      <tr><td>Butt kicks</td><td>2–3 min</td><td>Low</td></tr>
+      <tr><td><b>Total time</b></td><td><b>25–40 min</b></td><td></td></tr>
+    </tbody>
+  </table>
+  <p>Table 11.12 in the same excerpt, soccer/field-hockey/lacrosse suggestions: forward/backward/side ricochets; lower-extremity braiding; upper-body wall push-ups; walking lunges; leg figure-eights; reciprocal rowing with paddle. These are sport-specific movement ideas, not an endurance RCT. Form cues (same excerpt, citing Thein and Brody 1998; Chu and Rhodes 2001): slight forward lean; leg through to horizontal; avoid circular motions; elbows 90°; hands open; avoid dog-paddle; “run off the shallow end” into deep water when able.<sup><a href="#fn26">26</a></sup></p>
+
+  <h3>Nagle / S.W.E.A.T. aquatic HIIT — general and athletic, not soccer</h3>
+  <p>ACSM position-stand abstract (Garber 2011), fetched: most adults ≥30 min moderate on ≥5 d/wk (≥150 min/wk) or ≥20 min vigorous on ≥3 d/wk (≥75 min/wk), or mix totaling ≥500–1000 MET-min/wk. This is land-default health guidance, not a soccer aqua dose.<sup><a href="#fn34">34</a></sup></p>
+  <p>Nagle on older/deconditioned aquatic HIIT: exercise a minimum of <b>20 minutes at 70–85% of HRmax</b>, with recovery days, warm-up/cool-down. Athletic HIIT: longer intervals <b>30 s to 2 min</b> at <b>&gt;70–95% HRmax</b>, work:rest <b>1:1 or less</b> for aerobic; short <b>10–15 s</b> all-out with <b>1:4</b> rest for alactic/glycolytic.<sup><a href="#fn19">19</a></sup> Sample cueing interval: <b>15 s moderate / 15 s hard–very hard / 15 s easy</b>; repeat; 2–4 rounds per exercise; ~30 min bout. Cardio plus muscular segments 65–87% HRmax; cardio-only 20 min 82–87%, highest 90% HRmax. Wilder et al. 1993 DWR graded bout (same table): 5×2 min “somewhat hard” + 30 s rest; 8×1 min “hard” + 30 s rest; repeat first set; 37 min total; mean HR slow 51% HRmax, very fast 86% HRmax. Broman 2006 (elderly women DWR HIIT): 2×/week, 8 weeks; intervals 15 s to 3 min at 75% HRmax for 10 min with 2 min rest between intervals; land-cycle VO<sub>2</sub>max +10%. Rebold 2013 aquatic treadmill Tabata: 20 s work / 10 s rest, 8 rounds, 20 min, 2×/week, 8 weeks. Nagle’s tabulated studies often 2–3 d/wk for 8–15 wk (Mohr swim 3×15 wk, 25 min swim sprints).<sup><a href="#fn19">19</a></sup> An 8×45 s hard / 45 s easy aqua-jog set was not found on any fetched page and is not used here.</p>
+
+  <h3>Where it sits in a soccer week — sourced, not invented</h3>
+  <div class="fig">
+    <div class="week">
+      <section class="must">
+        <h4>The pitch must do</h4>
+        <ul>
+          <li>Position-specific high-intensity running (Bradley; FIFA TC)</li>
+          <li>Accels, decels, ~700 turns, 150–250 intense actions</li>
+          <li>HID/sprint — the qualities that grew</li>
+          <li>Running stiffness, COD, ball actions</li>
+        </ul>
+      </section>
+      <section class="yes">
+        <h4>Water may do</h4>
+        <ul>
+          <li>Hold the aerobic engine 4–6 wk when running is constrained (Wilber, Bushman)</li>
+          <li>Untrained VO<sub>2</sub> gain at ~3×/wk (Michaud)</li>
+          <li>Zero vertical GRF aerobic minutes (Kwok)</li>
+          <li>APT power with less DOMS (Fonseca) as a bridge, not a COD substitute</li>
+          <li>Heat dump in 26–29 °C water (Becker, Reilly/Kwok)</li>
+        </ul>
+      </section>
+      <section class="no">
+        <h4>Water does not do</h4>
+        <ul>
+          <li>Train treadmill/run VO<sub>2</sub>max via front crawl (Magel)</li>
+          <li>Exceed sport-specific training (Tanaka)</li>
+          <li>Rebuild land timing skills (Becker) or sole COD (Stolt)</li>
+          <li>Replace land plyo stiffness (Donoghue RFD −33 to −62%)</li>
+          <li>A fetched FIFA/UEFA/UKSCA minute prescription</li>
+        </ul>
+      </section>
+    </div>
+    <p class="cap"><b>Figure 4.</b> Weekly role of water, first principles plus sourced doses. Runner DWR studies that maintained VO<sub>2</sub> used 5–6 sessions/week at land-like intensity — a <em>replacement</em> block for injured runners, not a soccer in-season add-on. Doctor 2024: aquatic work used as added training (typically 6–12 weeks, 2–3×/week in the football studies they tabulated), not as MD+1 recovery. CWI after matches is a different intervention (recovery, not training).</p>
+  </div>
+  <table>
+    <caption>Published ranges, not a prescription. If sources disagree, the disagreement is the finding.</caption>
+    <thead><tr><th>Goal</th><th>Frequency</th><th>Duration</th><th>Intensity</th><th>Base</th><th>Disagreement / note</th></tr></thead>
+    <tbody>
+      <tr><td>Maintain land VO<sub>2</sub>max / 5 km in trained <em>runners</em> replacing all running</td><td>5–6 d/wk (Bushman 20–24 sessions in 4 wk; Wilber 5 d/wk × 6 wk)</td><td>Wilber 30 min hard or 60 min moderate</td><td>90–100% VO<sub>2</sub>max alt 70–75% VO<sub>2</sub>max; Bushman mixed</td><td>Runners, 4–6 week window</td><td>Eyestone 3–5 d/wk, 20–30 min, 70–80% HRmax lost 4.9% VO<sub>2</sub>max</td></tr>
+      <tr><td>Improve VO<sub>2</sub>max in untrained via DWR</td><td>3 d/wk (Michaud 8 wk)</td><td>16–70 min depending on secondary table</td><td>63–83% of land HRmax, often intervals</td><td>Untrained adults, not soccer</td><td>Brody 16–36; Kwok 40–70; Kravitz 25–45. Quinn 4 wk steady failed to hold land gains</td></tr>
+      <tr><td>Health aerobic (ACSM)</td><td>≥5 d moderate or ≥3 d vigorous</td><td>≥30 min mod or ≥20 min vig</td><td>ACSM land zones; water may need RPE</td><td>General adults</td><td>Not sport-specific</td></tr>
+      <tr><td>NSCA practitioner cap</td><td>Not specified as weekly</td><td>≤60 min per pool session (Stolt)</td><td>“Intense and demanding” possible inside 60 min</td><td>Expert roundtable, not RCT</td><td>Comfort/safety first</td></tr>
+      <tr><td>Brody athlete circuit</td><td>Not specified</td><td>25–40 min circuit; intervals total 20–50 min</td><td>High 3–5 min / low 2–3 min; or 80–90% / 60–70% HR</td><td>Textbook, Bates &amp; Hanson 1996</td><td>Not a soccer RCT</td></tr>
+      <tr><td>Aquatic HIIT (Nagle)</td><td>Studies 2–3 d/wk for 8–15 wk</td><td>20–30 min work common; Mohr swim sprints 25 min</td><td>15s/15s/15s; or 30s–2 min &gt;70–95% HRmax; Tabata 20/10</td><td>Mixed clinical/athletic, little soccer</td><td>S.W.E.A.T. not a football trial</td></tr>
+      <tr><td>Soccer aquatic plyometric (not endurance)</td><td>2–3 d/wk, 6–12 wk (Fonseca 2×6 wk)</td><td>Session length often not reported on the review page</td><td>Jump counts (Fonseca 944 in 6 wk)</td><td>Football players</td><td>Power/agility, not VO<sub>2</sub></td></tr>
+      <tr><td>In-season extra aerobic without impact</td><td>Not found as a governing-body dose</td><td>—</td><td>—</td><td>—</td><td>Physiology allows it; no sourced soccer weekly template</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="youth">
+  <h2><span class="num">XII · Youth</span> A nine-year-old is not an elite midfielder</h2>
+  <p>Elon Tran is 9 years old, in 5th grade, playing FSA soccer. Everything in Sections I–III describes the demand profile of the sport at the elite adult end. It is included so that a parent can see what the engine is <em>for</em>, not so that a 9-year-old can be trained as if he were Brozović.</p>
+
+  <h3>What youth matches actually look like — adjacent ages, not Elon’s</h3>
+  <p>Sanchez, Ramirez-Campillo et al. (2021). Under-12 males, n = 133; age <b>10.9 ± 0.8 years</b>; height 145.4 ± 5.5 cm; mass 37.1 ± 4.1 kg. Spanish professional-academy players. Official matches, two 30-min halves, GPS. Ages on the page are 10–11 / under-12, not 9.<sup><a href="#fn13">13</a></sup></p>
+  <table>
+    <caption>Sanchez 2021 — official matches. Do not read these rows as Elon Tran’s numbers.</caption>
+    <thead><tr><th>Format</th><th>Pitch</th><th>Area/player</th><th>Total distance</th><th>Relative distance</th><th>Sprint ≥18.1 km·h<sup>−1</sup></th><th>Vmax</th></tr></thead>
+    <tbody>
+      <tr><td>Soccer-7</td><td>40×55 m</td><td>173 m²</td><td>3064 ± 822 m</td><td>(no sig. vs 8)</td><td>120 ± 69.8 m (4.0% of TD)</td><td>23.2 ± 1.6 km·h<sup>−1</sup></td></tr>
+      <tr><td>Soccer-8</td><td>40×55 m</td><td>138 m²</td><td>3364 ± 1229 m</td><td>84.88 ± 7.37 m·min<sup>−1</sup></td><td>92.1 ± 69.4 m (2.7%)</td><td>22.7 ± 1.7</td></tr>
+      <tr><td>Soccer-11</td><td>68×105 m</td><td>325 m²</td><td>4598 ± 1163 m</td><td>91.27 ± 9.56 m·min<sup>−1</sup></td><td>171.4 ± 133 m (3.8%)</td><td>23.2 ± 1.7</td></tr>
+    </tbody>
+  </table>
+  <p>Soccer-11 exceeded Soccer-7/8 for total distance, distances in DV1–DV6, and absolute acceleration distance (Soccer-11 ACC 390 ± 116 m versus Soccer-7 307 ± 88.7 m). Relative ACC/DEC were <em>higher</em> in 7 and 8 than in 11: %ACC 10.0 / 10.5 / 8.4%; %DEC 10.3 / 9.8 / 7.9%. High-intensity running 13.1–18.0 km·h<sup>−1</sup>: Soccer-11 705 ± 253 m versus 7 503 ± 170 versus 8 473 ± 239. Authors: Soccer-11 imposes greater external load on U12s; they argue 7/8 may better match neuromuscular capacity, and 11 may need rules to control eccentric load. Training context on the page: 90-min × 3/week plus weekend match; no separate athletic conditioning/strength/power program. Inclusion: ≥4 years soccer, injury-free 4 months.<sup><a href="#fn13">13</a></sup></p>
+  <p>Scale versus adult, order of magnitude only, different methods: adult elite full-match midfielders can exceed 13 km in 90+ min (Bradley 2024). U12 Soccer-11 in this sample is about 4.6 km in about 60 min of scheduled time (relative about 91 m·min<sup>−1</sup>). Adult Qatar team sum is 108 km across 10 outfield players (about 10.8 km/player if even, which it is not). Youth density of accelerations (relative ACC/DEC) is high even when total metres are low. U8/U10 and EPL academy U9/U10 distances (Goto 2015; Bellistri 2017) were not successfully fetched; they sit in Unverified.</p>
+
+  <h3>AAP Brenner 2016, reaffirmed February 2021</h3>
+  <p>Late-specialization LTAD stages on the fetched page: FUNdamental <b>6–10 years</b> (learn ABCs: agility, balance, coordination, speed; “positive and fun”); Training to Train <b>10–14 years</b> (learn how to train and basic sport skills; 75% training / 25% competition); Training to Compete 13–18; Training to Win ≥17 (75% competition-related). USOC American Development Model: Discover, Learn, and Play ages 0–12.<sup><a href="#fn35">35</a></sup></p>
+  <blockquote class="pull">
+    “Current evidence suggests that delaying sport specialization for the majority of sports until after puberty (late adolescence, 15 or 16 years of age) will minimize the risks and lead to a higher likelihood of athletic success.”
+    <cite>Brenner, AAP Council on Sports Medicine and Fitness, 2016 / reaffirmed 2021<sup><a href="#fn35">35</a></sup></cite>
+  </blockquote>
+  <p>Overuse injuries 46% to 50% of all athletic injuries in some reports; 7.7% of high-school injuries in one cited report. 70% of children drop out of organized sports by age 13. Hours: one high-school study — increased injury risk when training &gt;16 hours/week. Jayanthi et al. 2015 (cited): organized sport hours/week greater than the athlete’s age in years associated with overuse injury; organized:free-play ratio &gt;2:1 associated with overuse injury. AAP guidance: these hour rules “need to be validated by other long term studies.” Recommendations on the page: at least 3 months off the primary sport per year (in 1-month increments); 1–2 days off per week from the primary sport; multiple sports at least until puberty. Scholarship/pro odds on the page: 3.3–11.3% of high-school athletes reach NCAA; 1% receive an athletic scholarship; 0.03–0.5% reach professional level.<sup><a href="#fn35">35</a></sup></p>
+  <div class="callout warn">
+    <strong class="k">For Elon, stated as the briefs stated it</strong>
+    AAP places 9-year-olds in FUNdamental (6–10) and at the floor of Discover, Learn, and Play (0–12). Training-to-Train (10–14) is the next stage, not a justification for adult 90-min aerobic volume. Sanchez U12 data are about 1–2 years older than Elon and already show that even official matches are about 3–4.6 km, not 10–13 km. Adding a dissimilar endurance mode on top of 3×90-min + weekend match is an extra-volume question the AAP hour-versus-age and 1–2 days off guidance is designed to flag — not a physiology green light. There is no evidence-based “missing aerobic engine” in a 9-year-old FSA player that swimming must fill. The documented youth risks are overuse, early specialization, and adult-format load.
+  </div>
+</section>
+
+<section id="rehab">
+  <h2><span class="num">XIII · When the grass is the problem</span> Rehab, heat, congestion</h2>
+  <p>The strongest story water tells is not athletic glory. It is: do not rest for three to six weeks if you can keep the engine turning without grinding the tissue that is injured.</p>
+  <ol class="plain" style="padding-left:1.2rem">
+    <li>Rest of 3–6 weeks can cost about 14–16% VO<sub>2</sub>max (Coyle via Brody excerpt), with significant cardiovascular decline from as little as 3 weeks inactivity.</li>
+    <li>Exclusive DWR 4 weeks (Bushman) or 6 weeks at high matched intensity (Wilber) maintained land 5 km / VO<sub>2</sub>max / economy in runners.</li>
+    <li>Underdosed DWR (20–30 min, 70–80% land HRmax, Eyestone; steady 80% HRR, Quinn) allowed VO<sub>2</sub>max to fall.</li>
+    <li>Kwok: DWR viable for athletes susceptible to repetitive stress injuries; buoyancy eliminates vertical GRF.</li>
+    <li>Thein and Brody (1998) JOSPT commentary (abstract fetched; book excerpt fetched): pool during rehab and post-recovery as adjunct; Michaud-style 8 wk, 3×/wk, 63–82% land HRmax, 16–36 min sufficient to increase VO<sub>2</sub>max in that study.</li>
+    <li>Bressel 2015: anatomic-landmark depths let clinicians stay inside partial-weight-bearing limits (neck ~6–8%, nipple ~24%, navel ~51% of dry weight).</li>
+    <li>Donoghue: aquatic plyos as a bridge after running (~2–3 BW) before full land plyos (4–7 BW).</li>
+    <li>Soccer APT (Fonseca): power gains with less DOMS — useful in high-volume or return-to-jump phases, not a substitute for land COD.</li>
+  </ol>
+  <p>No fetched soccer return-to-play guideline gave a week-by-week aqua aerobic ladder. Doses above are runner and mixed-athlete data applied cautiously.</p>
+  <p>Heat and extra volume without extra impact, as physiology, not as a FIFA heat protocol: water conducts heat 25 times faster than air (Becker). Cool pools (27–29 °C public; Reilly/Kwok 26–28 °C for max DWR) dump heat. Extra aerobic minutes in deep water add metabolic work with zero vertical GRF (Kwok). Becker: aquatic treadmill VO<sub>2</sub> 3 times greater at 53 m/min than land walking at that speed — slower locomotion can still be hard. This is walking/jogging in water, not a soccer drill. No fetched FIFA/UEFA heat document prescribed swim minutes as the extra-volume method. CWI after matches is a different intervention.</p>
+  <p>Congestion: the UEFA-reported Andersson study found active recovery (unspecified as aqua on that page) no better than rest across 72 h between two matches. Do not claim aqua jogging is a proven MD+1 performance restorer from that page. Allen et al. frame rising Premier League minutes and congestion as a player-health problem (fewer rest days, more high-speed load), not a call to add more endurance work. Extra aerobic sessions compete with recovery that the same literature says is already short.</p>
+</section>
+
+<section id="risks">
+  <h2><span class="num">XIV · Harm</span> Risks that are real</h2>
+  <h3>Shoulder overuse — if using stroke swimming, not DWR</h3>
+  <p>StatPearls <cite>Swimmer’s Shoulder</cite> (fetched 2023 update): 90% of swimming propulsive force from shoulder torque; elite weekly volume 60,000–80,000 m ≈ 30,000 strokes/arm; incidence 3–70% depending on definition; about 35% when defined as pain that interferes with training in elite/senior swimmers; some studies about 91% career prevalence. Soccer players doing small front-crawl volumes are not elite swimmers, but poor technique plus sudden yardage is a named trigger.<sup><a href="#fn36">36</a></sup></p>
+  <h3>Missed soccer-specific stimulus</h3>
+  <p>Magel 1975; Tanaka 1994; Becker on coordination; Donoghue on reduced RFD; NSCA Stolt: water footwork should not be solely relied on. Every hour in the pool that displaces an hour of position-specific running is an hour the HID/sprint qualities — the ones that actually grew — are not trained.</p>
+  <h3>Swimming skill as intensity limiter</h3>
+  <p>Brody excerpt: unskilled swimmers cannot hit cardiovascular targets with crawl. Frangolias: inexperienced DWR under-performs max tests (VO<sub>2</sub> gap 10.3 versus 3.8 mL·kg<sup>−1</sup>·min<sup>−1</sup>). NSCA: comfort before deep water. Stolt: confirm ability before head-deep work. Youth drowning incidence in soccer aqua sessions was not quantified on a fetched soccer-aqua paper; it is not invented as a rate. The safety sentence that is sourced is the NSCA one.</p>
+  <h3>Asthma / chlorine</h3>
+  <p>Fetched environmental-health abstract (Andersson et al. 2018): trichloramine 0.020–0.55 mg/m³ (mean 0.15); early-life pool exposure associated with higher pre-school asthma onset, especially in sensitized children.<sup><a href="#fn37">37</a></sup> Helenius numbers (17% new asthma over mean 9 years in 29 Finnish elite swimmers; 28/29 non-asthmatic at career start) appeared on a fetched OAJSM-style page snippet — treat 17% / 9 years as Unverified unless the full Helenius paper is opened (it was not). Safe statement from fetched Andersson 2018: indoor chlorinated pools are an airway-irritant environment; swimming should not be assumed “always better for asthma” without considering trichloramine.</p>
+</section>
+<section id="counters">
+  <h2><span class="num">XV · Steelman</span> Two counters against “just add water”</h2>
+  <p>The essay’s own briefs asked for the case against extra aerobic work, and then for the case against extra volume. Both are sourced. A parent who only reads the pool physics will over-buy swimming. A parent who only reads the World Cup HID tables will under-buy the engine. Hold both.</p>
+
+  <h3>Counter A — more aerobic work is not what soccer, especially modern soccer, needs</h3>
+  <p>Intensity, not volume, is what has evolved. Qatar 2022 versus 2018: only +3% total distance but +16–19% high-intensity/sprint (per-minute still +9–12% HID/sprint, and TD/min actually −3%). EPL 2015/16–2024/25: TD +2%, sprint +40%, and TD/min fell while HID/HSR/sprint per minute rose (Allen et al., <cite>BJSM</cite> 2025). Yang and Feng 2026: sprint and top speed up across confederations while broader HIRD often did not rise. If the constraint is repeated high-speed actions, steady extra aerobic kilometres — especially non-running kilometres — miss the demand that actually grew.</p>
+  <p>High-speed running is a small fraction of distance but a large fraction of decisive actions. UEFA EURO 2024 said so in so many words. FIFA TC cites Faude et al. 2012 that goal-scoring opportunities typically include high-intensity activity. Bradley: wide roles do the HID/sprint; some elite forwards sat in the low-volume, low-explosiveness quadrant. GSSI/Bangsbo: Premier League players covered <em>less</em> high-speed running than Championship and League 1 (681 vs 803 vs 881 m &gt;19 km/h), attributed to possession tactics, not inferior fitness. More aerobic volume does not automatically produce better soccer.</p>
+  <p>RSA literature is mixed on VO<sub>2</sub>max. Gist 2017 found a strong VO<sub>2</sub>max–sprint-time correlation, but the same page reviews Aziz (no association, 6×20 m, 1:5) and notes fatigue index did not correlate with VO<sub>2</sub>max even in their own data (r = 0.333, P = 0.15). Slimani’s claim that VO<sub>2</sub>max is “the most powerful discriminator” is from a heterogeneous male meta-analysis (I<sup>2</sup> &gt;93%) mixing field estimates and lab tests. Raising VO<sub>2</sub>max in a non-specific mode can look good on a treadmill without changing the quality that matters: first-step acceleration, 30–35+ km·h<sup>−1</sup> sprints, and PCr recovery <em>while running</em>.</p>
+  <p>Magel and Tanaka then close the door on the most tempting substitution. Interval swim training 1 h × 3 d/wk × 10 wk raised swimming VO<sub>2</sub>max by 380 mL/min and swim time by 4.0 min, and did not significantly raise treadmill-running VO<sub>2</sub>max. Tanaka: minimum transfer from swim training to VO<sub>2</sub>max; cross-training never exceeds the sport-specific mode; specificity matters more in the highly trained. Town and Bradley: DWR max only 73.5% of treadmill VO<sub>2</sub>max. Donoghue: aquatic landings cut impact and RFD. Becker: water will not rebuild land coordination skills. NSCA: do not rely solely on water footwork.</p>
+
+  <h3>Counter B — too much extra volume, especially year-round and extra-mode, is the risk</h3>
+  <p>Elite adults are already volume-constrained by the calendar. EPL rolling 3-season minutes +1,600; congested minutes +1,415; top-six +5,659 minutes and a higher congestion share. Allen et al. frame this as a player-health problem, not a call to add more endurance work. Extra aerobic sessions compete with recovery that the same literature says is already short. Some elite players: as few as 22 rest days between seasons; 4.3 days between games.</p>
+  <p>Youth: hours, specialization, and format already load the tissues. AAP: overuse about 46–50% of youth athletic injuries in some reports; dropout 70% by 13; delay specialization until 15–16 for most sports; ≥3 months off primary sport; 1–2 days off/week; caution when weekly organized hours exceed age in years. Sanchez U12: Soccer-11 already produces greater total distance, high-speed distance, and absolute ACC than 7/8; relative eccentric/ACC load is higher in the smaller formats. A 9-year-old in FUNdamental (AAP 6–10) who already trains in a 3×90 min + match pattern (the Sanchez academy week, not claimed as Elon’s exact week) does not have an evidence-based missing aerobic engine that swimming must fill.</p>
+  <p>Glycogen and temporary fatigue are not fixed by more easy aerobic metres in a different sport. SSE #125: end-match fatigue tracks fibre-specific glycogen depletion and clustered intense bouts (CP, ion handling), not a low VO<sub>2</sub>max ceiling in isolation. Adding low-skill endurance can deplete glycogen and add tissue load without training the 150–250 intense running actions or the ~700 turns.</p>
+</section>
+
+<section id="run-hiit">
+  <h2><span class="num">XV · The contrast that settles the argument</span> Run HIIT moved soccer. Swim training did not move running VO<sub>2</sub>max.</h2>
+  <p>A later full-text pass fetched Helgerud et al. 2001 (7-page MSSE PDF), Helgerud et al. 2007 (7-page MSSE PDF), and Stølen et al. 2005 (37-page <cite>Sports Medicine</cite> PDF). Magel 1975 and Tanaka 1994 remain abstract-verified. Together they are the first-principles punch: the protocol that changed soccer match output was <em>running</em> at 90–95% of maximal heart rate. The protocol that changed swimming VO<sub>2</sub>max did not change treadmill VO<sub>2</sub>max.</p>
+
+  <h3>Helgerud 2001 — elite junior soccer, full text</h3>
+  <p>Nineteen male elite junior players (age 18.1 ± 0.8 yr) from two Norwegian teams; six were Norwegian national junior players. Random assignment within each team: training group n = 9, control n = 10. Regular week: four × 1.5 h practice plus one game. Added interval running: four times 4 min at 90–95% of fcmax, separated by 3 min jogging at 50–60% of fcmax, twice per week for 8 weeks. Controls did extra technical work in those slots. Treadmill tests at 3° inclination.<sup><a href="#fn38">38</a></sup></p>
+  <div class="statrow">
+    <div class="stat turf"><span class="v">58.1 → 64.3</span><span class="l">TG VO<sub>2</sub>max, mL·kg<sup>−1</sup>·min<sup>−1</sup> (CG 58.4 → 59.5)</span></div>
+    <div class="stat turf"><span class="v">8,619 → 10,335 m</span><span class="l">Match distance, TG; +20%. CG 9,076 → 9,137 m</span></div>
+    <div class="stat turf"><span class="v">6.2 → 12.4</span><span class="l">Sprints ≥2 s per match, TG; +100%. Involvements 47.4 → 58.8</span></div>
+  </div>
+  <p>Lactate threshold 47.8 → 55.4 mL·kg<sup>−1</sup>·min<sup>−1</sup> (+16%). Running economy +6.7% (0.75 → 0.70 mL·kg<sup>−0.75</sup>·m<sup>−1</sup>). Whole-game %fcmax 82.7 → 85.6. No change in 10 m / 40 m sprint, 1RM bench, 1RM 90° squat, vertical jump, kicking velocity, or technical kicking points. The paper’s own conclusion: enhancing maximal oxygen uptake improved soccer performance as distance covered, work intensity, sprints, and involvements. The same paper says endurance training for soccer should ideally be carried out using the ball — and that 90–95% fcmax is hard to organise in a match, especially in lower divisions. This is a <b>running</b> result. It is not a swimming result. It is not a 9-year-old protocol (the sample is 18.1 ± 0.8 yr).</p>
+
+  <h3>Helgerud 2007 — students, not soccer, full text</h3>
+  <p>Forty moderately trained male university students, 3 d·wk<sup>−1</sup> for 8 weeks, four groups matched for total work. 4×4 min at 90–95% HRmax: VO<sub>2</sub>max 55.5 → 60.4 (+7.2%). 15/15: +5.5%. Long slow distance (45 min at 70% HRmax) and lactate-threshold continuous work: no significant VO<sub>2</sub>max change. Stroke volume rose about 10% in the interval groups only.<sup><a href="#fn39">39</a></sup> Intensity, not just minutes, is the aerobic signal. That is why Eyestone’s easy water work failed and Wilber’s hard DWR held.</p>
+
+  <h3>Stølen 2005 — physiology of soccer, full text</h3>
+  <p>Stølen, Chamari, Castagna, and Wisløff, 37-page review: typical elite outfield distance about 10–12 km; average intensity 80–90% HRmax; male soccer VO<sub>2</sub>max spanning roughly 50–75 mL·kg<sup>−1</sup>·min<sup>−1</sup> depending on level and position. The review discusses 4×4 programming, including an unpublished 10-day report of 62 → 66.5 mL·kg<sup>−1</sup>·min<sup>−1</sup>. Treat that 10-day figure as the review’s own citation of unpublished data, not as a new trial fetched here.<sup><a href="#fn40">40</a></sup></p>
+
+  <h3>Magel 1975 and Tanaka 1994 — the swim side of the same coin</h3>
+  <p>Magel et al. 1975 (abstract fetched): 15 male recreational swimmers; interval swim 1 h/day, 3 days/wk, 10 weeks. Swim VO<sub>2</sub>max <b>+380 mL/min</b>; max swim time +4.0 min; max HR −3.5 bpm. <b>No significant improvement in treadmill-running VO<sub>2</sub>max.</b> Tanaka 1994 (abstract): swim training may result in <b>minimum transfer</b> of training effects on VO<sub>2</sub>max; cross-training effects never exceed sport-specific training; specificity has greater significance for highly trained athletes.</p>
+  <p>Put the two columns on one table: run-HIIT in soccer players moved match metres and sprints. Swim-HIIT in swimmers moved swim VO<sub>2</sub>max and did not move running VO<sub>2</sub>max. Deep-water running, when hard and frequent, can <em>maintain</em> a runner’s land VO<sub>2</sub>max for 4–6 weeks (Wilber, Bushman). That is the honest job of water for a soccer athlete: keep the engine when the pitch is the problem. It is not how you build the engine in the first place.</p>
+</section>
+
+<section id="unverified">
+  <h2><span class="num">XVI · Epistemic hygiene</span> Unverified</h2>
+  <p>This section is not optional decoration. It is the list of claims that appeared in search hits, publisher abstracts seen in snippets, or papers whose full-page fetch failed. They are <b>not</b> used as facts in the argument above. Several of them are famous. Famous is not fetched.</p>
+  <div class="callout unv">
+    <strong class="k">Do not treat the following as verified</strong>
+    Famous papers whose <em>full text</em> still failed, or whose numbers only appeared in search snippets, stay here. Helgerud 2001, Helgerud 2007, and Stølen 2005 were fetched in full on a later pass and have been moved out of this box.
+  </div>
+  <table>
+    <caption>Unverified list, compiled from both research briefs. Full-page fetch failed or was not completed.</caption>
+    <thead><tr><th>Claim</th><th>Why unverified</th><th>URL to fetch</th></tr></thead>
+    <tbody>
+      <tr><td>Bangsbo 1994: aerobic production &gt;90% of total energy; ~5700 kJ (1360 kcal) for 75 kg player with VO<sub>2</sub>max 60; blood lactate 3–9 mM</td><td>DOI fetch timed out</td><td>https://doi.org/10.1080/02640414.1994.12059272</td></tr>
+      <tr><td>Bangsbo 1994 full PDF tables beyond the abstract (abstract-only: &gt;90% aerobic; 5700 kJ / 1360 kcal at 75 kg / VO<sub>2</sub>max 60; lactate 3–9 mM)</td><td>Abstract fetched; full PDF not opened this pass</td><td>https://doi.org/10.1080/02640414.1994.12059272</td></tr>
+      <tr><td>Mohr et al. 2003 primary paper numbers (Yo-Yo 2.26 vs 2.04 km; CV HIR 9.2% successive matches / 24.8% season)</td><td>Abstract in search; full text not fetched. Overlapping numbers that are in SSE #125 are verified there.</td><td>https://doi.org/10.1080/0264041031000071182</td></tr>
+      <tr><td>Faude et al. 2012: 360 Bundesliga goals; 83% preceded by a powerful action; scoring-player straight sprints 45% (n=161)</td><td>PubMed cookie wall</td><td>https://pubmed.ncbi.nlm.nih.gov/22394328/</td></tr>
+      <tr><td>Jones et al. 2013: professional soccer, 6×40 m RSA, VO<sub>2</sub>max vs RSA mean r = −0.655</td><td>Not fetched</td><td>https://doi.org/10.1155/2013/952350</td></tr>
+      <tr><td>Goto et al. 2015: EPL academy U9/U10 ~4,000 m total, ~4,700 m·h<sup>−1</sup>, HIR ~600–700 m</td><td>LWW page not fetched</td><td>https://journals.lww.com/nsca-jscr/fulltext/2015/04000/match_analysis_of_u9_and_u10_english_premier.14.aspx</td></tr>
+      <tr><td>Bellistri et al. 2017: U10 TD 3541 ± 511 m vs U8 2229 ± 331 m; HIRD 1503 vs 836 m</td><td>Springer page not fetched</td><td>https://doi.org/10.1007/s11332-016-0328-3</td></tr>
+      <tr><td>UEFA EURO 2024 full Physical Analysis report (team TD, HSR, sprint counts, work:rest)</td><td>News page fetched; PDF report not fetched</td><td>Linked from the UEFA.com article as “Download the report”</td></tr>
+      <tr><td>FIFA WWC 2023 team total/HID/sprint kilometres</td><td>Methodology page fetched; Part 2 benchmarks 404’d</td><td>FIFA TC WWC 2023 physical analysis hub</td></tr>
+      <tr><td>Women’s soccer VO<sub>2</sub>max ranges by level</td><td>Not on any fetched page</td><td>—</td></tr>
+      <tr><td>Match work:rest as a single ratio (e.g. 1:7)</td><td>Not stated as a single ratio on fetched pages</td><td>—</td></tr>
+      <tr><td>Discrete sprint counts per Qatar 2022 player</td><td>FIFA TC/Bradley report distances, not counts</td><td>—</td></tr>
+      <tr><td>2026 BMC/Frontiers HIIT network meta-analyses (SUCRA ranks)</td><td>Search snippets only</td><td>various 2026 Frontiers/BMC URLs</td></tr>
+      <tr><td>Scientific Reports 2024 energy-system % across 15×20 m RSA (glycolysis ~36% first 5 sprints, &lt;7% by sprint 15)</td><td>Search only</td><td>https://www.nature.com/articles/s41598-024-78916-z</td></tr>
+      <tr><td>A universal “HR 10 bpm lower in water” as a programming constant</td><td>Verified only as a subset of conditions; see Figure 3</td><td>—</td></tr>
+      <tr><td>Hamer &amp; Schotte 17 bpm offset; Cuesta-Vargas volleyball 14.9 bpm HRmax offset</td><td>Search hits; pages not fetched</td><td>—</td></tr>
+      <tr><td>8×45 s hard / 45 s easy aqua-jog set</td><td>Never found on a fetched page</td><td>—</td></tr>
+      <tr><td>FIFA, UEFA, or UKSCA minutes/week of swimming or aqua jogging for soccer; MD+1 20–30 min pool recovery as official medical guideline</td><td>Not on fetched governing-body pages</td><td>—</td></tr>
+      <tr><td>Water-polo treading, in-water soccer, drag-suit, or bungee-tethered pool sprints as evidence-based soccer endurance methods</td><td>No fetched trial</td><td>—</td></tr>
+      <tr><td>Chomani +21.05% / +8.84% / +9.35% / +12.50% motor-ability changes</td><td>Abstract snippets; full paper not fetched</td><td>—</td></tr>
+      <tr><td>Helenius elite-swimmer 17% incident asthma over 9 years</td><td>Secondary snippet; primary paper not fetched</td><td>—</td></tr>
+      <tr><td>Youth drowning incidence in soccer aqua sessions</td><td>Not quantified on fetched soccer-aqua papers</td><td>—</td></tr>
+      <tr><td>Any claim that swimming equals land running for highly trained soccer locomotor economy beyond the 4–6 week DWR runner window</td><td>Not fetched</td><td>—</td></tr>
+      <tr><td>Kruel aquatic HR deduction formula</td><td>AEA PDF blocked; not fetched</td><td>—</td></tr>
+      <tr><td>Reilly/Dowzer full-text spinal-load newtons</td><td>Only the qualitative “reduction in spinal loading” sentence was on fetched abstracts</td><td>—</td></tr>
+      <tr><td>Magel 1975 and Tanaka 1994 percentages as they sat in the soccer brief’s UNVERIFIED table</td><td>Soccer brief: full-text fetch failed. Water brief: abstracts <em>were</em> fetched. This essay uses the water-brief abstract numbers as counters, and does not pretend a full PDF was opened.</td><td>https://doi.org/10.1152/jappl.1975.38.1.151 · https://doi.org/10.2165/00007256-199418050-00005</td></tr>
+    </tbody>
+  </table>
+  <p>Note on Magel and Tanaka: the soccer physiology brief listed them as unverified because its own full-text fetches failed. The water-training brief subsequently fetched the abstracts and recorded the numbers used in Section IX. This essay follows the later, stricter instruction: Magel 1975 and Tanaka 1994 <em>are</em> in the water brief as counters — use those. Helgerud remains unverified in both.</p>
+</section>
+
+<section id="synthesis">
+  <h2><span class="num">XVII · Close</span> The engine and the pitch</h2>
+  <p>What a 90-minute soccer match actually asks, verified, elite adult:</p>
+  <ol>
+    <li><b>Volume.</b> About 10–13 km per outfield player; team outfield sum about 108 km at World Cup 2022. Most of it is &lt;15–20 km·h<sup>−1</sup>.</li>
+    <li><b>Intensity that distinguishes and decides.</b> About 0.5–1.8 km per player ≥20 km·h<sup>−1</sup> depending on role; team about 9 km ≥20 and about 2.3 km ≥25; 150–250 brief intense actions; top speeds 32–36+ km·h<sup>−1</sup>; about 700 turns.</li>
+    <li><b>Energetics.</b> The aerobic system supplies the background and the recovery (mean ~70% VO<sub>2</sub>max, HR ~85/98% max/peak, CP resynthesis in the &gt;70% low-intensity time). Anaerobic systems supply the decisive spikes (CP possibly &lt;30% rest in clusters; blood lactate often 2–10 mM). Late-match fade tracks glycogen in individual fibres plus a temporary post-bout drop (−12% HIR in the next 5 min).</li>
+    <li><b>Fitness qualities.</b> VO<sub>2</sub>max in male players typically about 48–63 ml·kg<sup>−1</sup>·min<sup>−1</sup> by role/level in Slimani’s synthesis, higher in some D1 samples; it helps RSA sprint times in at least one fetched study but is not the same as running economy, VO<sub>2</sub> kinetics, or eccentric/COD capacity.</li>
+    <li><b>Specificity.</b> Governing-body and match-analysis papers prescribe position-specific high-intensity running drills, not generic aerobic volume. HID/sprint have grown much faster than total distance.</li>
+  </ol>
+  <p>What a 9-year-old FSA player actually plays, verified adjacent ages, not Elon’s exact team: U12 official matches about 3.1–4.6 km depending on 7/8/11 format; Vmax about 23 km·h<sup>−1</sup>; high relative ACC/DEC in small formats. AAP: age 9 = FUNdamental / multi-sport sampling; not Training to Win; watch weekly hours versus age, 1–2 days off, 3 months off primary sport.</p>
+  <p>Physics of the other planet: neck/deep water about 6–10% dry weight (Bressel/Harrison) or about 15 lb on the joints (Becker); xiphoid about 24–35% standing load; DWR zero vertical GRF. Hydrostatic loading raises stroke volume (about +35% at rest, neck) and usually lowers HR; offset is condition-dependent (10 bpm on Becker’s aquatic treadmill line; 10–15 bpm in 18–25 °C water on Nagle’s page; 12–15% HR drop with depth; Svedenhag HRmax 172 vs 188). Density about 800 times air. Drag, not grass.</p>
+  <p>Aerobic transfer that is real: exclusive, hard, runner-style DWR can hold land VO<sub>2</sub>max / 5 km / economy 4–6 weeks (Bushman, Wilber). Easy, short, land-HR-zone DWR can fail (Eyestone −4.9% VO<sub>2</sub>max). Untrained people gain VO<sub>2</sub> at about 3×/week. Swimming is not running: Magel — +380 mL/min swim VO<sub>2</sub>max, no treadmill VO<sub>2</sub>max gain. Tanaka — minimum transfer from swim to run VO<sub>2</sub>max. Soccer literature: aquatic plyometrics have RCTs for jump/speed/agility; aquatic endurance swimming for soccer does not. Water polo / treading / drag suits: thin. Governing bodies: NSCA expert cap ≤60 min and “don’t rely only on water COD.” ACSM is general health minutes. FIFA/UEFA/UKSCA: no fetched dose. Front-crawl soccer RCT: none fetched.</p>
+  <p>The gap swimming would have to close, if it were the tool, is not “more minutes of cardio.” It is (a) oxidative recovery between <em>running</em> sprints (PCr resynthesis, VO<sub>2</sub>-on kinetics in the legs that sprint), (b) tolerance of 90 minutes of intermittent running including eccentric braking, (c) without stealing recovery or adding overuse on a 9-year-old already in a 3×/week + match week. Water can keep the engine. Water cannot make the pitch.</p>
+  <p>So: if a trained adolescent or adult soccer player cannot run — bone stress, congestion heat, a calendar that has already eaten the rest days — deep-water running at a Wilber/Bushman-like intensity, prescribed by RPE and cadence rather than a −10 bpm slogan, is a sourced way to keep VO<sub>2</sub>max from falling 14–16% in six weeks of rest. If the same player can run, the fetched match-analysis papers want position-specific high-intensity running drills. If the player is nine, the fetched AAP page wants fun, multiple sports, 1–2 days off, three months off the primary sport, and a wary eye on weekly hours versus age. The pool is a bridge. It is not a soccer player.</p>
+</section>
+
+<section id="sources">
+  <h2><span class="num">Notes and sources</span> Fetched pages</h2>
+  <p class="small">Footnotes follow the order of first appearance. URLs are the pages the briefs actually opened. Magel and Tanaka are included as abstract-fetched counters from the water brief.</p>
+  <ol class="sources" id="notelist">
+    <li id="fn1">Bradley PS. ‘Setting the Benchmark’ Part 2: Contextualising the Physical Demands of Teams in the FIFA World Cup Qatar 2022. <cite>Biol Sport</cite>. 2024;41(1):271–278. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10765426/">https://pmc.ncbi.nlm.nih.gov/articles/PMC10765426/</a></li>
+    <li id="fn2">FIFA Training Centre. Qatar 2022 — Distances teams covered. <a href="https://www.fifatrainingcentre.com/en/fwc2022/physical-analysis/what-distances-did-teams-cover.php">https://www.fifatrainingcentre.com/en/fwc2022/physical-analysis/what-distances-did-teams-cover.php</a></li>
+    <li id="fn3">Bradley PS. ‘Setting the Benchmark’ Part 1: The Contextualised Physical Demands of Positional Roles in the FIFA World Cup Qatar 2022. <cite>Biol Sport</cite>. 2024;41(1):261–270. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10765430/">https://pmc.ncbi.nlm.nih.gov/articles/PMC10765430/</a></li>
+    <li id="fn4">FIFA Training Centre. Qatar 2022 — When teams and players run. <a href="https://www.fifatrainingcentre.com/en/fwc2022/physical-analysis/when-do-teams-and-players-run.php">https://www.fifatrainingcentre.com/en/fwc2022/physical-analysis/when-do-teams-and-players-run.php</a></li>
+    <li id="fn5">Allen T, Taberner M, Zhilkin M, Green M. Evolving running load demands and fixture congestion in the English Premier League: a decade of insights from 2015/2016 to 2024/2025. <cite>Br J Sports Med</cite>. 2025;59(23):1643. <a href="https://bjsm.bmj.com/content/59/23/1643">https://bjsm.bmj.com/content/59/23/1643</a></li>
+    <li id="fn6">UEFA. Physical demands of EURO 2024: performance trends and takeaways. 18 Mar 2025. <a href="https://www.uefa.com/uefaeuro/history/news/0297-1d4e35e052fe-b2bcfac5c0bb-1000--physical-demands-of-euro-2024-performance-trends-and-take/">https://www.uefa.com/uefaeuro/history/news/0297-1d4e35e052fe-b2bcfac5c0bb-1000--physical-demands-of-euro-2024-performance-trends-and-take/</a></li>
+    <li id="fn7">Bangsbo J. Physiological Demands of Football. GSSI Sports Science Exchange #125. <a href="https://www.gssiweb.org/docs/default-source/sse-docs/sse125_bangsbo.pdf?sfvrsn=2">https://www.gssiweb.org/docs/default-source/sse-docs/sse125_bangsbo.pdf?sfvrsn=2</a></li>
+    <li id="fn8">FIFA Training Centre. Women’s World Cup 2023 physical analysis — Part 1 introduction and methodology. <a href="https://www.fifatrainingcentre.com/en/game/tournaments/fifa-womens-world-cup/2023/post-tournament-analysis/physical-analysis/part-1-introduction-and-methodology.php">https://www.fifatrainingcentre.com/en/game/tournaments/fifa-womens-world-cup/2023/post-tournament-analysis/physical-analysis/part-1-introduction-and-methodology.php</a></li>
+    <li id="fn9">Yang X, Feng L. Long-term physical performance trends across the five confederations: Evidence from the 19th to 22nd FIFA World Cup editions (2010–2022). <cite>PLoS One</cite>. 2026;21(7):e0354205. <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0354205">https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0354205</a></li>
+    <li id="fn10">Gist NH, Northey MW, Cooper CB, Gloeckner GJ, Peacock CA. Aerobic Capacity is Related to Repeated Sprint Ability with Sprint Distances Less Than 40 Meters. <cite>Int J Exerc Sci</cite>. 2017;10(2):197–204. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5360375/">https://pmc.ncbi.nlm.nih.gov/articles/PMC5360375/</a></li>
+    <li id="fn11">Slimani M, Znazen H, Miarka B, Bragazzi NL. Maximum Oxygen Uptake of Male Soccer Players According to their Competitive Level, Playing Position and Age Group: Implication from a Network Meta-Analysis. <cite>J Hum Kinet</cite>. 2019;66:233–245. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6458571/">https://pmc.ncbi.nlm.nih.gov/articles/PMC6458571/</a></li>
+    <li id="fn12">FIFA Training Centre. Qatar 2022 physical analysis — Background and method. <a href="https://www.fifatrainingcentre.com/en/fwc2022/physical-analysis/background-and-method.php">https://www.fifatrainingcentre.com/en/fwc2022/physical-analysis/background-and-method.php</a></li>
+    <li id="fn13">Sanchez M, Ramirez-Campillo R, Hernandez D, Carretero M, Luis-Pereira JM, Sanchez-Sanchez J. External Loads in Under-12 Players during Soccer-7, Soccer-8, and Soccer-11 Official Matches. <cite>Int J Environ Res Public Health</cite>. 2021;18:4581. <a href="https://mdpi-res.com/d_attachment/ijerph/ijerph-18-04581/article_deploy/ijerph-18-04581.pdf?version=1619450430">https://mdpi-res.com/d_attachment/ijerph/ijerph-18-04581/article_deploy/ijerph-18-04581.pdf?version=1619450430</a></li>
+    <li id="fn14">Kravitz L, Mayo JJ. Aqua Exercise Review. University of New Mexico. <a href="https://www.unm.edu/~lkravitz/Article%20folder/aqua.html">https://www.unm.edu/~lkravitz/Article%20folder/aqua.html</a></li>
+    <li id="fn15">Becker BE. Aquatic therapy: scientific foundations and clinical rehabilitation applications. <cite>PM&amp;R</cite>. 2009;1:859–872. PDF: <a href="https://www.ewacmedical.com/wp-content/uploads/2017/08/Becker-B-2009-Aquatic-Therapy-scientific-foundations-and-clinical-rehabilitation-applications-PM-1.pdf">https://www.ewacmedical.com/wp-content/uploads/2017/08/Becker-B-2009-Aquatic-Therapy-scientific-foundations-and-clinical-rehabilitation-applications-PM-1.pdf</a></li>
+    <li id="fn16">Carayannopoulos AG, Burdenko IN. The benefits of combining water and land-based therapy. <cite>J Exerc Rehabil</cite>. 2020;16:20–26. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7056478/">https://pmc.ncbi.nlm.nih.gov/articles/PMC7056478/</a></li>
+    <li id="fn17">Bressel E et al. Anatomic landmarks facilitate predictable partial lower limb loading during aquatic weight bearing. <cite>Curr Orthop Pract</cite>. 2015;26:414–419. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4654409/">https://pmc.ncbi.nlm.nih.gov/articles/PMC4654409/</a></li>
+    <li id="fn18">Kwok MMY, So BCL, Lai MCY, Ng SSM. Effectiveness of deep water running… <cite>Int J Environ Res Public Health</cite>. 2022;19:9434. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9367787/">https://pmc.ncbi.nlm.nih.gov/articles/PMC9367787/</a></li>
+    <li id="fn19">Nagle EF, Sanders ME, Franklin BA. Aquatic high intensity interval training for cardiometabolic health. <cite>Am J Lifestyle Med</cite>. 2017;11:64–76. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6124844/">https://pmc.ncbi.nlm.nih.gov/articles/PMC6124844/</a></li>
+    <li id="fn20">Town GP, Bradley SS. Maximal metabolic responses of deep and shallow water running in trained runners. <cite>Med Sci Sports Exerc</cite>. 1991. PubMed 2017021. <a href="https://pubmed.ncbi.nlm.nih.gov/2017021/">https://pubmed.ncbi.nlm.nih.gov/2017021/</a></li>
+    <li id="fn21">Donoghue OA, Shimojo H, Takagi H. Impact forces of plyometric exercises performed on land and in water. <cite>Sports Health</cite>. 2011;3:303–309. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3445157/">https://pmc.ncbi.nlm.nih.gov/articles/PMC3445157/</a></li>
+    <li id="fn22">Haff GG et al. Aquatic cross training for athletes: Part I. <cite>Strength Cond J</cite>. 2008;30(2):18–26. <a href="https://journals.lww.com/nsca-scj/fulltext/2008/04000/aquatic_cross_training_for_athletes__part_i.2.aspx">https://journals.lww.com/nsca-scj/fulltext/2008/04000/aquatic_cross_training_for_athletes__part_i.2.aspx</a></li>
+    <li id="fn23">Chu KS, Rhodes EC. Physiological and cardiovascular changes associated with deep water running in the young. <cite>Sports Med</cite>. 2001;31:33–46. <a href="https://pubmed.ncbi.nlm.nih.gov/11219500/">https://pubmed.ncbi.nlm.nih.gov/11219500/</a></li>
+    <li id="fn24">Wilber RL et al. Influence of water run training on the maintenance of aerobic performance. <cite>Med Sci Sports Exerc</cite>. 1996;28:1056–1062. <a href="https://doi.org/10.1097/00005768-199608000-00017">https://doi.org/10.1097/00005768-199608000-00017</a></li>
+    <li id="fn25">Bushman BA et al. Effect of 4 wk of deep water run training on running performance. <cite>Med Sci Sports Exerc</cite>. 1997;29:694–699. <a href="https://doi.org/10.1097/00005768-199705000-00017">https://doi.org/10.1097/00005768-199705000-00017</a></li>
+    <li id="fn26">Brody LT, Geigle PR (eds.). Aquatic Exercise for Rehabilitation and Training — excerpt “Aquatic training programs benefit injured athletes.” Human Kinetics. <a href="https://us.humankinetics.com/blogs/excerpt/aquatic-training-programs-benefit-injured-athletes">https://us.humankinetics.com/blogs/excerpt/aquatic-training-programs-benefit-injured-athletes</a>. Thein JM, Brody LT. Aquatic-based rehabilitation and training for the elite athlete. <cite>JOSPT</cite>. 1998;27:32–41. <a href="https://www.jospt.org/doi/10.2519/jospt.1998.27.1.32">https://www.jospt.org/doi/10.2519/jospt.1998.27.1.32</a></li>
+    <li id="fn27">Magel JR et al. Specificity of swim training on maximum oxygen uptake. <cite>J Appl Physiol</cite>. 1975;38:151–155. Abstract fetched. <a href="https://doi.org/10.1152/jappl.1975.38.1.151">https://doi.org/10.1152/jappl.1975.38.1.151</a></li>
+    <li id="fn28">Tanaka H. Effects of cross-training. Transfer of training effects on VO<sub>2</sub>max between cycling, running and swimming. <cite>Sports Med</cite>. 1994;18:330–339. Abstract fetched. <a href="https://doi.org/10.2165/00007256-199418050-00005">https://doi.org/10.2165/00007256-199418050-00005</a></li>
+    <li id="fn29">Doctor AR, Rathod P. Effectiveness of aquatic therapy on football players’ performance: a systematic review. <cite>Health Prob Civil</cite>. 2024;18:320–327. <a href="https://hpc.edu.pl/pdf-182851-134309?filename=EFFECTIVENESS-OF-AQUATIC-.pdf">https://hpc.edu.pl/pdf-182851-134309?filename=EFFECTIVENESS-OF-AQUATIC-.pdf</a></li>
+    <li id="fn30">Johnson QR et al. The impact of aquatic based plyometric training on jump performance: a critical review. <cite>Int J Exerc Sci</cite>. 2021;14:815–828. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8439703/">https://pmc.ncbi.nlm.nih.gov/articles/PMC8439703/</a></li>
+    <li id="fn31">FIFA. FIFA Medical Centre of Excellence inaugurated in Tehran. <a href="https://inside.fifa.com/news/fifa-medical-centre-of-excellence-inaugurated-in-tehran-2782916">https://inside.fifa.com/news/fifa-medical-centre-of-excellence-inaugurated-in-tehran-2782916</a></li>
+    <li id="fn32">UEFA. SvFF questions impact of active recovery training. <a href="https://www.uefa.com/news-media/news/01ec-0f860a7365fc-c9ce8eee89d7-1000--svff-questions-impact-of-active-recovery-training/">https://www.uefa.com/news-media/news/01ec-0f860a7365fc-c9ce8eee89d7-1000--svff-questions-impact-of-active-recovery-training/</a></li>
+    <li id="fn33">Haff GG et al. Aquatic cross training for athletes: Part II. <cite>Strength Cond J</cite>. 2008;30(3):67–73. <a href="https://journals.lww.com/nsca-scj/fulltext/2008/06000/aquatic_cross_training_for_athletes__part_ii.13.aspx">https://journals.lww.com/nsca-scj/fulltext/2008/06000/aquatic_cross_training_for_athletes__part_ii.13.aspx</a></li>
+    <li id="fn34">Garber CE et al. ACSM position stand. Quantity and quality of exercise… <cite>Med Sci Sports Exerc</cite>. 2011;43:1334–1359. <a href="https://europepmc.org/article/MED/21694556">https://europepmc.org/article/MED/21694556</a></li>
+    <li id="fn35">Brenner JS; AAP Council on Sports Medicine and Fitness. Sports Specialization and Intensive Training in Young Athletes. <cite>Pediatrics</cite>. 2016;138(3):e20162148 (reaffirmed Feb 2021). <a href="https://www.chkd.org/media/155p4r1t/sm_aap_sports-specialization-and-intensive-training-in-young-athletes_brenner_chkd.pdf">https://www.chkd.org/media/155p4r1t/sm_aap_sports-specialization-and-intensive-training-in-young-athletes_brenner_chkd.pdf</a></li>
+    <li id="fn36">Davis DD, Nickerson M, Varacallo MA. Swimmer’s Shoulder. <cite>StatPearls</cite>. Updated 2023 Nov 22. <a href="https://www.ncbi.nlm.nih.gov/books/NBK470589/">https://www.ncbi.nlm.nih.gov/books/NBK470589/</a></li>
+    <li id="fn37">Andersson M et al. Early life swimming pool exposure and asthma onset in children. <cite>Environ Health</cite>. 2018. <a href="https://link.springer.com/article/10.1186/s12940-018-0383-0">https://link.springer.com/article/10.1186/s12940-018-0383-0</a></li>
+    <li id="fn38">Helgerud J, Engen LC, Wisløff U, Hoff J. Aerobic endurance training improves soccer performance. <cite>Med Sci Sports Exerc.</cite> 2001;33(11):1925–1931. Full PDF fetched. <a href="https://journals.lww.com/acsm-msse/fulltext/2001/11000/aerobic_endurance_training_improves_soccer.19.aspx">publisher</a> · <a href="https://europepmc.org/article/MED/11689745">Europe PMC</a></li>
+    <li id="fn39">Helgerud J et al. Aerobic high-intensity intervals improve VO<sub>2</sub>max more than moderate training. <cite>Med Sci Sports Exerc.</cite> 2007;39(4):665–671. Full PDF fetched. <a href="https://journals.lww.com/acsm-msse/fulltext/2007/04000/aerobic_high_intensity_intervals_improve_v_o2max.12.aspx">publisher</a></li>
+    <li id="fn40">Stølen T, Chamari K, Castagna C, Wisløff U. Physiology of soccer: an update. <cite>Sports Med.</cite> 2005;35(6):501–536. Full PDF fetched. PMID 15974635.</li>
+
+  </ol>
+  <p class="small">Also fetched and used above without a dedicated first-citation number: FIFA Training Centre positional distances page; Reilly, Dowzer &amp; Cable 2003 (abstract quoted on Becker and Kwok); Killgore 2012 (quoted on Kwok). Bushman 1997 DOI in the water brief: 10.1097/00005768-199705000-00017.</p>
+  <hr class="rule-end">
+  <footer class="colophon">
+    <p>Essay for Jack Tran. Numbers only from fetched pages in <code>01-soccer-physiology.md</code> and <code>02-water-training.md</code>. No GitHub repository was created by this compile. No session menu was invented. Helgerud 2001 and 2007 and Stølen 2005 are full-text verified. Magel 1975 and Tanaka 1994 are abstract-fetched counters. Elon Tran is 9 / 5th grade / FSA; Sanchez U12 ages are 10.9 ± 0.8. Print this file: 10 pt body, letter, sticky TOC hidden.</p>
+  </footer>
+</section>
+</main>
+</div>
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll("nav.toc a"));
+  var ids = links.map(function (a) { return a.getAttribute("href").slice(1); });
+  var secs = ids.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  if (!("IntersectionObserver" in window) || !secs.length) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      links.forEach(function (a) {
+        a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+      });
+    });
+  }, { rootMargin: "0px 0px -70% 0px", threshold: 0.05 });
+  secs.forEach(function (s) { io.observe(s); });
+})();
+</script>
+</body>
+</html>
