@@ -1,0 +1,455 @@
+/* Midfield details page — turf green + chalk white + night navy.
+   Not a pool-teal clone. Not a purple gradient. */
+
+:root {
+  --navy: #08111c;
+  --navy-2: #101c2c;
+  --navy-3: #182638;
+  --ink: #141c16;
+  --muted: #4d5a52;
+  --chalk: #f3f0e4;
+  --chalk-2: #e7e2d2;
+  --chalk-3: #d9d3c0;
+  --card: #faf8f0;
+  --turf: #1c6b38;
+  --turf-deep: #124a26;
+  --turf-mid: #24824a;
+  --turf-bright: #3a9e58;
+  --lime: #c8e05a;
+  --line: #eef3e6;
+  --rule: #cfc7b0;
+  --warn: #7a5210;
+  --warn-bg: #f3e6c4;
+  --unv: #6e2e22;
+  --unv-bg: #f4e2dc;
+  --white: #fffcf6;
+  --shadow: 0 1px 0 rgba(8,17,28,.07);
+  --serif: "Newsreader", "Iowan Old Style", Georgia, "Palatino Linotype", ui-serif, serif;
+  --sans: "Barlow", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --cond: "Barlow Condensed", "Arial Narrow", "Barlow", sans-serif;
+  --mono: "IBM Plex Mono", "ui-monospace", Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--chalk);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.62;
+  font-optical-sizing: auto;
+}
+
+a { color: var(--turf-deep); }
+a:hover { color: var(--turf); }
+img { max-width: 100%; height: auto; }
+.skip {
+  position: absolute; left: -999px; top: 0;
+}
+.skip:focus {
+  left: 1rem; top: 1rem; z-index: 40;
+  background: #fff; padding: .5rem 1rem;
+}
+
+/* ——— Hero ——— */
+.hero {
+  position: relative;
+  min-height: 92vh;
+  background: var(--navy);
+  color: var(--chalk);
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero img.hero-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 62%;
+  z-index: 0;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(8,17,28,.55) 0%, rgba(8,17,28,.22) 38%, rgba(8,17,28,.72) 100%);
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2.2rem 6vw 3.4rem;
+  max-width: 1200px;
+}
+.kicker {
+  font-family: var(--cond);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--lime);
+  margin: 0 0 .6rem;
+}
+.hero h1 {
+  font-family: var(--cond);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 7vw, 5.4rem);
+  line-height: .92;
+  letter-spacing: .01em;
+  margin: 0 0 .8rem;
+  text-transform: uppercase;
+  max-width: 14ch;
+  text-shadow: 0 2px 24px rgba(8,17,28,.55);
+}
+.hero .dek {
+  font-size: 1.15rem;
+  max-width: 46rem;
+  color: var(--chalk-2);
+  margin: 0 0 1.4rem;
+  font-weight: 400;
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .9rem;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  letter-spacing: .04em;
+  color: var(--line);
+}
+.hero-meta span {
+  border: 1px solid rgba(238,243,230,.28);
+  padding: .28rem .6rem;
+  border-radius: 2px;
+}
+
+/* ——— Sticky TOC ——— */
+nav.toc {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--navy);
+  color: var(--chalk);
+  border-bottom: 3px solid var(--turf);
+  font-family: var(--sans);
+  font-size: 12.5px;
+}
+nav.toc .toc-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .15rem .15rem;
+  padding: .45rem 1.2rem .5rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  align-items: center;
+}
+nav.toc .toc-brand {
+  font-family: var(--cond);
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: var(--lime);
+  margin-right: .8rem;
+  white-space: nowrap;
+}
+nav.toc a {
+  color: var(--chalk-2);
+  text-decoration: none;
+  padding: .32rem .55rem;
+  border-radius: 2px;
+}
+nav.toc a:hover,
+nav.toc a:focus {
+  background: var(--turf-deep);
+  color: #fff;
+}
+nav.toc a.active {
+  background: var(--turf);
+  color: #fff;
+}
+
+/* ——— Layout ——— */
+.wrap {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 2.4rem 1.25rem 4rem;
+}
+.wrap.wide { max-width: 72rem; }
+.lede {
+  font-size: 1.22rem;
+  line-height: 1.55;
+}
+h2 {
+  font-family: var(--cond);
+  font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin: 2.8rem 0 .7rem;
+  padding-top: .4rem;
+  border-top: 3px solid var(--turf);
+}
+h3 {
+  font-family: var(--cond);
+  font-size: 1.45rem;
+  font-weight: 650;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: var(--turf-deep);
+  margin: 1.8rem 0 .5rem;
+}
+h4 {
+  font-family: var(--sans);
+  font-size: 1.02rem;
+  font-weight: 650;
+  margin: 1.2rem 0 .35rem;
+  color: var(--navy-2);
+}
+p { margin: 0 0 1rem; }
+ul, ol { margin: 0 0 1.1rem; padding-left: 1.2rem; }
+li { margin: 0 0 .35rem; }
+blockquote {
+  margin: 1.1rem 0 1.3rem;
+  padding: .15rem 0 .15rem 1.1rem;
+  border-left: 4px solid var(--turf);
+  color: var(--navy-2);
+  font-style: italic;
+}
+blockquote cite {
+  display: block;
+  font-style: normal;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-top: .45rem;
+  letter-spacing: .02em;
+}
+hr.pitch {
+  border: 0;
+  height: 0;
+  border-top: 2px dashed var(--turf-mid);
+  margin: 2rem 0;
+}
+
+/* ——— Figures / charts ——— */
+figure.viz {
+  margin: 1.4rem 0 1.8rem;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  padding: 1rem 1rem 1.1rem;
+  box-shadow: var(--shadow);
+}
+figure.viz h3 {
+  margin-top: 0;
+  font-size: 1.15rem;
+}
+figure.viz .chart {
+  width: 100%;
+  min-height: 280px;
+  overflow: visible;
+}
+figure.viz svg { display: block; width: 100%; height: auto; }
+figure.viz figcaption,
+.caption {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--muted);
+  margin-top: .7rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  line-height: 1.4;
+  margin: .5rem 0 0;
+  background: var(--white);
+}
+th, td {
+  border: 1px solid var(--rule);
+  padding: .42rem .5rem;
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  background: var(--navy);
+  color: var(--chalk);
+  font-family: var(--cond);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+}
+tr:nth-child(even) td { background: var(--chalk-2); }
+.num { font-family: var(--mono); font-size: 12.5px; white-space: nowrap; }
+.table-scroll { overflow-x: auto; }
+
+/* ——— Callouts ——— */
+.callout {
+  border: 1px solid var(--rule);
+  background: var(--card);
+  padding: 1rem 1.1rem .85rem;
+  margin: 1.1rem 0 1.4rem;
+}
+.callout.turf { border-left: 5px solid var(--turf); }
+.callout.warn { border-left: 5px solid var(--warn); background: var(--warn-bg); }
+.callout.unv { border-left: 5px solid var(--unv); background: var(--unv-bg); }
+.callout h3, .callout h4 { margin-top: 0; }
+.statrow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: .7rem;
+  margin: 1.1rem 0 1.5rem;
+}
+.stat {
+  background: var(--navy);
+  color: var(--chalk);
+  padding: .85rem .9rem .75rem;
+  min-height: 6.2rem;
+}
+.stat .n {
+  font-family: var(--cond);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--lime);
+  line-height: 1;
+  display: block;
+}
+.stat .l {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--chalk-3);
+  margin-top: .35rem;
+  display: block;
+}
+
+/* ——— Role cards / drills ——— */
+.rolegrid, .drillgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: .9rem;
+  margin: 1rem 0 1.5rem;
+}
+.role, .drill {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: .9rem 1rem .8rem;
+}
+.role .shirt {
+  font-family: var(--cond);
+  font-size: 3.2rem;
+  line-height: .85;
+  color: var(--turf);
+  font-weight: 700;
+}
+.role h3 { margin: .2rem 0 .4rem; }
+.pitchbox {
+  background:
+    repeating-linear-gradient(90deg, #1a7a3c 0 28px, #176e36 28px 56px);
+  border: 2px solid var(--line);
+  position: relative;
+  margin: .4rem 0 .6rem;
+  box-shadow: inset 0 0 0 1px rgba(238,243,230,.35);
+}
+.pitchbox .label {
+  position: absolute;
+  left: 6px; top: 4px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,.5);
+}
+.phase {
+  display: flex;
+  gap: .8rem;
+  align-items: flex-start;
+  margin: 0 0 1rem;
+}
+.phase .badge {
+  flex: 0 0 3.2rem;
+  height: 3.2rem;
+  background: var(--turf);
+  color: #fff;
+  font-family: var(--cond);
+  font-size: 1.6rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+/* ——— Sources / footnotes ——— */
+.sources a { word-break: break-all; }
+footer.colophon {
+  background: var(--navy);
+  color: var(--chalk-2);
+  padding: 2rem 1.25rem 3rem;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+footer.colophon .inner { max-width: 46rem; margin: 0 auto; }
+footer.colophon a { color: var(--lime); }
+
+/* d3 axis */
+.axis text { font-family: var(--sans); font-size: 11px; fill: var(--muted); }
+.axis path, .axis line { stroke: var(--rule); }
+.tick line { stroke: var(--chalk-3); }
+
+/* ——— Print ——— */
+@media print {
+  :root { --chalk: #fff; }
+  body {
+    background: #fff;
+    color: #111;
+    font-size: 11pt;
+    line-height: 1.45;
+  }
+  .skip, nav.toc { display: none !important; }
+  a { color: #111; text-decoration: none; }
+  .hero {
+    min-height: 0;
+    height: 4.6in;
+    page-break-after: always;
+    break-after: page;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .hero-inner { min-height: 0; height: 4.6in; padding: 1.2in 0.6in 0.5in; justify-content: flex-end; }
+  .wrap { max-width: none; padding: 0; }
+  h2 {
+    page-break-before: always;
+    break-before: page;
+    border-top: 2pt solid #1c6b38;
+  }
+  h2:first-of-type { page-break-before: auto; }
+  h3, h4, figure.viz, table, .callout, .role, .drill, .stat, blockquote {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  figure.viz, .callout, .role, .drill, .stat {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .chart { min-height: 0; }
+  footer.colophon { page-break-before: always; color: #111; background: #fff; }
+  footer.colophon a { color: #124a26; }
+}
+
+@media screen and (max-width: 720px) {
+  body { font-size: 17.5px; }
+  .hero { min-height: 78vh; }
+  .hero-inner { min-height: 78vh; padding: 1.4rem 1rem 1.8rem; }
+  nav.toc { font-size: 11.5px; }
+}
