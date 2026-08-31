@@ -2,7 +2,6 @@
 (function () {
   "use strict";
 
-  var NAVY = "#071422";
   var AQUA = "#1fb8ae";
   var AQUA_BRIGHT = "#3ee0d4";
   var TURF = "#3a9a5c";
@@ -48,80 +47,68 @@
       .style("height", "auto");
   }
 
-  /* 1. Qatar 2022 team distances — stacked composition of sourced km */
+  /* 1. Qatar 2022 team distances — three sourced km values */
   function qatarDistances(el, width) {
+    var rows = [
+      { name: "Team total", v: 108.1, fill: "#5d7e93", label: "108.1 km" },
+      { name: "HID ≥20 km/h", v: 9.001, fill: AQUA, label: "9.001 km" },
+      { name: "Sprint ≥25 km/h", v: 2.345, fill: TURF, label: "2.345 km" }
+    ];
     var height = 210;
-    var margin = { top: 28, right: 16, bottom: 36, left: 16 };
-    var innerW = width - margin.left - margin.right;
-    var total = 108.1;
-    var hid = 9.001;
-    var sprint = 2.345;
-    var hidOnly = hid - sprint;
-    var rest = total - hid;
-    var x = d3.scaleLinear().domain([0, total]).range([0, innerW]);
+    var margin = { top: 8, right: 88, bottom: 28, left: 118 };
+    var innerW = Math.max(width - margin.left - margin.right, 80);
+    var innerH = height - margin.top - margin.bottom;
+    var y = d3.scaleBand().domain(rows.map(function (d) { return d.name; })).range([0, innerH]).padding(0.28);
+    var x = d3.scaleLinear().domain([0, 108.1]).range([0, innerW]);
     var svg = svgRoot(el, width, height);
     var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
     svg.append("title").text("Qatar 2022 team distances: 108.1 km total, 9.001 km high-intensity, 2.345 km sprint.");
 
-    var segs = [
-      { key: "rest", v: rest, fill: "#163a5a", label: "" },
-      { key: "hid", v: hidOnly, fill: AQUA, label: "" },
-      { key: "sprint", v: sprint, fill: TURF, label: "" }
-    ];
-    var x0 = 0;
-    segs.forEach(function (s) {
-      s.x = x0;
-      x0 += s.v;
-    });
+    g.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0," + innerH + ")")
+      .call(d3.axisBottom(x).ticks(5).tickFormat(function (d) { return d + " km"; }));
+    g.append("g")
+      .attr("class", "axis")
+      .call(d3.axisLeft(y).tickSize(0))
+      .select(".domain").remove();
 
-    g.append("rect")
-      .attr("x", 0)
-      .attr("y", 54)
-      .attr("width", innerW)
-      .attr("height", 46)
-      .attr("fill", "#0a2438");
-
-    g.selectAll("rect.seg")
-      .data(segs)
+    g.selectAll("rect.track")
+      .data(rows)
       .enter()
       .append("rect")
-      .attr("class", "seg")
-      .attr("x", function (d) { return x(d.x); })
-      .attr("y", 54)
-      .attr("width", function (d) { return Math.max(x(d.v), 1); })
-      .attr("height", 46)
+      .attr("x", 0)
+      .attr("y", function (d) { return y(d.name); })
+      .attr("width", innerW)
+      .attr("height", y.bandwidth())
+      .attr("fill", "#0a2438");
+
+    g.selectAll("rect.bar")
+      .data(rows)
+      .enter()
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", function (d) { return y(d.name); })
+      .attr("width", function (d) { return x(d.v); })
+      .attr("height", y.bandwidth())
       .attr("fill", function (d) { return d.fill; });
 
-    function callout(xVal, y, text, color) {
-      g.append("text")
-        .attr("x", x(xVal))
-        .attr("y", y)
-        .attr("fill", color)
-        .attr("font-size", 12)
-        .attr("font-weight", 600)
-        .text(text);
-    }
-
-    callout(0, 20, "Team total 108.1 km", INK);
-    callout(rest + hidOnly * 0.05, 20, "HID ≥20 km/h  9.001 km", AQUA_BRIGHT);
-    callout(Math.max(rest + hidOnly, total - 28), 148, "Sprint ≥25 km/h  2.345 km", TURF);
-
-    g.append("line").attr("x1", x(rest)).attr("x2", x(rest)).attr("y1", 48).attr("y2", 108).attr("stroke", AQUA_BRIGHT).attr("stroke-width", 1);
-    g.append("line").attr("x1", x(rest + hidOnly)).attr("x2", x(rest + hidOnly)).attr("y1", 48).attr("y2", 128).attr("stroke", TURF).attr("stroke-width", 1);
-
-    g.append("text")
-      .attr("x", 0)
-      .attr("y", 178)
-      .attr("fill", MUTED)
-      .attr("font-size", 11)
-      .text("HID and sprint sit inside the 108.1 km total (FIFA TC / Bradley 2024).");
+    g.selectAll("text.val")
+      .data(rows)
+      .enter()
+      .append("text")
+      .attr("x", function (d) { return Math.min(x(d.v) + 8, innerW + 8); })
+      .attr("y", function (d) { return y(d.name) + y.bandwidth() / 2 + 4; })
+      .attr("fill", INK)
+      .attr("font-size", 12)
+      .attr("font-weight", 600)
+      .text(function (d) { return d.label; });
   }
 
   /* 2. Intensity grew faster than volume — grouped % change */
   function intensityVolume(el, width) {
-    var height = 280;
-    var margin = { top: 16, right: 16, bottom: 52, left: 44 };
+    var height = 300;
+    var margin = { top: 16, right: 16, bottom: 68, left: 44 };
     var innerW = width - margin.left - margin.right;
     var innerH = height - margin.top - margin.bottom;
     var groups = [
@@ -200,12 +187,24 @@
         .attr("fill", INK)
         .text(function (d) { return d.label; });
     });
+
+    var keys = [
+      { key: "TD", fill: "#5d7e93" },
+      { key: "HID", fill: AQUA },
+      { key: "HSR", fill: AQUA_BRIGHT },
+      { key: "Sprint", fill: TURF }
+    ];
+    keys.forEach(function (k, i) {
+      var lx = i * 78;
+      g.append("rect").attr("x", lx).attr("y", innerH + 34).attr("width", 9).attr("height", 9).attr("fill", k.fill);
+      g.append("text").attr("x", lx + 13).attr("y", innerH + 43).attr("fill", MUTED).attr("font-size", 11).text(k.key);
+    });
   }
 
   /* 3. Buoyancy offload — remaining dry-weight % */
   function buoyancy(el, width) {
     var rows = [
-      { name: "Neck (midpoint of ~6–10%)", v: 8, note: "plot 8%" },
+      { name: "Neck (midpoint of ~6–10%)", v: 8, note: "8%" },
       { name: "Xiphoid / nipple", v: 24, note: "~24%" },
       { name: "Navel", v: 51, note: "~51%" },
       { name: "DWR vertical GRF", v: 0, note: "0" }
@@ -318,7 +317,7 @@
       .attr("x", function (d) { return x(d.v) - 8; })
       .attr("y", function (d) { return y(d.name) + y.bandwidth() / 2 + 4; })
       .attr("text-anchor", "end")
-      .attr("fill", NAVY)
+      .attr("fill", "#071422")
       .attr("font-size", 12)
       .attr("font-weight", 700)
       .text(function (d) { return d.v + "%"; });
@@ -420,8 +419,8 @@
       { name: "Wilber water-run", pre: 58.7, post: 59.6, color: AQUA, delta: "held" },
       { name: "Eyestone", pre: 56.29, post: 53.52, color: "#8aa3b3", delta: "−4.9%" }
     ];
-    var height = 230;
-    var margin = { top: 20, right: 110, bottom: 36, left: 48 };
+    var height = 248;
+    var margin = { top: 20, right: 20, bottom: 64, left: 48 };
     var innerW = width - margin.left - margin.right;
     var innerH = height - margin.top - margin.bottom;
     var x = d3.scalePoint().domain(["Pre", "Post"]).range([20, innerW - 20]);
@@ -455,10 +454,15 @@
           .attr("r", 5)
           .attr("fill", s.color);
       });
+    });
+
+    series.forEach(function (s, i) {
+      var lx = i === 0 ? 8 : innerW / 2;
+      g.append("rect").attr("x", lx).attr("y", innerH + 32).attr("width", 9).attr("height", 9).attr("fill", s.color);
       g.append("text")
-        .attr("x", x("Post") + 12)
-        .attr("y", y(s.post) + 4)
-        .attr("fill", s.color)
+        .attr("x", lx + 14)
+        .attr("y", innerH + 41)
+        .attr("fill", INK)
         .attr("font-size", 11)
         .text(s.name + "  " + s.pre + "→" + s.post + "  " + s.delta);
     });
