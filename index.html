@@ -9,514 +9,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<style>
-:root {
-  --navy: #071422;
-  --navy-2: #0d2740;
-  --navy-3: #163a5a;
-  --ink: #1a2230;
-  --muted: #5a6573;
-  --paper: #f4efe4;
-  --paper-2: #ebe3d2;
-  --card: #faf6ee;
-  --aqua: #1fb8ae;
-  --aqua-deep: #0e7f79;
-  --aqua-pale: #d4f1ee;
-  --turf: #2c7a4b;
-  --turf-bright: #3a9a5c;
-  --turf-pale: #dcefe3;
-  --rule: #cbbfa6;
-  --warn: #8a5a12;
-  --warn-pale: #f3e6c8;
-  --unv: #6b3a3a;
-  --unv-pale: #f3e4e2;
-  --white: #fffdf8;
-  --shadow: 0 1px 0 rgba(7,20,34,.06);
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: "Source Serif 4", Georgia, "Iowan Old Style", "Palatino Linotype", ui-serif, serif;
-  font-size: 19px;
-  line-height: 1.62;
-  font-optical-sizing: auto;
-}
-.skip {
-  position: absolute; left: -999px; top: 0;
-}
-.skip:focus { left: 1rem; top: 1rem; background: #fff; padding: .5rem 1rem; z-index: 9; }
-/* layout */
-.frame {
-  display: grid;
-  grid-template-columns: 248px minmax(0, 1fr);
-  min-height: 100vh;
-}
-nav.toc {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow: auto;
-  background: var(--navy);
-  color: #d7e4ef;
-  padding: 1.4rem 1rem 2rem 1.15rem;
-  font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
-  font-size: 12.5px;
-  line-height: 1.35;
-}
-nav.toc .kicker {
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--aqua);
-  font-weight: 600;
-  font-size: 10px;
-  margin: 0 0 .4rem;
-}
-nav.toc h1 {
-  font-size: 13.5px;
-  font-weight: 600;
-  color: #fff;
-  margin: 0 0 1.1rem;
-  line-height: 1.35;
-  font-family: inherit;
-}
-nav.toc ol {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  counter-reset: t;
-}
-nav.toc ol li { margin: 0 0 .15rem; }
-nav.toc a {
-  display: block;
-  color: #b9c9d6;
-  text-decoration: none;
-  padding: .32rem .4rem .32rem .55rem;
-  border-left: 2px solid transparent;
-  border-radius: 0 3px 3px 0;
-}
-nav.toc a:hover { color: #fff; background: rgba(31,184,174,.12); }
-nav.toc a.active {
-  color: #fff;
-  border-left-color: var(--aqua);
-  background: rgba(31,184,174,.16);
-}
-nav.toc .toc-note {
-  margin-top: 1.4rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255,255,255,.12);
-  color: #8aa0b3;
-  font-size: 11px;
-  line-height: 1.45;
-}
-main {
-  max-width: 820px;
-  margin: 0 auto;
-  padding: 0 2.2rem 6rem;
-}
-/* masthead */
-.mast {
-  padding: 3.2rem 0 2.2rem;
-  border-bottom: 3px solid var(--navy);
-  margin-bottom: 2.4rem;
-}
-.mast .series {
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-  font-size: 11.5px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--aqua-deep);
-  font-weight: 600;
-  margin: 0 0 .85rem;
-}
-.mast h1 {
-  font-size: clamp(2.05rem, 4.2vw, 2.85rem);
-  line-height: 1.12;
-  letter-spacing: -.02em;
-  color: var(--navy);
-  margin: 0 0 1rem;
-  font-weight: 700;
-}
-.mast .deck {
-  font-size: 1.18rem;
-  line-height: 1.45;
-  color: var(--navy-2);
-  max-width: 40rem;
-  margin: 0 0 1.4rem;
-  font-style: italic;
-}
-.meta {
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-  font-size: 13px;
-  color: var(--muted);
-  display: flex;
-  flex-wrap: wrap;
-  gap: .4rem 1.2rem;
-}
-.meta b { color: var(--navy); font-weight: 600; }
-/* type */
-h2 {
-  font-size: 1.62rem;
-  line-height: 1.2;
-  color: var(--navy);
-  margin: 2.8rem 0 .9rem;
-  letter-spacing: -.015em;
-  padding-top: .6rem;
-  border-top: 1px solid var(--rule);
-}
-h2 .num {
-  display: block;
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-  font-size: 12px;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--aqua-deep);
-  font-weight: 600;
-  margin-bottom: .35rem;
-}
-h3 {
-  font-size: 1.22rem;
-  color: var(--navy-2);
-  margin: 2rem 0 .6rem;
-  font-weight: 650;
-}
-h4 {
-  font-size: 1.02rem;
-  color: var(--navy-3);
-  margin: 1.5rem 0 .4rem;
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-  font-weight: 600;
-  letter-spacing: .01em;
-}
-p { margin: 0 0 1.05rem; }
-.lede p:first-of-type::first-letter {
-  float: left;
-  font-size: 4.1rem;
-  line-height: .78;
-  padding: .12rem .45rem 0 0;
-  color: var(--navy);
-  font-weight: 700;
-}
-blockquote.pull {
-  margin: 1.6rem 0 1.7rem;
-  padding: 0 0 0 1.15rem;
-  border-left: 3px solid var(--aqua);
-  color: var(--navy);
-  font-size: 1.12rem;
-  line-height: 1.45;
-  font-style: italic;
-}
-blockquote.pull cite {
-  display: block;
-  margin-top: .5rem;
-  font-style: normal;
-  font-size: .78rem;
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-  letter-spacing: .04em;
-  color: var(--muted);
-}
-a { color: var(--aqua-deep); }
-a:hover { color: var(--navy); }
-sup a, .fn {
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-  font-size: .72em;
-  font-weight: 600;
-  text-decoration: none;
-  color: var(--navy-3);
-  padding: 0 .12em;
-}
-/* chips / callouts */
-.how {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin: 1.4rem 0 2rem;
-}
-.how article {
-  background: var(--card);
-  border: 1px solid var(--rule);
-  padding: 1.1rem 1.15rem 1.2rem;
-  box-shadow: var(--shadow);
-}
-.how h3 { margin-top: 0; font-size: 1rem; font-family: "IBM Plex Sans", system-ui, sans-serif; letter-spacing: .02em; }
-.how .who { font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; margin: 0 0 .4rem; }
-.how .youth { color: var(--aqua-deep); }
-.how .elite { color: var(--turf); }
-.how p { font-size: .92rem; margin-bottom: .65rem; }
-.how p:last-child { margin-bottom: 0; }
-.arg {
-  background: var(--navy);
-  color: #e8eef4;
-  padding: 1.35rem 1.4rem 1.2rem;
-  margin: 1.6rem 0 2rem;
-}
-.arg h3 {
-  color: var(--aqua);
-  margin: 0 0 .85rem;
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-  font-size: 12px;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-}
-.arg ol { margin: 0; padding-left: 1.2rem; }
-.arg li { margin: 0 0 .7rem; font-size: .98rem; line-height: 1.5; }
-.arg li:last-child { margin-bottom: 0; }
-.arg .turf { color: #7dcc96; }
-.arg .aq { color: var(--aqua); }
-.callout {
-  border: 1px solid var(--rule);
-  background: var(--paper-2);
-  padding: 1rem 1.15rem;
-  margin: 1.3rem 0 1.5rem;
-  font-size: .95rem;
-}
-.callout.turf { border-left: 4px solid var(--turf); }
-.callout.aqua { border-left: 4px solid var(--aqua); }
-.callout.warn { border-left: 4px solid var(--warn); background: var(--warn-pale); }
-.callout.unv { border-left: 4px solid var(--unv); background: var(--unv-pale); }
-.callout strong.k {
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-  font-size: 11px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: .35rem;
-  color: var(--navy-3);
-}
-.statrow {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: .7rem;
-  margin: 1.2rem 0 1.6rem;
-}
-.stat {
-  background: var(--navy);
-  color: #fff;
-  padding: .9rem .95rem 1rem;
-  min-height: 6.2rem;
-}
-.stat.aqua { background: var(--aqua-deep); }
-.stat.turf { background: var(--turf); }
-.stat .v {
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-  font-size: 1.55rem;
-  font-weight: 600;
-  letter-spacing: -.02em;
-  line-height: 1.1;
-  display: block;
-  margin-bottom: .35rem;
-}
-.stat .l {
-  font-size: .78rem;
-  line-height: 1.35;
-  color: rgba(255,255,255,.82);
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: .84rem;
-  margin: 1rem 0 1.5rem;
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-  background: var(--white);
-}
-th, td {
-  text-align: left;
-  padding: .45rem .55rem;
-  border-bottom: 1px solid var(--rule);
-  vertical-align: top;
-}
-th {
-  background: var(--navy);
-  color: #fff;
-  font-weight: 500;
-  font-size: 11.5px;
-  letter-spacing: .04em;
-}
-tr:nth-child(even) td { background: var(--paper-2); }
-caption {
-  text-align: left;
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: .4rem;
-  caption-side: top;
-}
-.fig {
-  margin: 1.6rem 0 1.8rem;
-  background: var(--white);
-  border: 1px solid var(--rule);
-  padding: 1rem 1rem 1.1rem;
-}
-.fig .cap {
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-  font-size: 12.5px;
-  color: var(--muted);
-  margin-top: .75rem;
-  line-height: 1.4;
-}
-.fig .cap b { color: var(--navy); }
-/* diagrams */
-.buoy {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 1rem;
-  align-items: stretch;
-  min-height: 340px;
-}
-.pool {
-  position: relative;
-  background: linear-gradient(#9ad9d4 0%, #148f8a 100%);
-  border-radius: 4px;
-  overflow: hidden;
-  height: 340px;
-}
-.bodyfig {
-  position: absolute;
-  left: 50%;
-  bottom: 8%;
-  width: 36px;
-  height: 78%;
-  transform: translateX(-50%);
-  background:
-    radial-gradient(circle at 50% 8%, #f4efe4 9px, transparent 10px),
-    linear-gradient(#f4efe4, #f4efe4);
-  background-repeat: no-repeat;
-  background-size: 100% 100%, 18px 70%;
-  background-position: 0 0, 9px 18%;
-  opacity: .95;
-}
-.pool .wl {
-  position: absolute; left: 0; right: 0; height: 1px; background: rgba(255,255,255,.7);
-}
-.levels { display: flex; flex-direction: column; justify-content: space-between; font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 12.5px; }
-.levels div { padding: .35rem 0; border-bottom: 1px dotted var(--rule); }
-.levels strong { color: var(--aqua-deep); }
-.energy {
-  position: relative;
-  height: 168px;
-  background: #0d2740;
-  overflow: hidden;
-}
-.energy .band {
-  position: absolute; left: 0; right: 0;
-  background: rgba(31,184,174,.28);
-  border-top: 1px dashed rgba(31,184,174,.7);
-  border-bottom: 1px dashed rgba(31,184,174,.7);
-}
-.energy .low {
-  position: absolute; left: 0; right: 0; bottom: 0;
-  background: repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 10px, transparent 10px 18px);
-}
-.energy .spk {
-  position: absolute; bottom: 18%; width: 3px; background: var(--turf-bright);
-  opacity: .85;
-}
-.energy .axis {
-  position: absolute; left: 8px; top: 8px; color: #cfe3ee;
-  font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 11px;
-}
-.energy .t {
-  position: absolute; bottom: 6px; left: 8px; right: 8px;
-  display: flex; justify-content: space-between;
-  color: #9bb3c4; font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 10.5px;
-}
-.hrgrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: .45rem;
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-  font-size: 13px;
-}
-.hrbar { display: grid; grid-template-columns: 210px 1fr 70px; gap: .5rem; align-items: center; }
-.hrbar .lab { color: var(--navy); }
-.track { height: 10px; background: var(--paper-2); position: relative; }
-.track > i {
-  display: block; height: 100%; background: var(--aqua);
-}
-.week {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: .7rem;
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-  font-size: 13px;
-}
-.week section {
-  padding: .85rem .9rem 1rem;
-  min-height: 11rem;
-}
-.week .yes { background: var(--aqua-pale); border-top: 4px solid var(--aqua-deep); }
-.week .no { background: var(--unv-pale); border-top: 4px solid var(--unv); }
-.week .must { background: var(--turf-pale); border-top: 4px solid var(--turf); }
-.week h4 { margin: 0 0 .5rem; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
-.week ul { margin: 0; padding-left: 1.05rem; }
-.week li { margin: 0 0 .3rem; }
-.legend {
-  display: flex; gap: 1rem; flex-wrap: wrap;
-  font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 12px; color: var(--muted);
-  margin: .4rem 0 0;
-}
-.swatch { display: inline-block; width: 12px; height: 12px; margin-right: .3rem; vertical-align: -1px; }
-ol.sources, ol.notes {
-  font-size: .88rem;
-  padding-left: 1.3rem;
-}
-ol.sources li, ol.notes li { margin: 0 0 .45rem; }
-ol.sources a { word-break: break-all; }
-.rule-end {
-  margin: 3rem 0 1rem;
-  border: 0;
-  border-top: 3px double var(--navy);
-}
-footer.colophon {
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-  font-size: 13px;
-  color: var(--muted);
-  padding-bottom: 2rem;
-}
-.small { font-size: .92rem; color: var(--navy-2); }
-ul.plain { margin: 0 0 1.1rem; padding-left: 1.2rem; }
-ul.plain li { margin: 0 0 .4rem; }
-.two {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin: 1rem 0 1.5rem;
-}
-.two .box {
-  background: var(--white);
-  border: 1px solid var(--rule);
-  padding: .9rem 1rem;
-  font-size: .92rem;
-}
-.two h4 { margin-top: 0; }
-@media (max-width: 980px) {
-  .frame { grid-template-columns: 1fr; }
-  nav.toc { position: relative; height: auto; max-height: 42vh; }
-  main { padding: 0 1.1rem 4rem; }
-  .how, .statrow, .two, .week, .buoy { grid-template-columns: 1fr; }
-  .hrbar { grid-template-columns: 1fr; }
-}
-@media print {
-  @page { size: letter; margin: .7in; }
-  :root { --paper: #fff; }
-  body { background: #fff; font-size: 10pt; line-height: 1.4; color: #111; }
-  .frame { display: block; }
-  nav.toc { display: none; }
-  main { max-width: none; padding: 0; }
-  a { color: inherit; text-decoration: none; }
-  .stat, .arg { break-inside: avoid; }
-  .fig, table, .how, .week { break-inside: avoid; }
-  h2 { break-after: avoid; }
-  .mast h1 { font-size: 22pt; }
-  footer.colophon { font-size: 8.5pt; }
-  ol.sources { font-size: 8.5pt; }
-}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <a class="skip" href="#essay">Skip to essay</a>
+<header class="hero">
+  <img src="img/hero-engine-pitch.png" alt="Split view: underwater pool lane on the left, night soccer pitch on the right. No people.">
+  <div class="hero-copy">
+    <p class="kicker">Water conditions the engine. It does not make the pitch.</p>
+    <h1>The Engine and the Pitch</h1>
+    <p class="deck">Soccer endurance is not a distance-run. Water is not land with extra resistance. Between those two facts sits a useful tool — and a tempting mistake.</p>
+    <div class="meta">
+      <span>A sourced essay</span>
+      <span>Youth club soccer (8–10 range) and, separately, elite demand</span>
+      <span>Compiled 30 Aug 2026 (CT)</span>
+    </div>
+  </div>
+</header>
 <div class="frame">
 <nav class="toc" aria-label="Contents">
   <p class="kicker">Essay · 2026</p>
@@ -544,20 +53,15 @@ ul.plain li { margin: 0 0 .4rem; }
     <li><a href="#synthesis">Synthesis</a></li>
     <li><a href="#sources">Sources</a></li>
   </ol>
-  <p class="toc-note">Single-file essay. Numbers only from fetched pages in the companion research briefs. Print stylesheet: 10 pt body. Offline: system-ui / Georgia if webfonts fail.</p>
+  <p class="toc-note">Sourced essay with D3 figures. Print stylesheet hides live charts and keeps the fallback tables. Offline: system-ui / Georgia if webfonts fail.</p>
 </nav>
+<div class="stage">
 <main id="essay">
-<header class="mast">
-  <p class="series">Physiology · aquatic training · soccer · a parent’s brief</p>
-  <h1>The Engine and the Pitch: Why Water Can Condition Soccer Endurance Without Making a Soccer Player</h1>
-  <p class="deck">Soccer endurance is not a distance-run. Water is not land with extra resistance. Between those two facts sits a useful tool — and a tempting mistake.</p>
-  <div class="meta">
-    <span>A sourced essay</span>
-    <span>Youth club soccer (roughly 8–10 years) and, separately, the sport’s elite demand</span>
-    <span>Compiled 30 Aug 2026 (CT)</span>
+  <p class="lead-strip">
+    <span><b>Why water.</b> Condition the aerobic engine without impact.</span>
+    <span><b>Why not only water.</b> HID, sprints, and turns stay on grass.</span>
     <span>Fetched sources only · no invented session menus</span>
-  </div>
-</header>
+  </p>
 
 <section id="how">
   <h2><span class="num">Reader’s frame</span> How to use this</h2>
@@ -607,20 +111,23 @@ ul.plain li { margin: 0 0 .4rem; }
     “on average, teams during the FIFA World Cup Qatar 2022™ covered 108.1km in total, with 9,001m and 2,345m covered at the higher intensities (&gt;20km/h and &gt;25km/h), respectively.”
     <cite>FIFA Training Centre, Qatar 2022 physical analysis, Part 1 — distances teams covered<sup><a href="#fn2">2</a></sup></cite>
   </blockquote>
-  <div class="statrow">
-    <div class="stat turf">
-      <span class="v">108.1 km</span>
-      <span class="l">Team total, Qatar 2022, 64 matches, outfield including substitutes, no extra time</span>
+  <figure class="chart-plate" aria-labelledby="c1-title">
+    <p class="chart-kicker">Figure · Qatar 2022 team distances</p>
+    <h3 id="c1-title">Most metres are cheap. The decisive band is small.</h3>
+    <div class="chart-live" id="chart-qatar"></div>
+    <p class="cap"><b>Source:</b> FIFA Training Centre, Qatar 2022 physical analysis; Bradley 2024 PMC (Biol Sport). Team totals, 64 matches, outfield including substitutes, no extra time. HID ≥20 km·h<sup>−1</sup> and sprint ≥25 km·h<sup>−1</sup> sit inside the 108.1 km total.</p>
+    <div class="chart-fallback">
+      <table>
+        <caption>Fallback table — same three sourced numbers as the chart.</caption>
+        <thead><tr><th>Measure</th><th>Value</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Team total distance</td><td>108.1 km</td><td>FIFA TC / Bradley 2024</td></tr>
+          <tr><td>HID ≥20 km·h<sup>−1</sup></td><td>9.001 km (9,001 m)</td><td>FIFA TC / Bradley 2024 PMC</td></tr>
+          <tr><td>Sprint ≥25 km·h<sup>−1</sup></td><td>2.345 km (2,345 m)</td><td>FIFA TC / Bradley 2024 PMC</td></tr>
+        </tbody>
+      </table>
     </div>
-    <div class="stat turf">
-      <span class="v">9,001 m</span>
-      <span class="l">Team high-intensity distance ≥20 km·h<sup>−1</sup> — the band that actually grew</span>
-    </div>
-    <div class="stat turf">
-      <span class="v">2,345 m</span>
-      <span class="l">Team sprint distance ≥25 km·h<sup>−1</sup> — small fraction, large match meaning</span>
-    </div>
-  </div>
+  </figure>
   <p>Against Russia 2018 the same comparison is the essay’s first warning against “more easy kilometres.” Total distance was only <b>+3%</b>. Distance at the higher intensities was <b>+16–19%</b> in absolute terms. On a per-minute basis the high-intensity difference was still <b>9–12%</b>, and total distance was <b>3% lower</b> in Qatar 2022 than in 2018. The game did not get longer in metres. It got sharper.<sup><a href="#fn1">1</a></sup></p>
   <p>That sharpness is not evenly distributed. Top versus bottom teams on high-intensity distance (≥20 km·h<sup>−1</sup>): United States, Canada, Saudi Arabia, Germany, and IR Iran covered <b>19–34%</b> more HID than Argentina, Ecuador, Qatar, Poland, and Costa Rica. Match-to-match coefficient of variation at team level: total distance <b>3.2%</b>, HID <b>9.1%</b>, sprint <b>13.9%</b>. Japan’s HID/sprint CV ran <b>23.2–29.4%</b>. Ecuador’s HID CV was <b>2.1%</b>; Uruguay’s sprint CV <b>3.3%</b>. High-intensity runs correlated with defensive transitions and recoveries (<b>r = 0.63</b>) and with progressions and final-third entries (<b>r = 0.73–0.75</b>).<sup><a href="#fn1">1</a></sup> HID is not decoration. It is how teams win the moments that look like tactics on television.</p>
 
@@ -632,6 +139,22 @@ ul.plain li { margin: 0 0 .4rem; }
 
   <h3>A decade of the Premier League: total distance barely moved; sprinting did</h3>
   <p>Allen, Taberner, Zhilkin and Green tracked English Premier League running loads across 2015/16–2024/25: 3,750 games, 3,408 after exclusions, team totals including goalkeepers. Their high-intensity definition is &gt;5.5 m/s; high-speed running 5.5–7 m/s; sprint &gt;7 m/s. Over ten seasons, team totals: total distance <b>+2%</b>, HID <b>+27%</b>, HSR <b>+23%</b>, sprint distance <b>+40%</b>. Intensity per minute (HID/min, HSR/min, sprint/min) increased; <b>TD/min decreased</b> (effect size −0.27).<sup><a href="#fn5">5</a></sup></p>
+  <figure class="chart-plate" aria-labelledby="c2-title">
+    <p class="chart-kicker">Figure · Intensity versus volume</p>
+    <h3 id="c2-title">The game got sharper, not longer.</h3>
+    <div class="chart-live" id="chart-intensity"></div>
+    <p class="cap"><b>Source:</b> Bradley 2024 PMC (Qatar 2022 vs 2018); Allen, Taberner, Zhilkin &amp; Green, BJSM 2025 (EPL 10 seasons). Qatar HID is the published +16–19% range (bar at the midpoint 17.5, whisker 16–19). EPL HID &gt;5.5 m/s; HSR 5.5–7 m/s; sprint &gt;7 m/s. Do not collapse the two studies into one trend line.</p>
+    <div class="chart-fallback">
+      <table>
+        <caption>Fallback table — percent change already stated in the essay.</caption>
+        <thead><tr><th>Series</th><th>TD</th><th>HID</th><th>HSR</th><th>Sprint</th></tr></thead>
+        <tbody>
+          <tr><td>Qatar 2022 vs 2018</td><td>+3%</td><td>+16–19%</td><td>—</td><td>(inside the HID band)</td></tr>
+          <tr><td>EPL 10 seasons</td><td>+2%</td><td>+27%</td><td>+23%</td><td>+40%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </figure>
   <p>The largest jump sat in 2023/24, linked to the added-time rule (<b>+5.0 minutes</b> mean game duration versus 2015/16). A 2024/25 added-time modification reduced minutes (<b>−1.8 min</b> versus the prior season in the paper’s Table 2 discussion). Rolling three-season total match minutes were <b>+1,600</b>; congested minutes <b>+1,415</b>. Top-six clubs: total minutes <b>+5,659</b> (<b>+9%</b>), congested <b>+2,003</b>. Congested minutes as a share of total: all players <b>13% → 26%</b> versus the first three-season average; top-six stayed <b>17–29%</b> against all-player <b>12–20%</b>. The paper cites other work that some elite players have as few as <b>22 rest days</b> between seasons and average <b>4.3 days</b> between games.<sup><a href="#fn5">5</a></sup> That is a player-health problem. It is not a call to add a fifth aerobic mode.</p>
 
   <h3>EURO 2024, classic match analysis, and the women’s game</h3>
@@ -729,25 +252,39 @@ ul.plain li { margin: 0 0 .4rem; }
   <p>Harrison et al. (1992), as quoted on a fetched PMC page: gravitational force reduced by <b>30%</b> at knee-level, <b>50%</b> at waist-level, and about <b>90%</b> reduced weight-bearing at the neck.<sup><a href="#fn16">16</a></sup> Harrison and Bulstrode (1987), as reported in a fetched orthopaedic aquatic-loading study: C7/neck <b>5.9–10%</b> of dry body weight; xiphisternum <b>25–37%</b>; ASIS/navel <b>40–56%</b>. The same paper’s own measurements in periarticular-fracture patients (n=61): mean percent dry weight <b>7.9%</b> (SD 3.3) at neck exhaling, <b>6.0%</b> (SD 2.7) at neck inhaling, <b>23.9%</b> (SD 5.9) at nipple, <b>51.4%</b> (SD 5.6) at navel.<sup><a href="#fn17">17</a></sup></p>
   <p>Kwok et al. (2022) define deep-water running as running with <b>70%</b> of the body immersed, submerged at shoulder level, with or without a flotation device. Deep water <b>eliminates vertical ground-reaction forces</b>.<sup><a href="#fn18">18</a></sup> Shallow-water work is not the same planet as deep water. At xiphoid or chest depth the legs still load at roughly one-quarter to one-third of dry weight when standing, and more when walking or jogging. Nagle et al. note that walking and jogging may increase weight-bearing by about <b>25% to 75%</b> depending on depth, movement, and speed — citing Gulick/Geigle via Nagle 2017.<sup><a href="#fn19">19</a></sup></p>
 
+  <div class="buoy-pair">
+    <figure class="buoy-still">
+      <img src="img/buoyancy-depths.png" alt="Anonymous silhouette standing in a dark pool, crossed by three glowing depth bands at neck, chest, and navel.">
+      <figcaption>Anonymous depth bands. Neck, xiphoid/nipple, navel — the three landmarks used in the chart.</figcaption>
+    </figure>
+    <figure class="chart-plate" aria-labelledby="c3-title">
+      <p class="chart-kicker">Figure · Remaining dry weight</p>
+      <h3 id="c3-title">Buoyancy offload by depth</h3>
+      <div class="chart-live" id="chart-buoyancy"></div>
+      <p class="cap"><b>Source:</b> Becker 2009; Bressel 2015 (n=61: neck 6.0–7.9%, nipple 23.9%, navel 51.4%); Harrison &amp; Bulstrode via Bressel (neck 5.9–10%). Chart uses the essay midpoints: neck 8%, xiphoid/nipple ~24%, navel ~51%. DWR vertical GRF is 0 (Kwok 2022). Walking/jogging can raise remaining load about 25–75% (Nagle citing Gulick/Geigle) — not plotted.</p>
+      <div class="chart-fallback">
+        <table>
+          <caption>Fallback table — percent of dry weight remaining.</caption>
+          <thead><tr><th>Depth</th><th>Plotted remaining load</th><th>Source notes</th></tr></thead>
+          <tbody>
+            <tr><td>Neck</td><td>8% (midpoint of ~6–10%)</td><td>Harrison &amp; Bulstrode 5.9–10%; Bressel 6.0–7.9%</td></tr>
+            <tr><td>Xiphoid / nipple</td><td>~24%</td><td>Bressel nipple 23.9%</td></tr>
+            <tr><td>Navel</td><td>~51%</td><td>Bressel 51.4%</td></tr>
+            <tr><td>DWR vertical GRF</td><td>0</td><td>Kwok 2022</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </figure>
+  </div>
   <div class="fig">
-    <div class="buoy">
-      <div class="pool" aria-hidden="true">
-        <div class="bodyfig"></div>
-        <div class="wl" style="top:8%"></div>
-        <div class="wl" style="top:28%"></div>
-        <div class="wl" style="top:46%"></div>
-        <div class="wl" style="top:58%"></div>
-        <div class="wl" style="top:78%"></div>
-      </div>
-      <div class="levels">
-        <div><strong>Neck / C7</strong> — remaining load about 6–10% of dry weight (Harrison &amp; Bulstrode); Bressel: 7.9% exhaling, 6.0% inhaling; Becker: ~15 lb compressive. Harrison 1992: ~90% reduced weight-bearing. This is DWR territory; Kwok: 70% immersed, shoulder, zero vertical GRF.</div>
-        <div><strong>Xiphoid / nipple</strong> — Becker: 60% or more offloaded. Harrison &amp; Bulstrode: 25–37% remaining at xiphisternum. Bressel nipple: 23.9% of dry weight. Nagle restates xiphoid offload ~60%.</div>
-        <div><strong>Umbilicus / navel / ASIS</strong> — Becker: ~50% offload at umbilicus. Harrison &amp; Bulstrode: 40–56% remaining. Bressel navel: 51.4% of dry weight. Harrison 1992: 50% reduction at waist.</div>
-        <div><strong>Symphysis pubis</strong> — Becker: 40% of body weight offloaded.</div>
-        <div><strong>Knee</strong> — Harrison 1992: gravitational force reduced 30% at knee-level. This is not “non-impact.”</div>
-      </div>
+    <div class="levels">
+      <div><strong>Neck / C7</strong> — remaining load about 6–10% of dry weight (Harrison &amp; Bulstrode); Bressel: 7.9% exhaling, 6.0% inhaling; Becker: ~15 lb compressive. Harrison 1992: ~90% reduced weight-bearing. This is DWR territory; Kwok: 70% immersed, shoulder, zero vertical GRF.</div>
+      <div><strong>Xiphoid / nipple</strong> — Becker: 60% or more offloaded. Harrison &amp; Bulstrode: 25–37% remaining at xiphisternum. Bressel nipple: 23.9% of dry weight. Nagle restates xiphoid offload ~60%.</div>
+      <div><strong>Umbilicus / navel / ASIS</strong> — Becker: ~50% offload at umbilicus. Harrison &amp; Bulstrode: 40–56% remaining. Bressel navel: 51.4% of dry weight. Harrison 1992: 50% reduction at waist.</div>
+      <div><strong>Symphysis pubis</strong> — Becker: 40% of body weight offloaded.</div>
+      <div><strong>Knee</strong> — Harrison 1992: gravitational force reduced 30% at knee-level. This is not “non-impact.”</div>
     </div>
-    <p class="cap"><b>Figure 2.</b> Buoyancy is a depth function, not a mood. Deep-water running and neck-depth immersion are a different loading environment from xiphoid jogging, and both are different from grass. Numbers as reported by Becker 2009, Harrison (via Carayannopoulos 2020 and Bressel 2015), Bressel’s own n=61, and Kwok 2022. Walking and jogging can raise remaining load by about 25–75% (Nagle citing Gulick/Geigle).</p>
+    <p class="cap"><b>Depth notes.</b> Same sourced sentences as the original figure. The D3 chart plots only the four verified remaining-load points requested; these rows keep the surrounding Harrison / Becker / Nagle detail.</p>
   </div>
 </section>
 
@@ -773,6 +310,23 @@ ul.plain li { margin: 0 0 .4rem; }
     <p class="cap"><b>Figure 3.</b> Heart-rate offset in water is a <em>range</em>. Bars are ordinal, not a common scale: some rows are beats, some are percents. Town &amp; Bradley (abstract): DWR VO<sub>2</sub>max 73.5% of treadmill, SWR 90.3%; HRmax DWR 86% of treadmill, SWR 88.6%. Prescribe water intensity with RPE, cadence, and water-specific HR, not land zones (Killgore via Kwok; Nagle; Kravitz). Warm water can erase the gap; max tests often widen it.</p>
   </div>
 
+  <figure class="chart-plate" aria-labelledby="c4-title">
+    <p class="chart-kicker">Figure · Max VO<sub>2</sub> share of treadmill</p>
+    <h3 id="c4-title">Deep water is not a full land VO<sub>2</sub>max test</h3>
+    <div class="chart-live" id="chart-town-bradley"></div>
+    <p class="cap"><b>Source:</b> Town &amp; Bradley 1991 abstract. Trained runners, max tests. DWR VO<sub>2</sub>max 73.5% of treadmill; SWR 90.3%. HRmax (DWR 86%, SWR 88.6%) is in the essay and not re-plotted.</p>
+    <div class="chart-fallback">
+      <table>
+        <caption>Fallback table — Town &amp; Bradley VO<sub>2</sub>max as a share of treadmill.</caption>
+        <thead><tr><th>Mode</th><th>VO<sub>2</sub>max vs treadmill</th></tr></thead>
+        <tbody>
+          <tr><td>Deep-water running</td><td>73.5%</td></tr>
+          <tr><td>Shallow-water running</td><td>90.3%</td></tr>
+          <tr><td>Treadmill</td><td>100% (reference)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </figure>
   <p>Town and Bradley (1991) abstract, trained runners, max tests: treadmill VO<sub>2</sub>max and HRmax higher than both water tests. Shallow-water running VO<sub>2</sub>max <b>90.3%</b> of treadmill; deep-water running <b>73.5%</b>. HRmax SWR <b>88.6%</b>, DWR <b>86%</b> of treadmill. RER and lactate did not differ. Shallow water was metabolically greater than deep water.<sup><a href="#fn20">20</a></sup> Svedenhag and Seger (1992), as reported on the Kravitz page: HRmax <b>172 vs 188 bpm</b>; VO<sub>2</sub>max <b>4.03 vs 4.60 L/min</b> (water versus land), trained male runners in a vest.<sup><a href="#fn14">14</a></sup> Michaud et al. (1995), same page: DWR HRmax about <b>15 beats</b> lower than treadmill (pre 172 vs 187; post 175 vs 189) in untrained subjects, max tests. Wilber et al. (1996), same page: average HR <b>14%</b> lower during DWR versus treadmill in endurance runners, submax. Hamer and Morton (1990), same page: submax water-run HR <b>10–12 bpm</b> lower; at <b>90%</b> VO<sub>2</sub>max the gap shrank to <b>5 bpm</b> (168 vs 173), in shallow water of <b>1 m</b>. Kravitz summary of the literature they reviewed: submax DWR HR <b>3–15%</b> lower than treadmill; at a given VO<sub>2</sub>, HR has been shown <b>up to 20 bpm</b> lower in water (citing Mougios and Deligiannis 1993).<sup><a href="#fn14">14</a></sup></p>
   <p>Practical implication, sourced: do not take a land heart-rate zone into the pool and call it equivalent. Kravitz notes that ACSM land HR targets may underdose chest-depth water because of hydrostatic bradycardia; studies that hit <b>70–85% HRmax</b> in water (upper end of zone) were the ones that improved fitness.<sup><a href="#fn14">14</a></sup> Killgore (2012), as quoted by Kwok: DWR max HR and VO<sub>2</sub> “consistently lower” than treadmill; “submaximal values strikingly similar”; gap smaller with DWR experience.<sup><a href="#fn18">18</a></sup></p>
   <p>Temperature is not a footnote. Kwok et al. (citing Reilly 2003): <b>26 °C to 28 °C</b> recommended for DWR at maximal intensities.<sup><a href="#fn18">18</a></sup> Becker: public and competitive pools often <b>27–29 °C</b>; therapy pools <b>33.5–35.5 °C</b>.<sup><a href="#fn15">15</a></sup> Nagle: aquatic cycling/running in <b>18–25 °C</b> produces HRs <b>10–15 beats/min</b> lower than land; exercising in <b>30–35.5 °C</b> water → HRs similar to land.<sup><a href="#fn19">19</a></sup> Water conducts heat <b>25 times</b> faster than air (Becker). Cool pools dump heat; hot tubs (<b>37.5–41 °C</b>) do the opposite.<sup><a href="#fn15">15</a></sup></p>
@@ -810,6 +364,22 @@ ul.plain li { margin: 0 0 .4rem; }
 
   <h3>Eyestone 1993 and Quinn 1994 — underdose is not a vibe, it is a result</h3>
   <p>Eyestone et al.: 32 recreational runners; <b>6 weeks</b> DWR versus cycling versus run; ACSM-minimum-style dose: week 1 <b>3 d</b>, weeks 3–6 <b>5 d</b> (Kwok lists week 2 as 4 sessions; <b>27</b> total); <b>20 min</b> progressing to <b>30 min</b>; <b>70%</b> HRmax progressing to <b>80%</b>. Pre VO<sub>2</sub>max <b>56.29 ± 1.49</b> → post <b>53.52 ± 1.61</b> mL·kg<sup>−1</sup>·min<sup>−1</sup> (<b>−4.9%</b>, significant). Two-mile time: small non-significant <b>+1.21%</b> improvement. Kravitz notes hydrostatic bradycardia may have caused under-dosing if land HR targets were used.<sup><a href="#fn14">14</a>, <a href="#fn18">18</a></sup></p>
+  <figure class="chart-plate" aria-labelledby="c6-title">
+    <p class="chart-kicker">Figure · Dose quality</p>
+    <h3 id="c6-title">Hard, frequent DWR held. Easy, short DWR did not.</h3>
+    <div class="chart-live" id="chart-dose"></div>
+    <p class="cap"><b>Source:</b> Wilber et al. 1996 (water-run group VO<sub>2</sub>max 58.7 → 59.6); Eyestone et al. 1993 (56.29 → 53.52, −4.9%). Quinn −6.75% is in the next paragraph and is not on this slope chart.</p>
+    <div class="chart-fallback">
+      <table>
+        <caption>Fallback table — VO<sub>2</sub>max pre/post, mL·kg<sup>−1</sup>·min<sup>−1</sup>.</caption>
+        <thead><tr><th>Study</th><th>Pre</th><th>Post</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td>Wilber 1996 water-run</td><td>58.7</td><td>59.6</td><td>Held</td></tr>
+          <tr><td>Eyestone 1993</td><td>56.29</td><td>53.52</td><td>−4.9%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </figure>
   <p>Quinn et al. 1994: 7 untrained women; <b>4 weeks</b> DWR at steady <b>80% HRR ±10 bpm</b> after land training. VO<sub>2</sub>max fell from <b>42.9 ± 3.2</b> (post-land) to <b>40.0 ± 1.8</b> (<b>−6.75%</b>). Authors later recommended adding intervals.<sup><a href="#fn14">14</a></sup></p>
 
   <h3>Michaud 1995 — untrained people can gain</h3>
@@ -932,15 +502,24 @@ ul.plain li { margin: 0 0 .4rem; }
 
   <h3>What youth matches actually look like — adjacent published ages, not a named child</h3>
   <p>Sanchez, Ramirez-Campillo et al. (2021). Under-12 males, n = 133; age <b>10.9 ± 0.8 years</b>; height 145.4 ± 5.5 cm; mass 37.1 ± 4.1 kg. Spanish professional-academy players. Official matches, two 30-min halves, GPS. Ages on the page are 10–11 / under-12, not 9.<sup><a href="#fn13">13</a></sup></p>
-  <table>
-    <caption>Sanchez 2021 — official matches. Do not read these rows as one child’s numbers.</caption>
-    <thead><tr><th>Format</th><th>Pitch</th><th>Area/player</th><th>Total distance</th><th>Relative distance</th><th>Sprint ≥18.1 km·h<sup>−1</sup></th><th>Vmax</th></tr></thead>
-    <tbody>
-      <tr><td>Soccer-7</td><td>40×55 m</td><td>173 m²</td><td>3064 ± 822 m</td><td>(no sig. vs 8)</td><td>120 ± 69.8 m (4.0% of TD)</td><td>23.2 ± 1.6 km·h<sup>−1</sup></td></tr>
-      <tr><td>Soccer-8</td><td>40×55 m</td><td>138 m²</td><td>3364 ± 1229 m</td><td>84.88 ± 7.37 m·min<sup>−1</sup></td><td>92.1 ± 69.4 m (2.7%)</td><td>22.7 ± 1.7</td></tr>
-      <tr><td>Soccer-11</td><td>68×105 m</td><td>325 m²</td><td>4598 ± 1163 m</td><td>91.27 ± 9.56 m·min<sup>−1</sup></td><td>171.4 ± 133 m (3.8%)</td><td>23.2 ± 1.7</td></tr>
-    </tbody>
-  </table>
+  <figure class="chart-plate" aria-labelledby="c7-title">
+    <p class="chart-kicker">Figure · Youth academy sample versus elite band</p>
+    <h3 id="c7-title">U12 official matches are not a 10–13 km game</h3>
+    <div class="chart-live" id="chart-youth"></div>
+    <p class="cap"><b>Source:</b> Sanchez et al. 2021 — U12 academy sample (age 10.9 ± 0.8 years), official matches. Soccer-7 3064 m, Soccer-8 3364 m, Soccer-11 4598 m. Elite outfield band 10–13 km from Bangsbo SSE #125 (typical top-level male distance). The elite mark is a band, not a mean. Label is the U12 academy sample, not a named child.</p>
+    <div class="chart-fallback">
+      <table>
+        <caption>Sanchez 2021 official matches plus the elite band. Do not read these rows as one child’s numbers.</caption>
+        <thead><tr><th>Format</th><th>Pitch</th><th>Area/player</th><th>Total distance</th><th>Relative distance</th><th>Sprint ≥18.1 km·h<sup>−1</sup></th><th>Vmax</th></tr></thead>
+        <tbody>
+          <tr><td>U12 Soccer-7</td><td>40×55 m</td><td>173 m²</td><td>3064 ± 822 m</td><td>(no sig. vs 8)</td><td>120 ± 69.8 m (4.0% of TD)</td><td>23.2 ± 1.6 km·h<sup>−1</sup></td></tr>
+          <tr><td>U12 Soccer-8</td><td>40×55 m</td><td>138 m²</td><td>3364 ± 1229 m</td><td>84.88 ± 7.37 m·min<sup>−1</sup></td><td>92.1 ± 69.4 m (2.7%)</td><td>22.7 ± 1.7</td></tr>
+          <tr><td>U12 Soccer-11</td><td>68×105 m</td><td>325 m²</td><td>4598 ± 1163 m</td><td>91.27 ± 9.56 m·min<sup>−1</sup></td><td>171.4 ± 133 m (3.8%)</td><td>23.2 ± 1.7</td></tr>
+          <tr><td>Elite outfield (band)</td><td>—</td><td>—</td><td>10–13 km</td><td>—</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </figure>
   <p>Soccer-11 exceeded Soccer-7/8 for total distance, distances in DV1–DV6, and absolute acceleration distance (Soccer-11 ACC 390 ± 116 m versus Soccer-7 307 ± 88.7 m). Relative ACC/DEC were <em>higher</em> in 7 and 8 than in 11: %ACC 10.0 / 10.5 / 8.4%; %DEC 10.3 / 9.8 / 7.9%. High-intensity running 13.1–18.0 km·h<sup>−1</sup>: Soccer-11 705 ± 253 m versus 7 503 ± 170 versus 8 473 ± 239. Authors: Soccer-11 imposes greater external load on U12s; they argue 7/8 may better match neuromuscular capacity, and 11 may need rules to control eccentric load. Training context on the page: 90-min × 3/week plus weekend match; no separate athletic conditioning/strength/power program. Inclusion: ≥4 years soccer, injury-free 4 months.<sup><a href="#fn13">13</a></sup></p>
   <p>Scale versus adult, order of magnitude only, different methods: adult elite full-match midfielders can exceed 13 km in 90+ min (Bradley 2024). U12 Soccer-11 in this sample is about 4.6 km in about 60 min of scheduled time (relative about 91 m·min<sup>−1</sup>). Adult Qatar team sum is 108 km across 10 outfield players (about 10.8 km/player if even, which it is not). Youth density of accelerations (relative ACC/DEC) is high even when total metres are low. U8/U10 and EPL academy U9/U10 distances (Goto 2015; Bellistri 2017) were not successfully fetched; they sit in Unverified.</p>
 
@@ -1008,11 +587,25 @@ ul.plain li { margin: 0 0 .4rem; }
 
   <h3>Helgerud 2001 — elite junior soccer, full text</h3>
   <p>Nineteen male elite junior players (age 18.1 ± 0.8 yr) from two Norwegian teams; six were Norwegian national junior players. Random assignment within each team: training group n = 9, control n = 10. Regular week: four × 1.5 h practice plus one game. Added interval running: four times 4 min at 90–95% of fcmax, separated by 3 min jogging at 50–60% of fcmax, twice per week for 8 weeks. Controls did extra technical work in those slots. Treadmill tests at 3° inclination.<sup><a href="#fn38">38</a></sup></p>
-  <div class="statrow">
-    <div class="stat turf"><span class="v">58.1 → 64.3</span><span class="l">TG VO<sub>2</sub>max, mL·kg<sup>−1</sup>·min<sup>−1</sup> (CG 58.4 → 59.5)</span></div>
-    <div class="stat turf"><span class="v">8,619 → 10,335 m</span><span class="l">Match distance, TG; +20%. CG 9,076 → 9,137 m</span></div>
-    <div class="stat turf"><span class="v">6.2 → 12.4</span><span class="l">Sprints ≥2 s per match, TG; +100%. Involvements 47.4 → 58.8</span></div>
-  </div>
+  <figure class="chart-plate" aria-labelledby="c5-title">
+    <p class="chart-kicker">Figure · Transfer fork</p>
+    <h3 id="c5-title">Run HIIT moved soccer. Swim training did not move running VO<sub>2</sub>max.</h3>
+    <div class="chart-live" id="chart-transfer"></div>
+    <p class="cap"><b>Source:</b> Helgerud et al. 2001 (TG VO<sub>2</sub>max 58.1→64.3; match m 8619→10335; sprints 6.2→12.4). Magel et al. 1975: swim VO<sub>2</sub>max +380 mL/min and no significant treadmill VO<sub>2</sub>max gain. Control-group metres (CG 58.4→59.5; 9076→9137) stay in the prose; they are not on the chart. Magel published no treadmill before/after pair, so none is drawn.</p>
+    <div class="chart-fallback">
+      <table>
+        <caption>Fallback table — Helgerud training group and Magel swim result.</caption>
+        <thead><tr><th>Measure</th><th>Before</th><th>After</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Helgerud TG VO<sub>2</sub>max (mL·kg<sup>−1</sup>·min<sup>−1</sup>)</td><td>58.1</td><td>64.3</td><td>Helgerud 2001</td></tr>
+          <tr><td>Helgerud TG match distance (m)</td><td>8619</td><td>10335</td><td>Helgerud 2001</td></tr>
+          <tr><td>Helgerud TG sprints ≥2 s</td><td>6.2</td><td>12.4</td><td>Helgerud 2001</td></tr>
+          <tr><td>Magel swim VO<sub>2</sub>max</td><td>—</td><td>+380 mL/min</td><td>Magel 1975</td></tr>
+          <tr><td>Magel treadmill VO<sub>2</sub>max</td><td colspan="2">No significant gain (no pair published)</td><td>Magel 1975</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </figure>
   <p>Lactate threshold 47.8 → 55.4 mL·kg<sup>−1</sup>·min<sup>−1</sup> (+16%). Running economy +6.7% (0.75 → 0.70 mL·kg<sup>−0.75</sup>·m<sup>−1</sup>). Whole-game %fcmax 82.7 → 85.6. No change in 10 m / 40 m sprint, 1RM bench, 1RM 90° squat, vertical jump, kicking velocity, or technical kicking points. The paper’s own conclusion: enhancing maximal oxygen uptake improved soccer performance as distance covered, work intensity, sprints, and involvements. The same paper says endurance training for soccer should ideally be carried out using the ball — and that 90–95% fcmax is hard to organise in a match, especially in lower divisions. This is a <b>running</b> result. It is not a swimming result. It is not an 8–10 protocol (the sample is 18.1 ± 0.8 yr).</p>
 
   <h3>Helgerud 2007 — students, not soccer, full text</h3>
@@ -1065,7 +658,7 @@ ul.plain li { margin: 0 0 .4rem; }
       <tr><td>Magel 1975 and Tanaka 1994 percentages as they sat in the soccer brief’s UNVERIFIED table</td><td>Soccer brief: full-text fetch failed. Water brief: abstracts <em>were</em> fetched. This essay uses the water-brief abstract numbers as counters, and does not pretend a full PDF was opened.</td><td>https://doi.org/10.1152/jappl.1975.38.1.151 · https://doi.org/10.2165/00007256-199418050-00005</td></tr>
     </tbody>
   </table>
-  <p>Note on Magel and Tanaka: the soccer physiology brief listed them as unverified because its own full-text fetches failed. The water-training brief subsequently fetched the abstracts and recorded the numbers used in Section IX. This essay follows the later, stricter instruction: Magel 1975 and Tanaka 1994 <em>are</em> in the water brief as counters — use those. Helgerud remains unverified in both.</p>
+  <p>Note on Magel and Tanaka: the soccer physiology brief listed them as unverified because its own full-text fetches failed. The water-training brief subsequently fetched the abstracts and recorded the numbers used in Section IX. This essay follows the later, stricter instruction: Magel 1975 and Tanaka 1994 <em>are</em> in the water brief as counters — use those. Helgerud 2001 and 2007 were fetched in full on a later pass and are used as verified run-HIIT evidence.</p>
 </section>
 
 <section id="synthesis">
@@ -1082,7 +675,7 @@ ul.plain li { margin: 0 0 .4rem; }
   <p>Physics of the other planet: neck/deep water about 6–10% dry weight (Bressel/Harrison) or about 15 lb on the joints (Becker); xiphoid about 24–35% standing load; DWR zero vertical GRF. Hydrostatic loading raises stroke volume (about +35% at rest, neck) and usually lowers HR; offset is condition-dependent (10 bpm on Becker’s aquatic treadmill line; 10–15 bpm in 18–25 °C water on Nagle’s page; 12–15% HR drop with depth; Svedenhag HRmax 172 vs 188). Density about 800 times air. Drag, not grass.</p>
   <p>Aerobic transfer that is real: exclusive, hard, runner-style DWR can hold land VO<sub>2</sub>max / 5 km / economy 4–6 weeks (Bushman, Wilber). Easy, short, land-HR-zone DWR can fail (Eyestone −4.9% VO<sub>2</sub>max). Untrained people gain VO<sub>2</sub> at about 3×/week. Swimming is not running: Magel — +380 mL/min swim VO<sub>2</sub>max, no treadmill VO<sub>2</sub>max gain. Tanaka — minimum transfer from swim to run VO<sub>2</sub>max. Soccer literature: aquatic plyometrics have RCTs for jump/speed/agility; aquatic endurance swimming for soccer does not. Water polo / treading / drag suits: thin. Governing bodies: NSCA expert cap ≤60 min and “don’t rely only on water COD.” ACSM is general health minutes. FIFA/UEFA/UKSCA: no fetched dose. Front-crawl soccer RCT: none fetched.</p>
   <p>The gap swimming would have to close, if it were the tool, is not “more minutes of cardio.” It is (a) oxidative recovery between <em>running</em> sprints (PCr resynthesis, VO<sub>2</sub>-on kinetics in the legs that sprint), (b) tolerance of 90 minutes of intermittent running including eccentric braking, (c) without stealing recovery or adding overuse on an 8–10-year-old already in a 3×/week + match week. Water can keep the engine. Water cannot make the pitch.</p>
-  <p>So: if a trained adolescent or adult soccer player cannot run — bone stress, congestion heat, a calendar that has already eaten the rest days — deep-water running at a Wilber/Bushman-like intensity, prescribed by RPE and cadence rather than a −10 bpm slogan, is a sourced way to keep VO<sub>2</sub>max from falling 14–16% in six weeks of rest. If the same player can run, the fetched match-analysis papers want position-specific high-intensity running drills. If the player is nine, the fetched AAP page wants fun, multiple sports, 1–2 days off, three months off the primary sport, and a wary eye on weekly hours versus age. The pool is a bridge. It is not a soccer player.</p>
+  <p>So: if a trained adolescent or adult soccer player cannot run — bone stress, congestion heat, a calendar that has already eaten the rest days — deep-water running at a Wilber/Bushman-like intensity, prescribed by RPE and cadence rather than a −10 bpm slogan, is a sourced way to keep VO<sub>2</sub>max from falling 14–16% in six weeks of rest. If the same player can run, the fetched match-analysis papers want position-specific high-intensity running drills. If the player is in the 8–10 range, the fetched AAP page wants fun, multiple sports, 1–2 days off, three months off the primary sport, and a wary eye on weekly hours versus age. The pool is a bridge. It is not a soccer player.</p>
 </section>
 
 <section id="sources">
@@ -1134,11 +727,14 @@ ul.plain li { margin: 0 0 .4rem; }
   <p class="small">Also fetched and used above without a dedicated first-citation number: FIFA Training Centre positional distances page; Reilly, Dowzer &amp; Cable 2003 (abstract quoted on Becker and Kwok); Killgore 2012 (quoted on Kwok). Bushman 1997 DOI in the water brief: 10.1097/00005768-199705000-00017.</p>
   <hr class="rule-end">
   <footer class="colophon">
-    <p>Essay. Privacy-scrubbed. Numbers only from fetched pages in <code>01-soccer-physiology.md</code> and <code>02-water-training.md</code>. No GitHub repository was created by this compile. No session menu was invented. Helgerud 2001 and 2007 and Stølen 2005 are full-text verified. Magel 1975 and Tanaka 1994 are abstract-fetched counters. Youth frame is the 8–10 range; Sanchez U12 sample ages are 10.9 ± 0.8. Print this file: 10 pt body, letter, sticky TOC hidden.</p>
+    <p>Essay. Privacy-scrubbed. Numbers only from fetched pages. No session menu was invented. Charts use only numbers already in this essay. Helgerud 2001 and 2007 and Stølen 2005 are full-text verified. Magel 1975 and Tanaka 1994 are abstract-fetched counters. Youth frame is the 8–10 range; Sanchez U12 sample ages are 10.9 ± 0.8. Print: 10 pt body, letter, sticky TOC and live charts hidden, fallback tables kept.</p>
   </footer>
 </section>
 </main>
 </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="viz.js"></script>
 <script>
 (function () {
   var links = Array.prototype.slice.call(document.querySelectorAll("nav.toc a"));
